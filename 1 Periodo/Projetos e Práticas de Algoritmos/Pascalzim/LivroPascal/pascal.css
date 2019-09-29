@@ -1,0 +1,98 @@
+A  {
+	color : #000099;
+	text-decoration : none;
+	font-family : Tahoma, Arial;
+	font-weight : bold;
+}
+
+A:Visited  {
+	font-family : Tahoma, Arial;
+}
+
+A:Active  {}
+
+A:Hover  {
+	font-family : Tahoma, Arial;
+	color : #FF8000;
+	text-decoration : underline;
+}
+
+P  {
+	font-family : Tahoma, Arial;
+	font-size : x-small;
+}
+
+UL  {
+	font-family : Tahoma, Arial;
+	font-size : x-small;
+}
+
+H1  {
+	font-family : Tahoma, Arial;
+	font-size : x-large;
+	color : #800000;
+	font-weight : bold;
+}
+
+H2  {
+	font-family : Tahoma, Arial;
+	font-size : large;
+	color : #800000;
+	font-weight : bold;
+}
+
+TABLE  {
+	font-family : Tahoma, Arial;
+	font-size : x-small;
+}
+
+TD  {
+	font-family : Tahoma, Arial;
+	font-size : x-small;
+}
+
+TH  {
+	font-weight : bold;
+	color : White;
+	font-size : x-small;
+	font-family : Tahoma, Arial;
+	background-color : Black;
+}
+
+PRE  {
+	font-size : x-small;
+	clip : auto;
+}
+
+H3  {
+	font-size : medium;
+	font-family : Tahoma, Arial;
+	font-weight : bold;
+	color : #800000;
+}
+
+.note  {
+	border-color : Gray;
+	border-width : thin;
+	border-style : solid;
+	padding : 5;
+}
+
+.copyr  {
+	color : "Maroon";
+	font-size : 'xx-small';
+	background-color : #FFC891;
+	font-weight : bold;
+	text-align : center;
+}
+
+.new  {
+	color : Red;
+}
+
+.slug  {
+	font-weight : bold;
+	font-style : italic;
+	color : Gray;
+}
+

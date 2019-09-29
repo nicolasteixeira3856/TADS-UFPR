@@ -1,0 +1,439 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 3 <br>Types, Variables, and Constants</h1>
+</td></tr>
+</table> 
+
+<!-- text -->
+
+<p>The original Pascal language was based on some simple notions, which have now become quite common in programming languages. The first is the notion of <I>data type</I>. The type determines the values a variable can have, and the operations that can be performed on it. The concept of type is stronger in Pascal than in C, where the arithmetic data types are almost interchangeable, and much stronger than in the original versions of BASIC, which had no similar concept.
+
+<h2>Variables</h2>
+
+<P>Pascal requires all variables to be declared before they are used. Every time you declare a variable, you must specify a data type. Here are some sample variable declarations:
+
+<pre>
+<b>var</b>
+  Value: Integer;
+  IsCorrect: Boolean;
+  A, B: Char;
+</pre>
+
+<P>The <i>var</i> keyword can be used in several places in the code, such as at the beginning of the code of a function or procedure, to declare variables local to the routine, or inside a unit to declare global variables. After the <i>var</i> keyword comes a list of variable names, followed by a colon and the name of the data type. You can write more than one variable name on a single line, as in the last statement above.
+<P>Once you have defined a variable of a given type, you can perform on it only the operations supported by its data type. For example, you can use the Boolean value in a test and the integer value in a numerical expression. You cannot mix Booleans and integers (as you can with the C language).
+<P>Using simple assignments, we can write the following code:
+
+<pre>
+Value := 10;
+IsCorrect := True;
+</pre>
+
+<P>But the next statement is not correct, because the two variables have different data types:
+
+<pre>
+Value := IsCorrect; <i>// error</i>
+</pre>
+
+<P>If you try to compile this code, Delphi issues a compiler error with this description: <I>Incompatible types: 'Integer' and 'Boolean'</I>. Usually, errors like this are programming errors, because it does not make sense to assign a True or False value to a variable of the Integer data type. You should not blame Delphi for these errors. It only warns you that there is something wrong in the code.
+<P>Of course, it is often possible to convert the value of a variable from one type into a different type. In some cases, this conversion is automatic, but usually you need to call a specific system function that changes the internal representation of the data.
+<P>In Delphi you can assign an initial value to a global variable while you declare it. For example, you can write:
+
+<pre>
+<b>var</b>
+  Value: Integer = 10;
+  Correct: Boolean = True;
+</pre>
+
+<P>This initialization technique works only for global variables, not for variables declared inside the scope of a procedure or method.
+
+<h2>Constants</h2>
+
+<P>Pascal also allows the declaration of constants to name values that do not change during program execution. To declare a constant you don't need to specify a data type, but only assign an initial value. The compiler will look at the value and automatically use its proper data type. Here are some sample declarations:
+
+<pre>
+<b>const</b>
+  Thousand = 1000;
+  Pi = 3.14;
+  AuthorName = <i>'Marco Cant&ugrave;'</i>;
+</pre>
+
+<P>Delphi determines the constant's data type based on its value. In the example above, the Thousand constant is assumed to be of type SmallInt, the smallest integral type which can hold it. If you want to tell Delphi to use a specific type you can simply add the type name in the declaration, as in:
+
+<pre>
+<b>const</b>
+  Thousand: Integer = 1000;
+</pre>
+
+<P>When you declare a constant, the compiler can choose whether to assign a memory location to the constant, and save its value there, or to duplicate the actual value each time the constant is used. This second approach makes sense particularly for simple constants.
+
+<p class=note>Note: The 16-bit version of Delphi allows you to change the value of a typed constant at run-time, as if it was a variable. The 32-bit version still permits this behavior for backward compatibility when you enable the <i>$J</i> compiler directive, or use the corresponding <i>Assignable typed constants</i> check box of the Compiler page of the Project Options dialog box. Although this is the default, you are strongly advised not to use this trick as a general programming technique. Assigning a new value to a constant disables all the compiler optimizations on constants. In such a case, simply declare a variable, instead.
+
+<h2>Resource String Constants</h2>
+
+<P>When you define a string constant, instead of writing:
+
+<pre>
+<b>const</b>
+  AuthorName = <i>'Marco Cant&ugrave;'</i>;
+</pre>
+
+<P>starting with Delphi 3 you can write the following:
+
+<pre>
+<b>resourcestring</b>
+  AuthorName = <i>'Marco Cant&ugrave;'</i>;
+</pre>
+
+<P>In both cases you are defining a constant; that is, a value you don't change during program execution. The difference is only in the implementation. A string constant defined with the <i>resourcestring</i> directive is stored in the resources of the program, in a string table. 
+<P>To see this capability in action, you can look at the ResStr example, which has a button with the following code:
+
+<pre>
+<b>resourcestring</b>
+  AuthorName = <i>'Marco Cant&ugrave;'</i>;
+  BookName = <i>'Essential Pascal'</i>;
+
+<B>procedure</B> TForm1.Button1Click(Sender: TObject);
+<B>begin</B>
+  ShowMessage (BookName + #13 + AuthorName);
+<B>end</B>;
+</pre>
+
+<P>The output of the two strings appears on separate lines because the strings are separated by the <I>newline</I> character (indicated by its numerical value in the <i>#13</i> character-type constant).
+<P>The interesting aspect of this program is that if you examine it with a resource explorer (there is one available among the examples that ship with Delphi) you'll see the new strings in the resources. This means that the strings are not part of the compiled code but stored in a separate area of the executable file (the EXE file).
+
+<p class=note>Note: In short, the advantage of resources is in an efficient memory handling performed by Windows and in the possibility of localizing a program (translating the strings to a different language) without having to modify its source code.
+
+<h2>Data Types</h2>
+
+<P>In Pascal there are several predefined data types, which can be divided into three groups: <I>ordinal types</I>, <I>real types</I>, and <I>strings</I>. We'll discuss ordinal and real types in the following sections, while strings are covered later in this chapter. In this section I'll also introduce some types defined by the Delphi libraries (not predefined by the compiler), which can be considered predefined types.
+<P>Delphi also includes a <I>non-typed</I> data type, called <i>variant</i>, and discussed in Chapter 10 of this book. Strangely enough a variant is a type without proper type-checking. It was introduced in Delphi 2 to handle OLE Automation.
+
+<h2>Ordinal Types</h2>
+
+<P>Ordinal types are based on the concept of order or sequence. Not only can you compare two values to see which is higher, but you can also ask for the value following or preceding a given value or compute the lowest or highest possible value.
+<P>The three most important predefined ordinal types are Integer, Boolean, and Char (character). However, there are a number of other related types that have the same meaning but a different internal representation and range of values. The following Table 3.1 lists the ordinal data types used for representing numbers.
+
+<p class="slug">Table 3.1: Ordinal data types for numbers
+
+<p><table border="1" bordercolor="Black" cellspacing="0" cellpadding="5">
+<tr>
+	<th width="20%" align="LEFT">Size</th>
+	<th width="40%" align="LEFT">Signed<br>Range</th>
+	<th width="40%" align="LEFT">Unsigned<br>Range</th>
+</tr>
+<tr>
+	<td>8 bits</td>
+	<td>ShortInt<br>-128 to 127</td>
+	<td>Byte<br>0 to 255</td>
+</tr>
+<tr>
+	<td>16 bits</td>
+	<td>SmallInt<br>-32768 to 32767</td>
+	<td>Word<br>0 to 65,535</td>
+</tr>
+<tr>
+	<td>32 bits</td>
+	<td>LongInt<br>-2,147,483,648 to 2,147,483,647</td>
+	<td>LongWord (since Delphi 4)<br>0 to 4,294,967,295</td>
+</tr>
+<tr>
+	<td>64 bits</td>
+	<td>Int64</td>
+	<td><br></td>
+</tr>
+<tr>
+	<td>16/32 bits</td>
+	<td>Integer</td>
+	<td>Cardinal</td>
+</tr>
+</table>
+
+<P>As you can see, these types correspond to different representations of numbers, depending on the number of bits used to express the value, and the presence or absence of a sign bit. Signed values can be positive or negative, but have a smaller range of values, because one less bit is available for the value itself. You can refer to the Range example, discussed in the next section, for the actual range of values of each type.
+<P>The last group (marked as 16/32) indicates values having a different representation in the 16-bit and 32-bit versions of Delphi. Integer and Cardinal are frequently used, because they correspond to the native representation of numbers in the CPU.
+
+<h3>Integral Types in Delphi 4</h3>
+
+<p>In Delphi 3, the 32-bit unsigned numbers indicated by the Cardinal type were actually 31-bit values, with a range up to 2 gigabytes. Delphi 4 introduced a new unsigned numeric type, LongWord, which uses a truly 32-bit value up to 4 gigabytes. The Cardinal type is now an alias of the new LongWord type. LongWord permits 2GB more data to be addressed by an unsigned number, as mentioned above. Moreover, it corresponds to the native representation of numbers in the CPU.
+<p>Another new type introduced in Delphi 4 is the Int64 type, which represents integer numbers with up to 18 digits. This new type is fully supported by some of the ordinal type routines (such as High and Low), numeric routines (such as Inc and Dec), and string-conversion routines (such as IntToStr). For the opposite conversion, from a string to a number, there are two new specific functions: <i>StrToInt64</i> and <i>StrToInt64Def</i>.
+
+<h3>Boolean</h3>
+
+<P>Boolean values other than the Boolean type are seldom used. Some Boolean values with specific representations are required by Windows API functions. The types are ByteBool, WordBool, and LongBool.
+<p>In Delphi 3 for compatibility with Visual Basic and OLE automation, the data types <i>ByteBool</i>, <i>WordBool</i>, and <i>LongBool</i> were modified to represent the value <i>True</i> with -1, while the value <i>False</i> is still 0. The <i>Boolean</i> data type remains unchanged (<i>True</i> is 1, <i>False</i> is 0). If you've used explicit typecasts in your Delphi 2 code, porting the code to later versions of Delphi might result in errors.
+
+<h3>Characters</h3>
+<P>Finally there are two different representation for characters: <i>ANSIChar</i> and <i>WideChar</i>. The first type represents 8-bit characters, corresponding to the ANSI character set traditionally used by Windows; the second represents 16-bit characters, corresponding to the new Unicode characters supported by Windows NT, and only partially by Windows 95 and 98. Most of the time you'll simply use the <i>Char</i> type, which in Delphi 3 corresponds to <i>ANSIChar</i>. Keep in mind, anyway, that the first 256 Unicode characters correspond exactly to the ANSI characters.
+
+<p>Constant characters can be represented with their symbolic notation, as in <i>'k'</i>, or with a numeric notation, as in <i>#78</i>. The latter can also be expressed using the <i>Chr</i> function, as in <i>Chr (78)</i>. The opposite conversion can be done with the <i>Ord</i> function.
+<p>It is generally better to use the symbolic notation when indicating letters, digits, or symbols. When referring to special characters, instead, you'll generally use the numeric notation. The following list includes some of the most commonly used special characters:
+<ul>
+<li><i>#9</i> tabulator
+<li><i>#10</i> newline
+<li><i>#13</i> carriage return (enter key)
+</ul>
+
+<h3>The Range Example</h3>
+
+<P>To give you an idea of the different ranges of some of the ordinal types, I've written a simple Delphi program named Range. Some results are shown in Figure 3.1.
+
+<p class="slug">FIGURE 3.1: The Range example displays some information about ordinal data types (Integers in this case).
+
+<p><img src="../gif/epf0301.gif" width=417 height=213 alt="" border="0">
+
+<P>The Range program is based on a simple form, which has six buttons (each named after an ordinal data type) and some labels for categories of information, as you can see in Figure 3.1. Some of the labels are used to hold static text, others to show the information about the type each time one of the buttons is pressed.
+<P>Every time you press one of the buttons on the right, the program updates the labels with the output. Different labels show the data type, number of bytes used, and the maximum and minimum values the data type can store. Each button has its own <i>OnClick</i> event-response method because the code used to compute the three values is slightly different from button to button. For example, here is the source code of the <i>OnClick</i> event for the Integer button (<i>BtnInteger</i>):
+
+<pre>
+<b>procedure</b> TFormRange.BtnIntegerClick(Sender: TObject);
+<b>begin</b>
+  LabelType.Caption := <i>'Integer'</i>;
+  LabelSize.Caption := IntToStr (SizeOf (Integer));
+  LabelMax.Caption := IntToStr (High (Integer));
+  LabelMin.Caption := IntToStr (Low (Integer));
+<b>end</b>;
+</pre>
+
+<P>If you have some experience with Delphi programming, you can examine the source code of the program to understand how it works. For beginners, it's enough to note the use of three functions: <i>SizeOf</i>, <i>High</i>, and <i>Low</i>. The results of the last two functions are ordinals of the same kind (in this case, integers), and the result of the <i>SizeOf</i> function is always an integer. The return value of each of these functions is first translated into strings using the <i>IntToStr</i> function, then copied to the captions of the three labels.
+<P>The methods associated with the other buttons are very similar to the one above. The only real difference is in the data type passed as a parameter to the various functions. Figure 3.2 shows the result of executing this same program under Windows 95 after it has been recompiled with the 16-bit version of Delphi. Comparing Figure 3.1 with Figure 3.2, you can see the difference between the 16-bit and 32-bit Integer data types.
+
+<p class="slug">FIGURE 3.2: The output of the 16-bit version of the Range example, again showing information about integers.
+
+<p><img src="../gif/epf0302.gif" width=417 height=213 alt="" border="0">
+
+<P>The size of the <i>Integer</i> type varies depending on the CPU and operating system you are using. In 16-bit Windows, an Integer variable is two bytes wide. In 32-bit Windows, an Integer is four bytes wide. For this reason, when you recompile the Range example, you get a different output.
+<P>The two different representations of the <i>Integer</i> type are not a problem, as long as your program doesn't make any assumptions about the size of integers. If you happen to save an Integer to a file using one version and retrieve it with another, though, you're going to have some trouble. In this situation, you should choose a platform-independent data type (such as <i>LongInt</i> or <i>SmallInt</i>). For mathematical computation or generic code, your best bet is to stick with the standard integral representation for the specific platform--that is, use the Integer type--because this is what the CPU likes best. The <i>Integer</i> type should be your first choice when handling integer numbers. Use a different representation only when there is a compelling reason to do so.
+
+<h3>Ordinal Types Routines</h3>
+
+<P>There are some system routines (routines defined in the Pascal language and in the Delphi system unit) that work on ordinal types. They are shown in Table 3.2. C++ programmers should notice that the two versions of the <I>Inc</I> procedure, with one or two parameters, correspond to the ++ and += operators (the same holds for the Dec procedure).
+
+<p class="slug">Table 3.2: System Routines for Ordinal Types
+
+<p><table border="1" cellspacing="0" cellpadding="3" bordercolor="Black">
+<tr align="LEFT"><th>Routine</th><th>Purpose</th>
+</tr><tr><td>Dec</td><td>Decrements the variable passed as parameter, by one or by the value of the optional second parameter.
+</td></tr><tr><td>
+Inc</td><td>Increments the variable passed as parameter, by one or by the specified value.
+</td></tr><tr><td>Odd</td><td>Returns True if the argument is an odd number.
+</td></tr><tr><td>Pred</td><td>Returns the value before the argument in the order determined by the data type, the predecessor.
+</td></tr><tr><td>Succ</td><td>Returns the value after the argument, the successor.
+</td></tr><tr><td>Ord</td><td>Returns a number indicating the order of the argument within the set of values of the data type.
+</td></tr><tr><td>Low</td><td>Returns the lowest value in the range of the ordinal type passed as its parameter.
+</td></tr><tr><td>High</td><td>Returns the highest value in the range of the ordinal data type.
+</td></tr>
+</table>
+
+<P>Notice that some of these routines, when applied to constants, are automatically evaluated by the compiler and replaced by their value. For example if you call <i>High(X)</i> where <i>X</i> is defined as an Integer, the compiler can simply replace the expression with the highest possible value of the Integer data type.
+
+<h2>Real Types</h2>
+
+<P>Real types represent floating-point numbers in various formats. The smallest storage size is given by <i>Single</i> numbers, which are implemented with a 4-byte value. Then there are <i>Double</i> floating-point numbers, implemented with 8 bytes, and <i>Extended</i> numbers, implemented with 10 bytes. These are all floating-point data types with different precision, which correspond to the IEEE standard floating-point representations, and are directly supported by the CPU numeric coprocessor, for maximum speed.
+
+<p>In Delphi 2 and Delphi 3 the Real type had the same definition as in the 16-bit version; it was a 48-bit type. But its usage was deprecated by Borland, which suggested that you use the Single, Double, and Extended types instead. The reason for their suggestion is that the old 6-byte format is neither supported by the Intel CPU nor listed among the official IEEE real types. To completely overcome the problem, Delphi 4 modifies the definition of the Real type to represent a standard 8-byte (64-bit) floating-point number.
+<p>In addition to the advantage of using a standard definition, this change allows components to publish properties based on the Real type, something Delphi 3 did not allow. Among the disadvantages there might be compatibility problems. If necessary, you can overcome the possibility of incompatibility by sticking to the Delphi 2 and 3 definition of the type; do this by using the following compiler option: 
+<pre>
+{$REALCOMPATIBILITY ON}
+</pre>
+
+<P>There are also two strange data types: <i>Comp</i> describes very big integers using 8 bytes (which can hold numbers with 18 decimal digits); and <i>Currency</i> (not available in 16-bit Delphi) indicates a fixed-point decimal value with four decimal digits, and the same 64-bit representation as the <i>Comp</i> type. As the name implies, the <i>Currency</i> data type has been added to handle very precise monetary values, with four decimal places.
+<P>We cannot build a program similar to the Range example with real data types, because we cannot use the <i>High</i> and <i>Low</i> functions or the <i>Ord</i> function on real-type variables. Real types represent (in theory) an infinite set of numbers; ordinal types represent a fixed set of values.
+
+<p class=note> Note: Let me explain this better. when you have the integer 23 you can determine which is the following value. Integers are finite (they have a determined range and they have an order). Floating point numbers are infinite even within a small range, and have no order: in fact, how many values are there between 23 and 24? And which number follows 23.46? It is 23.47, 23.461, or 23.4601? That's really hard to know!
+
+<p>For this reason, it makes sense to ask for the ordinal position of the character <I>w</I> in the range of the Char data type, but it makes no sense at all to ask the same question about 7143.1562 in the range of a floating-point data type. Although you can indeed know whether one real number has a higher value than another, it makes no sense to ask how many real numbers exist before a given number (this is the meaning of the <i>Ord</i> function).
+<P>Real types have a limited role in the user interface portion of the code (the Windows side), but they are fully supported by Delphi, including the database side. The support of IEEE standard floating-point types makes the Object Pascal language completely appropriate for the wide range of programs that require numerical computations. If you are interested in this aspect, you can look at the arithmetic functions provided by Delphi in the system unit (see the Delphi Help for more details).
+
+<p class=note><b>Note:</b> Delphi also has a <i>Math</i> unit that defines advanced mathematical routines, covering trigonometric functions (such as the <i>ArcCosh</i> function), finance (such as the <i>InterestPayment</i> function), and statistics (such as the <i>MeanAndStdDev</i> procedure). There are a number of these routines, some of which sound quite strange to me, such as the <i>MomentSkewKurtosis</i> procedure (I'll let you find out what this is).
+
+<h2>Date and Time</h2>
+
+<P>Delphi uses real types also to handle date and time information. To be more precise Delphi defines a specific <I>TDateTime</I> data type. This is a floating-point type, because the type must be wide enough to store years, months, days, hours, minutes, and seconds, down to millisecond resolution in a single variable. Dates are stored as the number of days since 1899-12-30 (with negative values indicating dates before 1899) in the integer part of the <i>TDateTime</i> value. Times are stored as fractions of a day in the decimal part of the value.
+<P><i>TDateTime</i> is not a predefined type the compiler understands, but it is defined in the system unit as:
+
+<pre>
+<b>type</b>
+  TDateTime = <b>type</b> Double;
+</pre>
+
+<P>Using the <i>TDateTime</i> type is quite easy, because Delphi includes a number of functions that operate on this type. You can find a list of these functions in Table 3.3.
+
+<p class="slug">Table 3.3: System Routines for the TDateTime Type
+
+<p><table border="1" cellspacing="0" cellpadding="3" bordercolor="Black">
+<tr align="LEFT"><th>Routine</th><th>Description
+</th></tr><tr><td>Now</td><td>Returns the current date and time into a single TDateTime value.
+</td></tr><tr><td>Date</td><td>Returns only the current date.
+</td></tr><tr><td>Time</td><td>Returns only the current time.
+</td></tr><tr><td>DateTimeToStr</td><td>Converts a date and time value into a string, using default formatting; to have more control on the conversion use the FormatDateTime function instead.
+</td></tr><tr><td>DateTimeToString</td><td>Copies the date and time values into a string buffer, with default formatting.
+</td></tr><tr><td>DateToStr</td><td>Converts the date portion of a TDateTime value into a string.
+</td></tr><tr><td>TimeToStr</td><td>Converts the time portion of a TDateTime value into a string.
+</td></tr><tr><td>FormatDateTime</td><td>Formats a date and time using the specified format; you can specify which values you want to see and which format to use, providing a complex format string.
+</td></tr><tr><td>StrToDateTime</td><td>Converts a string with date and time information to a TDateTime value, raising an exception in case of an error in the format of the string.
+</td></tr><tr><td>StrToDate</td><td>Converts a string with a date value into the TDateTime format.
+</td></tr><tr><td>StrToTime</td><td>Converts a string with a time value into the TDateTime format.
+</td></tr><tr><td>DayOfWeek</td><td>Returns the number corresponding to the day of the week of the TDateTime value passed as parameter.
+</td></tr><tr><td>DecodeDate</td><td>Retrieves the year, month, and day values from a date value.
+</td></tr><tr><td>DecodeTime</td><td>Retrieves out of a time value.
+</td></tr><tr><td>EncodeDate</td><td>Turns year, month, and day values into a TDateTime value.
+</td></tr><tr><td>EncodeTime</td><td>Turns hour, minute, second, and millisecond values into a TDateTime value.
+</td></tr></table>
+
+<P>To show you how to use this data type and some of its related routines, I've built a simple example, named TimeNow. The main form of this example has a Button and a ListBox component. When the program starts it automatically computes and displays the current time and date. Every time the button is pressed, the program shows the time elapsed since the program started.
+<P>Here is the code related to the <i>OnCreate</i> event of the form:
+
+<pre>
+<b>procedure</b> TFormTimeNow.FormCreate(Sender: TObject);
+<b>begin</b>
+  StartTime := Now;
+  ListBox1.Items.Add (TimeToStr (StartTime));
+  ListBox1.Items.Add (DateToStr (StartTime));
+  ListBox1.Items.Add (<i>'Press button for elapsed time'</i>);
+<b>end</b>;
+</pre>
+
+<P>The first statement is a call to the <i>Now</i> function, which returns the current date and time. This value is stored in the <i>StartTime</i> variable, declared as a global variable as follows:
+
+<pre>
+<b>var</b>
+  FormTimeNow: TFormTimeNow;
+  StartTime: TDateTime;
+</pre>
+
+<P>I've added only the second declaration, since the first is provided by Delphi. By default, it is the following:
+
+<pre>
+<b>var</b>
+  Form1: TForm1;
+</pre>
+
+<P>Changing the name of the form, this declaration is automatically updated. Using global variables is actually not the best approach: It should be better to use a private field of the form class, a topic related to object-oriented programming and discussed in Mastering Delphi 4. 
+<P>The next three statements add three items to the ListBox component on the left of the form, with the result you can see in Figure 3.3. The first line contains the time portion of the <i>TDateTime</i> value converted into a string, the second the date portion of the same value. At the end the code adds a simple reminder.
+
+<p class="slug">FIGURE 3.3: The output of the TimeNow example at startup.
+
+<p><img src="../gif/epf0303.gif" width=444 height=155 alt="" border="0">
+
+<P>This third string is replaced by the program when the user clicks on the Elapsed button:
+
+<pre>
+<b>procedure</b> TFormTimeNow.ButtonElapsedClick(Sender: TObject);
+<b>var</b>
+  StopTime: TDateTime;
+<b>begin</b>
+  StopTime := Now;
+  ListBox1.Items [2] :=  FormatDateTime (<i>'hh:nn:ss'</i>,
+    StopTime - StartTime);
+<b>end</b>;
+</pre>
+
+<P>This code retrieves the new time and computes the difference from the time value stored when the program started. Because we need to use a value that we computed in a different event handler, we had to store it in a global variable. There are actually better alternatives, based on classes.
+
+<p class=note><b>Note:</b> The code that replaces the current value of the third string uses the index 2. The reason is that the items of a list box are zero-based: the first item is number 0, the second number 1, and the third number 2. More on this as we cover arrays.
+
+<P>Besides calling <i>TimeToStr</i> and <i>DateToStr</i> you can use the more powerful <i>FormatDateTime </i>function, as I've done in the last method above (see the Delphi Help file for details on the formatting parameters). Notice also that time and date values are transformed into strings depending on Windows international settings. Delphi reads these values from the system, and copies them to a number of global constants declared in the SysUtils unit. Some of them are:
+
+<pre>
+DateSeparator: Char;
+ShortDateFormat: string;
+LongDateFormat: string;
+TimeSeparator: Char;
+TimeAMString: string;
+TimePMString: string;
+ShortTimeFormat: string;
+LongTimeFormat: string;
+ShortMonthNames: array [1..12] <b>of</b> string;
+LongMonthNames: array [1..12] <b>of</b> string;
+ShortDayNames: array [1..7] <b>of</b> string;
+LongDayNames: array [1..7] <b>of</b> string;
+</pre>
+
+<P>More global constants relate to currency and floating-point number formatting. You can find the complete list in the Delphi Help file under the topic <I>Currency and date/time formatting variables</I>.
+
+<p class=note><b>Note: </b>Delphi includes a DateTimePicker component, which provides a sophisticated way to input a date, selecting it from a calendar.
+
+<h2>Specific Windows Types</h2>
+
+<P>The predefined data types we have seen so far are part of the Pascal language. Delphi also includes other data types defined by Windows. These data types are not an integral part of the language, but they are part of the Windows libraries. Windows types include new default types (such as <i>DWORD</i> or <i>UINT</i>), many records (or structures), several pointer types, and so on.
+<P>Among Windows data types, the most important type is represented by handles, discussed in Chapter 9.
+
+<h2>Typecasting and Type Conversions</h2>
+
+<P>As we have seen, you cannot assign a variable to another one of a different type. In case you need to do this, there are two choices. The first choice is <I>typecasting</I>, which uses a simple functional notation, with the name of the destination data type:
+
+<pre>
+<b>var</b>
+  N: Integer;
+  C: Char;
+  B: Boolean;
+<b>begin</b>
+  N := Integer (<i>'X'</i>);
+  C := Char (N);
+  B := Boolean (0);
+</pre>
+
+<P>You can typecast between data types having the same size. It is usually safe to typecast between ordinal types, or between real types, but you can also typecast between pointer types (and also objects) as long as you know what you are doing.
+<P>Casting, however, is generally a dangerous programming practice, because it allows you to access a value as if it represented something else. Since the internal representations of data types generally do not match, you risk hard-to-track errors. For this reason, you should generally avoid typecasting.
+<P>The second choice is to use a type-conversion routine. The routines for the various types of conversions are summarized in Table 3.4. Some of these routines work on the data types that we'll discuss in the following sections. Notice that the table doesn't include routines for special types (such as <i>TDateTime</i> or variant) or routines specifically intended for formatting, like the powerful <i>Format</i> and <i>FormatFloat</i> routines.
+
+<p class="slug">Table 3.4: System Routines for Type Conversion
+
+<p><table border="1" cellspacing="0" cellpadding="3" bordercolor="Black">
+<tr align="LEFT"><th>Routine</th><th>Description
+</th></tr><tr><td>Chr</td><td>Converts an ordinal number into an ANSI character. 
+</td></tr><tr><td>Ord</td><td>Converts an ordinal-type value into the number indicating its order.
+</td></tr><tr><td>Round</td><td>Converts a real-type value into an Integer-type value, rounding its value.
+</td></tr><tr><td>Trunc</td><td>Converts a real-type value into an Integer-type value, truncating its value.
+</td></tr><tr><td>Int</td><td>Returns the Integer part of the floating-point value argument.
+</td></tr><tr><td>IntToStr</td><td>Converts a number into a string.
+</td></tr><tr><td>IntToHex</td><td>Converts a number into a string with its hexadecimal representation.
+</td></tr><tr><td>StrToInt</td><td>Converts a string into a number, raising an exception if the string does not represent a valid integer.
+</td></tr><tr><td>StrToIntDef</td><td>Converts a string into a number, using a default value if the string is not correct.
+</td></tr><tr><td>Val</td><td>Converts a string into a number (traditional Turbo Pascal routine, available for compatibility).
+</td></tr><tr><td>Str</td><td>Converts a number into a string, using formatting parameters (traditional Turbo Pascal routine, available for compatibility).
+</td></tr><tr><td>StrPas</td><td>Converts a null-terminated string into a Pascal-style string. This conversion is automatically done for AnsiStrings in 32-bit Delphi. (See the section on strings later in this chapter.)
+</td></tr><tr><td>StrPCopy</td><td>Copies a Pascal-style string into a null-terminated string. This conversion is done with a simple PChar cast in 32-bit Delphi. (See the section on strings later in this chapter.) 
+</td></tr><tr><td>StrPLCopy</td><td>Copies a portion of a Pascal-style string into a null-terminated string.
+</td></tr><tr><td>FloatToDecimal</td><td>Converts a floating-point value to record including its decimal representation (exponent, digits, sign).
+</td></tr><tr><td>FloatToStr</td><td>Converts the floating-point value to its string representation using default  formatting.
+</td></tr><tr><td>FloatToStrF</td><td>Converts the floating-point value to its string representation using the specified  formatting.
+</td></tr><tr><td>FloatToText</td><td>Copies the floating-point value to a string buffer, using the specified formatting.
+</td></tr><tr><td>FloatToTextFmt</td><td>As the previous routine, copies the floating-point value to a string buffer, using  the specified formatting.
+</td></tr><tr><td>StrToFloat</td><td>Converts the given Pascal string to a floating-point value.
+</td></tr><tr><td>TextToFloat</td><td>Converts the given null-terminated string to a floating-point value.
+</td></tr></table>
+
+<p class="note"><img src="../gif/newani.gif" width="32" height="16" border="0" alt="">Note: In recent versions of Delphi's Pascal compiler, the <i>Round</i> function is based on the FPU processor of the CPU. This processor adopts the so-called &quot;Banker's Rounding&quot;, which rounds middle values (as 5.5 or 6.5) up and down depending whether they follow an odd or an even number. </p>
+
+<h2>Conclusion</h2>
+
+<p>In this chapter we've explored the basic notion of type in Pascal. But the language has another very important feature: It allows programmers to define new custom data types, called user-defined data types. This is the topic of the next chapter.
+
+<h3><a href="ch04udt.htm">Next Chapter: User-Defined Data Types</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

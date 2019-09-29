@@ -1,0 +1,126 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 8<br>Memory</h1>
+</td></tr>
+</table> 
+
+<!-- text -->
+	
+
+<p class ="note"><b>Author's Note:</b> This chapter will cover memory handling, discuss the various memory areas, and introduce dynamic arrays. Temporarily only this last part is available.
+
+<h2>Delphi 4 Dynamic Arrays</h2>
+
+<p>Traditionally, the Pascal language has always had fixed-size arrays. When you declare a data type using the array construct, you have to specify the number of elements of the array. As expert programmers probably know, there were a few techniques you could use to implement dynamic arrays, typically using pointers and manually allocating and freeing the required memory. </p>
+<p>Delphi 4 introduces a very simple implementation of dynamic arrays, modeling them after the dynamic long string type I've just covered. As long strings, dynamic arrays are dynamically allocated and reference counted, but they do not offer a copy-on-write technique. That's not a big problem, as you can deallocate an array by setting its variable to nil.</p><p>
+You can now simply declare an array without specifying the number of elements and then allocate it with a given size using the SetLength procedure. The same procedure can also be used to resize an array without losing its content. There are also other string-oriented procedures, such as the <i>Copy</i> function, that you can use on arrays.</p>
+<p>Here is a small code excerpt, underscoring the fact that you must both declare and allocate memory for the array before you can start using it:</p>
+
+<pre><b>procedure </b>TForm1.Button1Click(Sender: TObject);
+<b>var</b>
+  Array1: <b>array of</b> Integer;
+<b>begin</b>
+  Array1 [1] := 100; <i>// error</i>
+  SetLength (Array1, 100);
+  Array1 [99] := 100; <i>// OK</i>
+  ...
+<b>end</b>;</pre>
+
+<p>As you indicate only the number of elements of the array, the index invariably starts from 0. Generic arrays in Pascal account for a non-zero low bound and for non-integer indexes, two features that dynamic arrays don't support. To learn the status of a dynamic array, you can use the Length, High, and Low functions, as with any other array. For dynamic arrays, however, Low always returns 0, and High always returns the length minus one. This implies that for an empty array High returns -1 (which, when you think about it, is a strange value, as it is lower than that returned by Low).</p>
+
+<p class="slug">Figure 8.1: The form of the DynArr example </p>
+
+<p><img src="../gif/epf0801.gif" width=203 height=166 border=0 alt="">
+
+<p>After this short introduction I can show you a simple example, called DynArr and shown in Figure 8.1. It is indeed simple because there is nothing very complex about dynamic arrays. I'll also use it to show a few possible errors programmers might make. The program declares two global arrays and initializes the first in the <i>OnCreate</i> handler:</p>
+
+<pre><b>var</b>
+  Array1, Array2: <b>array of </b>Integer;
+
+<b>procedure </b>TForm1.FormCreate(Sender: TObject);
+<b>begin</b>
+  <i>// allocate</i>
+  SetLength (Array1, 100);
+<b>end</b>;</pre>
+
+<p>This sets all the values to zero. This initialization code makes it possible to start reading and writing values of the array right away, without any fear of memory errors. (Assuming, of course, that you don't try to access items beyond the upper bound of the array.) For an even better initialization, the program has a button that writes into each cell of the array:</p>
+
+<pre><b>procedure </b>TForm1.btnFillClick(Sender: TObject);
+<b>var</b>
+  I: Integer;
+<b>begin</b>
+  <b>for</b> I := Low (Array1) <b>to</b> High (Array1) <b>do</b>
+    Array1 [I] := I;
+<b>end</b>;</pre>
+
+<p>The Grow button allows you to modify the size of the array without losing its contents. You can test this by using the Get value button after pressing the Grow button:</p>
+
+<pre><b>procedure </b>TForm1.btnGrowClick(Sender: TObject);
+<b>begin</b>
+<i>  // grow keeping existing values</i>
+  SetLength (Array1, 200);
+<b>end</b>;
+
+<b>procedure</b> TForm1.btnGetClick(Sender: TObject);
+<b>begin</b>
+  <i>// extract</i>
+  Caption := IntToStr (Array1 [99]);
+<b>end</b>;</pre>
+
+<p>The only slightly complex code is in the <i>OnClick</i> event of the Alias button. The program copies one array to the other one with the := operator, effectively creating an alias (a new variable referring to the same array in memory). At this point, however, if you modify one of the arrays, the other is affected as well, as they both refer to the same memory area:</p>
+
+<pre><b>procedure</b> TForm1.btnAliasClick(Sender: TObject);
+<b>begin</b>
+<i>  // alias</i>
+  Array2 := Array1;
+<i>  // change one (both change)</i>
+  Array2 [99] := 1000;
+<i>  // show the other</i>
+  Caption := IntToStr (Array1 [99]);
+</pre>
+  
+<p>The <i>btnAliasClick</i> method does two more operations. The first is an equality test on the arrays. This tests not the actual elements of the structures but rather the memory areas the arrays refer to, checking whether the variables are two aliases of the same array in memory:</p>
+
+<pre><b>procedure</b> TForm1.btnAliasClick(Sender: TObject);
+<b>begin</b>
+  ...
+  <b>if</b> Array1 = Array2 <b>then</b>
+    Beep;
+<i>  // truncate first array</i>
+  Array1 := Copy (Array2, 0, 10);
+<b>end</b>;</pre>
+
+<p>The second is a call to the <i>Copy</i> function, which not only moves data from one array to the other, but also replaces the first array with a new one created by the function. The effect is that the <i>Array1</i> variable now refers to an array of 11 elements, so that pressing the Get value or Set value buttons produces a memory error and raises an exception (unless you have range-checking turned off, in which case the error remains but the exception is not displayed). The code of the Fill button continues to work fine even after this change, as the items of the array to modify are determined using its current bounds.</p>
+
+<h2>Conclusion</h2>
+<p>This chapter temporarily covers only dynamic arrays, certainly an important element for memory management, but only a portion of the entire picture. More material will follow.
+<p>The memory structure described in this chapter is typical of Windows programming, a topic I'll introduce in the next chapter (without going to the full extent of using the VCL, though).
+
+<h3><a href="ch09win.htm">Next Chapter: Windows Programming</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

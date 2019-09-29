@@ -1,0 +1,176 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 11<br>Program and Units</h1>
+</td></tr>
+</table> 
+
+<!-- text -->	
+
+<p>Delphi applications make intensive use of units, or program modules. Units, in fact, were the basis of the modularity in the language before classes were introduced. In a Delphi application, every form has a corresponding unit behind it. When you add a new form to a project (with the corresponding toolbar button or the File > New Form menu command), Delphi actually adds a new unit, which defines the class for the new form.
+
+<h2>Units</h2>
+
+<p>Although every form is defined in a unit, the reverse is not true. Units do not need to define forms; they can simply define and make available a collection of routines. By selecting the File > New menu command and then the Unit icon in the New page of the Object Repository, you add a new blank unit to the current project. This blank unit contains the following code, delimiting the sections a unit is divided into:
+
+<pre>
+<b>unit</b> Unit1;
+
+<b>interface</b>
+
+<b>implementation</b>
+
+<b>end</b>.</pre>
+
+<p>The concept of a unit is simple. A unit has a unique name corresponding to its filename, an interface section declaring what is visible to other units, and an implementation section with the real code and other hidden declarations. Finally, the unit can have an optional initialization section with some startup code, to be executed when the program is loaded into memory; it can also have an optional finalization section, to be executed on program termination. 
+<p>The general structure of a unit, with all its possible sections, is the following:
+
+<pre><b>unit</b> unitName;
+
+<b>interface</b>
+
+<i>// other units we need to refer to</i>
+<b>uses</b>
+  A, B, C;
+
+<i>// exported type definition</i>
+<b>type</b>
+  newType = TypeDefinition;
+
+<i>// exported constants</i>
+<b>const</b>
+  Zero = 0;
+
+<i>// global variables</i>
+<b>var</b>
+  Total: Integer;
+
+<i>// list of exported functions and procedures</i>
+<b>procedure</b> MyProc;
+
+<b>implementation</b>
+
+<b>uses</b>
+  D, E;
+
+<i>// hidden global variable</i>
+<b>var</b>
+  PartialTotal: Integer;
+
+<i>// all the exported functions must be coded</i>
+<b>procedure</b> MyProc;
+<b>begin</b>
+  <i>// ... code of procedure MyProc</i>
+<b>end</b>;
+
+<b>initialization</b>
+  <i>// optional initialization part</i>
+
+<b>finalization</b>
+  <i>// optional clean-up code</i>
+
+<b>end</b>.</pre>
+
+<p>The uses clause at the beginning of the interface section indicates which other units we need to access in the interface portion of the unit. This includes the units that define the data types we refer to in the definition of other data types, such as the components used within a form we are defining.
+<p>The second uses clause, at the beginning of the implementation section, indicates more units we need to access only in the implementation code. When you need to refer to other units from the code of the routines and methods, you should add elements in this second uses clause instead of the first one. All the units you refer to must be present in the project directory or in a directory of the search path (you can set the search path for a project in the Directories/Conditionals page of the project’s Options dialog box).
+
+<p class="note">C++ programmers should be aware that the uses statement does not correspond to an include directive. The effect of a uses statement is to import just the precompiled interface portion of the units listed. The implementation portion of the unit is considered only when that unit is compiled. The units you refer to can be both in source code format (PAS) or compiled format (DCU), but the compilation must have taken place with the same version of the Delphi.
+
+<p>The interface of a unit can declare a number of different elements, including procedures, functions, global variables, and data types. In Delphi applications, the data types are probably used the most often. Delphi automatically places a new class data type in a unit each time you create a form.
+However, containing form definitions is certainly not the only use for units in Delphi. You can continue to have traditional units, with functions and procedures, and you can have units with classes that do not refer to forms or other visual elements.
+
+<h2>Units and Scope</h2>
+
+In Pascal, units are the key to encapsulation and visibility, and they are probably even more important than the private and public keywords of a class. (In fact, as we’ll see in the next chapter, the effect of the private keyword is related to the scope of the unit containing the class.)
+The scope of an identifier (such as a variable, procedure, function, or a data type) is the portion of the code in which the identifier is accessible. The basic rule is that an identifier is meaningful only within its scope—that is, only within the block in which it is declared. You cannot use an identifier outside its scope. Here are some examples.
+
+<ul>
+<li>Local variables: If you declare a variable within the block defining a routine or a method, you cannot use this variable outside that procedure. The scope of the identifier spans the whole procedure, including nested routines (unless an identifier with the same name in the nested routine hides the outer definition). The memory for this variable is allocated on the stack when the program executes the routine defining it. As soon as the routine terminates, the memory on the stack is automatically released.
+<li>Global hidden variables: If you declare an identifier in the implementation portion of a unit, you cannot use it outside the unit, but you can use it in any block and procedure defined within the unit. The memory for this variable is allocated as soon as the program starts and exists until it terminates. You can use the initialization section of the unit to provide a specific initial value.
+<li>Global variables: If you declare an identifier in the interface portion of the unit, its scope extends to any other unit that uses the one declaring it. This variable uses memory and has the same lifetime as the previous group; the only difference is in its visibility.
+</ul>
+
+<p>Any declarations in the interface portion of a unit are accessible from any part of the program that includes the unit in its uses clause. Variables of form classes are declared in the same way, so that you can refer to a form (and its public fields, methods, properties, and components) from the code of any other form. Of course, it’s poor programming practice to declare everything as global. Besides the obvious memory consumption problems, using global variables makes a program less easy to maintain and update. In short, you should use the smallest possible number of global variables.
+
+<h2>Units as Namespaces</h2>
+
+<p>The uses statement is the standard technique to access the scope of another unit. At that point you can access the definitions of the unit. But it might happen that two units you refer to declare the same identifier; that is, you might have two classes or two routines with the same name.
+<p>In this case you can simply use the unit name to prefix the name of the type or routine defined in the unit. For example, you can refer to the <i>ComputeTotal</i> procedure defined in the given <i>Totals</i> unit as <i>Totals.ComputeTotal</i>. This should not be required very often, as you are strongly advised against using the same name for two different things in a program.
+<p>However, if you look into the VCL library and the Windows files, you’ll find that some Delphi functions have the same name as (but generally different parameters than) some Windows API functions available in Delphi itself. An example is the simple <i>Beep</i> procedure.
+<p>If you create a new Delphi program, add a button, and write the following code:
+
+<pre><b>procedure</b> TForm1.Button1Click(Sender: TObject);
+<b>begin</b>
+  Beep;
+<b>end</b>;</pre>
+
+<p>then as soon as you press the button you’ll hear a short sound. Now, move to the uses statement of the unit and change the code from this:
+
+<pre><b>uses</b>
+  Windows, Messages, SysUtils, Classes, ...</pre>
+  
+<p>to this very similar version (simply moving the <i>SysUtils</i> unit before the <i>Windows</i> unit):
+
+<pre><b>uses</b>
+  SysUtils, Windows, Messages, Classes, ...</pre>
+  
+<p>If you now try to recompile this code, you’ll get a compiler error: &quot;Not enough actual parameters.&quot; The problem is that the Windows unit defines another Beep function with two parameters. Stated more generally, what happens in the definitions of the first units you include in the uses statement might be hidden by corresponding definitions of later units. The safe solution is actually quite simple:
+
+<pre><b>procedure</b> TForm1.Button1Click(Sender: TObject);
+<b>begin</b>
+  SysUtils.Beep;
+<b>end</b>;</pre>
+
+<p>This code will compile regardless of the order of the units in the uses statements. There are few other name clashes in Delphi, simply because Delphi code is generally hosted by methods of classes. Having two methods with the same name in two different classes doesn’t create any problem. The problems arise only with global routines.
+
+<h2>Units and Programs</h2>
+
+<p>A Delphi application consists of two kinds of source code files: one or more units and one program file. The units can be considered secondary files, which are referred to by the main part of the application, the program. In theory, this is true. In practice, the program file is usually an automatically generated file with a limited role. It simply needs to start up the program, running the main form. The code of the program file, or Delphi project file (DPR), can be edited either manually or by using the Project Manager and some of the Project Options related to the application object and the forms.
+<p>The structure of the program file is usually much simpler than the structure of the units. Here is the source code of a sample program file:
+
+<pre><b>program</b> Project1;
+
+<b>uses</b>
+  Forms,
+  Unit1 <b>in</b> <i>‘Unit1.PAS’ {Form1DateForm}</i>;
+
+<b>begin</b>
+  Application.Initialize;
+  Application.CreateForm (TForm1, Form1);
+  Application.Run;
+<b>end</b>.</pre>
+
+<p>As you can see, there is simply a uses section and the main code of the application, enclosed by the begin and end keywords. The program’s uses statement is particularly important, because it is used to manage the compilation and linking of the application.
+
+<h2>Conclusion</h2>
+
+<p>At least for the moment, this chapter on the structure of a Pascal application written in Delphi or with one of the latest versions of Turbo Pascal, is the last of the book. Feel free to email me your comment and requests.
+<p>If after this introduction on the Pascal language you want to delve into the object-oriented elements of Object Pascal in Delphi, you can refer to my published book <i><b>Mastering Delphi 5</b></i> (Sybex, 1999). For more information on this and more advanced books of mine (and of other authors as well) you can refer to my web site, <a href="http://www.marcocantu.com">www.marcocantu.com</a>. The same site hosts updated versions of this book, and its examples.
+
+<h3><a href="default.htm">Back to the Cover Page</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

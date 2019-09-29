@@ -1,0 +1,511 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 6<br>Procedures and Functions</h1>
+</td></tr>
+</table> 
+
+<!-- text -->	
+
+<p>Another important idea emphasized by Pascal is the concept of the routine, basically a series of statements with a unique name, which can be activated many times by using their name. This way you avoid repeating the same statements over and over, and having a single version of the code you can easily modify it all over the program. From this point of view, you can think of routines as the basic code encapsulation mechanism. I'll get back to this topic with an example after I introduce the Pascal routines syntax.
+
+<h2>Pascal Procedures and Functions</h2>
+
+<p>In Pascal, a routine can assume two forms: a procedure and a function. In theory, a procedure is an operation you ask the computer to perform, a function is a computation returning a value. This difference is emphasized by the fact that a function has a result, a return value, while a procedure doesn't. Both types of routines can have multiple parameters, of given data types.
+<p>In practice, however, the difference between functions and procedures is very limited: you can call a function to perform some work and then skip the result (which might be an optional error code or something like that) or you can call a procedure which passes a result within its parameters (more on reference parameters later in this chapter).
+<p>Here are the definitions of a procedure and two versions of the same function, using a slightly different syntax:
+
+<pre><b>procedure </b>Hello;
+<b>begin</b>
+  ShowMessage ('Hello world!');
+<b>end</b>;
+
+<b>function</b> Double (Value: Integer) : Integer;
+<b>begin</b>
+  Double := Value * 2;
+<b>end</b>;
+
+<i>// or, as an alternative</i>
+<b>function</b> Double2 (Value: Integer) : Integer;
+<b>begin</b>
+  Result := Value * 2;
+<b>end</b>;</pre>
+
+<p>The use of <i>Result</i> instead of the function name to assign the return value of a function is becoming quite popular, and tends to make the code more readable, in my opinion. 
+<p>Once these routines have been defined, you can call them one or more times. You call the procedure to make it perform its task, and call a function to compute the value:
+
+<pre>
+<b>procedure</b> TForm1.Button1Click (Sender: TObject);
+<b>begin</b>
+  Hello;
+<b>end</b>;
+ 
+<b>procedure</b> TForm1.Button2Click (Sender: TObject);
+<b>var</b>
+  X, Y: Integer;
+<b>begin</b>
+  X := Double (StrToInt (Edit1.Text));
+  Y := Double (X);
+  ShowMessage (IntToStr (Y));
+<b>end</b>;</pre>
+
+<p class="note"><b>Note</b>: For the moment don't care about the syntax of the two procedures above, which are actually methods. Simply place two buttons on a Delphi form, click on them at design time, and the Delphi IDE will generate the proper support code: Now you simply have to fill in the lines between <i>begin</i> and <i>end</i>. To compile the code above you need to add also an Edit control to the form.
+
+<p>Now we can get back to the encapsulation code concept I've introduced before. When you call the <i>Double</i> function, you don't need to know the algorithm used to implement it. If you later find out a better way to double numbers, you can easily change the code of the function, but the calling code will remain unchanged (although executing it will be faster!). The same principle can be applied to the <i>Hello</i> procedure: We can modify the program output by changing the code of this procedure, and the <i>Button2Click</i> method will automatically change its effect. Here is how we can change the code: 
+
+<pre><b>procedure </b>Hello;
+<b>begin</b>
+  MessageDlg (<i>'Hello world!'</i>, mtInformation, [mbOK]);
+<b>end</b>;
+</pre>
+
+<p class="note"><b>Tip</b>: When you call an existing Delphi function or procedure, or any VCL method, you should remember the number and type of the parameters. Delphi editor helps you by suggesting the parameters list of a function or procedure with a fly-by hint as soon as you type its name and the open parenthesis. This feature is called Code Parameters and is part of the Code Insight technology.
+
+<h2>Reference Parameters</h2>
+
+<p>Pascal routines allow parameter passing by value and by reference. Passing parameters by value is the default: the value is copied on the stack and the routine uses and manipulates the copy, not the original value.
+<p>Passing a parameter by reference means that its value is not copied onto the stack in the formal parameter of the routine (avoiding a copy often means that the program executes faster). Instead, the program refers to the original value, also in the code of the routine. This allows the procedure or function to change the value of the parameter. Parameter passing by reference is expressed by the <i>var</i> keyword.
+
+<p class="note">This technique is available in most programming languages. It isn't present in C, but has been introduced in C++, where you use the & (pass by reference) symbol. In Visual Basic every parameter not specified as <i>ByVal</i> is passed by reference.
+
+<p>Here is an example of passing a parameter by reference using the <i>var</i> keyword:
+
+<pre><b>procedure</b> DoubleTheValue (<b>var</b> Value: Integer);
+<b>begin</b>
+  Value := Value * 2;
+<b>end</b>;</pre>
+
+<p>In this case, the parameter is used both to pass a value to the procedure and to return a new value to the calling code. When you write:
+
+<pre><b>var</b>
+  X: Integer;
+<b>begin</b>
+  X := 10;
+  DoubleTheValue (X);</pre>
+
+<p>the value of the X variable becomes 20, because the function uses a reference to the original memory location of X, affecting its initial value.
+<p>Passing parameters by reference makes sense for ordinal types, for old-fashioned strings, and for large records. Delphi objects, in fact, are invariably passed by value, because they are references themselves. For this reason passing an object by reference makes little sense (apart from very special cases), because it corresponds to passing a "reference to a reference."
+<p>Delphi long strings have a slightly different behavior: they behave as references, but if you change one of the string variables referring to the same string in memory, this is copied before updating it. A long string passed as a value parameter behaves as a reference only in terms of memory usage and speed of the operation. But if you modify the value of the string, the original value is not affected. On the contrary, if you pass the long string by reference, you can alter the original value.
+
+<p class=note>Delphi 3 introduced a new kind of parameter, out. An out parameter has no initial value and is used only to return a value. These parameters should be used only for COM procedures and functions; in general, it is better to stick with the more efficient var parameters. Except for not having an initial value, out parameters behave like var parameters.
+
+<h2>Constant Parameters</h2>
+
+<p>As an alternative to reference parameters, you can use a const parameter. Since you cannot assign a new value to a constant parameter inside the routine, the compiler can optimize parameter passing. The compiler can choose an approach similar to reference parameters (or a const reference in C++ terms), but the behavior will remain similar to value parameters, because the original value won't be affected by the routine.
+<p>In fact, if you try to compile the following (silly) code, Delphi will issue an error:
+
+<pre><b>function</b> DoubleTheValue (<b>const</b> Value: Integer): Integer;
+<b>begin</b>
+  Value := Value * 2;      <i>// compiler error</i>
+  Result := Value;
+<b>end</b>;</pre>
+
+<h2>Open Array Parameters</h2>
+
+<p>Unlike C, a Pascal function or procedure always has a fixed number of parameters. However, there is a way to pass a varying number of parameters to a routine using an open array.
+<p>The basic definition of an open array parameter is that of a typed open array. This means you indicate the type of the parameter but do not know how many elements of that type the array is going to have. Here is an example of such a definition:
+
+<pre><b>function</b> Sum (const A: array of Integer): Integer;
+<b>var</b>
+  I: Integer;
+<b>begin</b>
+  Result := 0;
+  <b>for</b> I := Low(A) <b>to</b> High(A) <b>do</b>
+    Result := Result + A[I];
+<b>end</b>;</pre>
+
+<p>Using High(A) we can get the size of the array. Notice also the use of the return value of the function, Result, to store temporary values. You can call this function by passing to it an array of Integer expressions:
+
+<pre>X := Sum ([10, Y, 27*I]);</pre>
+
+<p>Given an array of Integers, of any size, you can pass it directly to a routine requiring an open array parameter or, instead, you can call the Slice function to pass only a portion of the array (as indicated by its second parameter). Here is an example, where the complete array is passed as parameter:
+
+<pre><b>var</b>
+  List: <b>array</b> [1..10] <b>of</b> Integer;
+  X, I: Integer;
+<b>begin</b>
+  <i>// initialize the array</i>
+  <b>for</b> I := Low (List) <b>to </b>High (List) <b>do</b>
+    List [I] := I * 2;
+  <i>// call</i>
+  X := Sum (List);</pre>
+
+<p>If you want to pass only a portion of the array to the Slice function, simply call it this way:
+
+<pre>X := Sum (Slice (List, 5));</pre>
+
+You can find all the code fragments presented in this section in the OpenArr example (see Figure 6.1, later on, for the form).
+
+<p class="slug">Figure 6.1: The OpenArr example when the Partial Slice button is pressed
+
+<p><img src="../gif/epf0601.gif" width=348 height=262 border=0 alt="">
+
+<p class="note">Typed open arrays in Delphi 4 are fully compatible with dynamic arrays (introduced in Delphi 4 and covered in Chapter 8). Dynamic arrays use the same syntax as open arrays, with the difference that you can use a notation such as <i>array of Integer</i> to declare a variable, not just to pass a parameter.
+
+<h3>Type-Variant Open Array Parameters</h3>
+
+<p>Besides these typed open arrays, Delphi allows you to define type-variant or untyped open arrays. This special kind of array has an undefined number of values, which can be handy for passing parameters.
+<p>Technically, the construct array of const allows you to pass an array with an undefined number of elements of different types to a routine at once. For example, here is the definition of the Format function (we'll see how to use this function in <a href="ch07str.htm">Chapter 7</a>, covering strings):
+
+<pre>function Format (const Format: string;
+  const Args: array of const): string;</pre>
+
+<p>The second parameter is an open array, which gets an undefined number of values. In fact, you can call this function in the following ways:
+
+<pre>N := 20;
+S := <i>'Total:'</i>;
+Label1.Caption := Format (<i>'Total: %d'</i>, [N]);
+Label2.Caption := Format (<i>'Int: %d, Float: %f'</i>, [N, 12.4]);
+Label3.Caption := Format (<i>'%s %d'</i>, [S, N * 2]);</pre>
+
+<p>Notice that you can pass a parameter as either a constant value, the value of a variable, or an expression. Declaring a function of this kind is simple, but how do you code it? How do you know the types of the parameters? The values of a type-variant open array parameter are compatible with the <i>TVarRec</i> type elements.
+
+<p class="note"><b>Note:</b> Do not confuse the <i>TVarRec</i> record with the <i>TVarData</i> record used by the Variant type itself. These two structures have a different aim and are not compatible. Even the list of possible types is different, because <i>TVarRec</i> can hold Delphi data types, while <i>TVarData</i> can hold OLE data types.
+
+<p>The <i>TVarRec</i> record has the following structure:
+
+<pre><b>type</b>
+  TVarRec = <b>record</b>
+    <b>case</b> Byte <b>of</b>
+      vtInteger:    (VInteger: Integer; VType: Byte);
+      vtBoolean:    (VBoolean: Boolean);
+      vtChar:       (VChar: Char);
+      vtExtended:   (VExtended: PExtended);
+      vtString:     (VString: PShortString);
+      vtPointer:    (VPointer: Pointer);
+      vtPChar:      (VPChar: PChar);
+      vtObject:     (VObject: TObject);
+      vtClass:      (VClass: TClass);
+      vtWideChar:   (VWideChar: WideChar);
+      vtPWideChar:  (VPWideChar: PWideChar);
+      vtAnsiString: (VAnsiString: Pointer);
+      vtCurrency:   (VCurrency: PCurrency);
+      vtVariant:    (VVariant: PVariant);
+      vtInterface:  (VInterface: Pointer);
+  <b>end</b>;</pre>
+
+<p>Each possible record has the <i>VType</i> field, although this is not easy to see at first because it is declared only once, along with the actual Integer-size data (generally a reference or a pointer).
+<p>Using this information we can actually write a function capable of operating on different data types. In the <i>SumAll</i> function example, I want to be able to sum values of different types, transforming strings to integers, characters to the corresponding order value, and adding 1 for True Boolean values. The code is based on a case statement, and is quite simple, although we have to dereference pointers quite often:
+
+<pre><b>function </b>SumAll (<b>const </b>Args: <b>array of const</b>): Extended;
+<b>var</b>
+  I: Integer;
+<b>begin</b>
+  Result := 0;
+  <b>for</b> I := Low(Args) <b>to</b> High (Args) <b>do</b>
+    <b>case</b> Args [I].VType <b>of</b>
+      vtInteger: Result :=
+        Result + Args [I].VInteger;
+      vtBoolean:
+        <b>if</b> Args [I].VBoolean <b>then</b>
+          Result := Result + 1;
+      vtChar:
+        Result := Result + Ord (Args [I].VChar);
+      vtExtended:
+        Result := Result + Args [I].VExtended^;
+      vtString, vtAnsiString:
+        Result := Result + StrToIntDef ((Args [I].VString^), 0);
+      vtWideChar:
+        Result := Result + Ord (Args [I].VWideChar);
+      vtCurrency:
+        Result := Result + Args [I].VCurrency^;
+    <b>end</b>; <i>// case</i>
+<b>end</b>;</pre>
+
+<p>I've added this code to the OpenArr example, which calls the <i>SumAll</i> function when a given button is pressed:
+
+<pre><b>procedure </b>TForm1.Button4Click(Sender: TObject);
+<b>var</b>
+  X: Extended;
+  Y: Integer;
+<b>begin</b>
+  Y := 10;
+  X := SumAll ([Y * Y, <i>'k'</i>, True, 10.34, '99999']);
+  ShowMessage (Format (
+    <i>'SumAll ([Y*Y, ''k'', True, 10.34, ''99999'']) => %n'</i>, [X]));
+<b>end</b>;</pre>
+
+<p>You can see the output of this call, and the form of the OpenArr example, in Figure 6.2.
+
+<p class="slug">Figure 6.2: The form of the OpenArr example, with the message box displayed when the Untyped button is pressed.
+
+<p><img src="../gif/epf0602.gif" width=454 height=268 border=0 alt="">
+
+<h2>Delphi Calling Conventions</h2>
+
+<p>The 32-bit version of Delphi has introduced a new approach to passing parameters, known as fastcall: Whenever possible, up to three parameters can be passed in CPU registers, making the function call much faster. The fast calling convention (used by default in Delphi 3) is indicated by the register keyword.
+<p>The problem is that this is the default convention, and functions using it are not compatible with Windows: the functions of the Win32 API must be declared using the stdcall calling convention, a mixture of the original Pascal calling convention of the Win16 API and the cdecl calling convention of the C language.
+<p>There is generally no reason not to use the new fast calling convention, unless you are making external Windows calls or defining Windows callback functions. We'll see an example using the stdcall convention before the end of this chapter. You can find a summary of Delphi calling conventions in the Calling conventions topic under Delphi help.
+
+<h2>What Is a Method?</h2>
+
+<p>If you have already worked with Delphi or read the manuals, you have probably heard about the term &quot;method&quot;. A method is a special kind of function or procedure that is related to a data type, a class. In Delphi, every time we handle an event, we need to define a method, generally a procedure. In general, however, the term method is used to indicate both functions and procedures related to a class.
+<p>We have already seen a number of methods in the examples in this and the previous chapters. Here is an empty method automatically added by Delphi to the source code of a form:
+
+<pre><b>procedure </b>TForm1.Button1Click(Sender: TObject);
+<b>begin</b>
+  <i>{here goes your code}</i>
+<b>end</b>;</pre>
+
+<h2>Forward Declarations</h2>
+
+<p>When you need to use an identifier (of any kind), the compiler must have already seen some sort of declaration to know what the identifier refers to. For this reason, you usually provide a full declaration before using any routine. However, there are cases in which this is not possible. If procedure A calls procedure B, and procedure B calls procedure A, when you start writing the code, you will need to call a routine for which the compiler still hasn't seen a declaration.
+<p>If you want to declare the existence of a procedure or function with a certain name and given parameters, without providing its actual code, you can write the procedure or function followed by the forward keyword:
+
+<pre><b>procedure </b>Hello; <b>forward</b>;</pre>
+
+<p>Later on, the code should provide a full definition of the procedure, but this can be called even before it is fully defined. Here is a silly example, just to give you the idea:
+
+<pre><b>procedure </b>DoubleHello; <b>forward</b>;
+
+<b>procedure </b>Hello;
+<b>begin</b>
+  <b>if</b> MessageDlg (<i>'Do you want a double message?'</i>,
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes <b>then</b>
+    DoubleHello
+  <b>else</b>
+    ShowMessage (<i>'Hello'</i>);
+<b>end</b>;
+
+<b>procedure </b>DoubleHello;
+<b>begin</b>
+  Hello;
+  Hello;
+<b>end</b>;</pre>
+
+<p>This approach allows you to write mutual recursion: <i>DoubleHello</i> calls Hello, but Hello might call <i>DoubleHello</i>, too. Of course there must be a condition to terminate the recursion, to avoid a stack overflow. You can find this code, with some slight changes, in the DoubleH example.
+<p>Although a forward procedure declaration is not very common in Delphi, there is a similar case that is much more frequent. When you declare a procedure or function in the interface portion of a unit (more on units in the next chapter), it is considered a forward declaration, even if the forward keyword is not present. Actually you cannot write the body of a routine in the interface portion of a unit. At the same time, you must provide in the same unit the actual implementation of each routine you have declared.
+<p>The same holds for the declaration of a method inside a class type that was automatically generated by Delphi (as you added an event to a form or its components). The event handlers declared inside a <i>TForm</i> class are forward declarations: the code will be provided in the implementation portion of the unit. Here is an excerpt of the source code of an earlier example, with the declaration of the <i>Button1Click</i> method:
+
+<pre><b>type</b>
+  TForm1 = <b>class</b>(TForm)
+    ListBox1: TListBox;
+    Button1: TButton;
+    <b>procedure</b> Button1Click(Sender: TObject);
+  <b>end</b>;</pre>
+
+<h2>Procedural Types</h2>
+
+<p>Another unique feature of Object Pascal is the presence of procedural types. These are really an advanced language topic, which only a few Delphi programmers will use regularly. However, since we will discuss related topics in later chapters (specifically, method pointers, a technique heavily used by Delphi), it's worth a quick look at them here. If you are a novice programmer, you can skip this section for now, and come back to it when you feel ready.
+<p>In Pascal, there is the concept of procedural type (which is similar to the C language concept of function pointer). The declaration of a procedural type indicates the list of parameters and, in the case of a function, the return type. For example, you can declare a new procedural type, with an Integer parameter passed by reference, with this code:
+
+<pre><b>type</b>
+  IntProc = <b>procedure</b> (<b>var </b>Num: Integer);</pre>
+
+<p>This procedural type is compatible with any routine having exactly the same parameters (or the same function signature, to use C jargon). Here is an example of a compatible routine:
+
+<pre><b>procedure </b>DoubleTheValue (<b>var </b>Value: Integer);
+<b>begin</b>
+  Value := Value * 2;
+<b>end</b>;</pre>
+
+<p class="note">Note: In the 16-bit version of Delphi, routines must be declared using the far directive in order to be used as actual values of a procedural type.
+
+<p>Procedural types can be used for two different purposes: you can declare variables of a procedural type or pass a procedural type (that is, a function pointer) as parameter to another routine. Given the preceding type and procedure declarations, you can write this code:
+
+<pre><b>var</b>
+  IP: IntProc;
+  X: Integer;
+<b>begin</b>
+  IP := DoubleTheValue;
+  X := 5;
+  IP (X);
+<b>end</b>;</pre>
+
+<p>This code has the same effect as the following shorter version:
+
+<pre><b>var</b>
+  X: Integer;
+<b>begin</b>
+  X := 5;
+  DoubleTheValue (X);
+<b>end</b>;</pre>
+
+<p>The first version is clearly more complex, so why should we use it? In some cases, being able to decide which function to call and actually calling it later on can be useful. It is possible to build a complex example showing this approach. However, I prefer to let you explore a fairly simple one, named ProcType. This example is more complex than those we have seen so far, to make the situation a little more realistic.
+<p>Simply create a blank project and place two radio buttons and a push button, as shown in Figure 6.3. This example is based on two procedures. One procedure is used to double the value of the parameter. This procedure is similar to the version I've already shown in this section. A second procedure is used to triple the value of the parameter, and therefore is named TripleTheValue:
+
+<p class="slug">Figure 6.3: The form of the ProcType example.
+
+<p><img src="../gif/epf0603.gif" width=305 height=179 border=0 alt="">
+
+<pre><b>procedure</b> TripleTheValue (<b>var </b>Value: Integer);
+<b>begin</b>
+  Value := Value * 3;
+  ShowMessage (<i>'Value tripled: '</i> + IntToStr (Value));
+<b>end</b>;</pre>
+
+<p>Both procedures display what is going on, to let us know that they have been called. This is a simple debugging feature you can use to test whether or when a certain portion of code is executed, instead of adding a breakpoint in it.
+<p>Each time a user presses the Apply button, one of the two procedures is executed, depending on the status of the radio buttons. In fact, when you have two radio buttons in a form, only one of them can be selected at a time. This code could have been implemented by testing the value of the radio buttons inside the code for the <i>OnClick</i> event of the Apply button. To demonstrate the use of procedural types, I've instead used a longer but interesting approach. Each time a user clicks on one of the two radio buttons, one of the procedures is stored in a variable:
+
+<pre><b>procedure </b>TForm1.DoubleRadioButtonClick(Sender: TObject);
+<b>begin</b>
+  IP := DoubleTheValue;
+<b>end</b>;</pre>
+
+<p>When the user clicks on the push button, the procedure we have stored is executed:
+
+<pre><b>procedure </b>TForm1.ApplyButtonClick(Sender: TObject);
+<b>begin</b>
+  IP (X);
+<b>end</b>;</pre>
+
+<p>To allow three different functions to access the IP and X variables, we need to make them visible to the whole form; they cannot be declared locally (inside one of the methods). A solution to this problem is to place these variables inside the form declaration:
+
+<pre><b>type</b>
+  TForm1 = <b>class</b>(TForm)
+    ...
+  <b>private</b>
+    <i>{ Private declarations }</i>
+    IP: IntProc;
+    X: Integer;
+  <b>end</b>;</pre>
+
+<p>We will see exactly what this means in the next chapter, but for the moment, you need to modify the code generated by Delphi for the class type as indicated above, and add the definition of the procedural type I've shown before. To initialize these two variables with suitable values, we can handle the <i>OnCreate</i> event of the form (select this event in the Object Inspector after you have activated the form, or simply double-click on the form). I suggest you refer to the listing to study the details of the source code of this example.
+
+<p class="note">You can see a practical example of the use of procedural types in Chapter 9, in the section <i>A Windows Callback Function</i>.</p>
+
+<h2>Function Overloading</h2>
+
+<p>The idea of overloading is simple: The compiler allows you to define two functions or procedures using the same name, provided that the parameters are different. By checking the parameters, in fact, the compiler can determine which of the versions of the routine you want to call.</p>
+<p>Consider this series of functions extracted from the Math unit of the VCL:</p>
+
+<pre><b>function</b> Min (A,B: Integer): Integer; <b>overload</b>;
+<b>function</b> Min (A,B: Int64): Int64; <b>overload</b>;
+<b>function</b> Min (A,B: Single): Single; <b>overload</b>;
+<b>function</b> Min (A,B: Double): Double; <b>overload</b>;
+<b>function</b> Min (A,B: Extended): Extended; <b>overload</b>;</pre>
+
+<p>When you call Min (10, 20), the compiler easily determines that you're calling the first function of the group, so the return value will be an Integer. </p>
+<p>The basic rules are two:</p>
+<ul>
+<li>Each version of the routine must be followed by the overload keyword.
+<li>The differences must be in the number or type of the parameters, or both. The return type, instead, cannot be used to distinguish among two routines.
+</ul>
+<p>Here are three overloaded versions of a ShowMsg procedure I've added to the OverDef example (an application demonstrating overloading and default parameters):</p>
+
+<pre><b>procedure</b> ShowMsg (str: string); <b>overload</b>;
+<b>begin</b>
+  MessageDlg (str, mtInformation, [mbOK], 0);
+<b>end</b>;
+
+<b>procedure</b> ShowMsg (FormatStr: string;
+  Params: <b>array of const</b>); <b>overload</b>;
+<b>begin</b>
+  MessageDlg (Format (FormatStr, Params),
+    mtInformation, [mbOK], 0);
+<b>end</b>;
+
+<b>procedure</b> ShowMsg (I: Integer; Str: string); <b>overload</b>;
+<b>begin</b>
+  ShowMsg (IntToStr (I) + <i>' '</i> + Str);
+<b>e</b>nd;</pre>
+
+<p>The three functions show a message box with a string, after optionally formatting the string in different ways. Here are the three calls of the program:</p>
+
+<pre>ShowMsg (<i>'Hello'</i>);
+ShowMsg (<i>'Total = %d.'</i>, [100]);
+ShowMsg (10, <i>'MBytes'</i>);</pre>
+
+<p>What surprised me in a positive way is that Delphi's Code Parameters technology works very nicely with overloaded procedures and functions. As you type the open parenthesis after the routine name, all the available alternatives are listed. As you enter the parameters, Delphi uses their type to determine which of the alternatives are still available. In Figure 6.4 you can see that after starting to type a constant string Delphi shows only the compatible versions (omitting the version of the ShowMsg procedure that has an integer as first parameter).</p>
+
+<p class="slug">Figure 6.4: The multiple alternatives offered by Code Parameters for overloaded routines are filtered according to the parameters already available.	
+
+<p><img src="../gif/epf0604.gif" width=544 height=376 border=0 alt="">
+
+<p>The fact that each version of an overloaded routine must be properly marked implies that you cannot overload an existing routine of the same unit that is not marked with the overload keyword. (The error message you get when you try is: &quot;Previous declaration of '&lt;name&gt;' was not marked with the 'overload' directive.&quot;) However, you can overload a routine that was originally declared in a different unit. This is for compatibility with previous versions of Delphi, which allowed different units to reuse the same routine name. Notice, anyway, that this special case is not an extra feature of overloading, but an indication of the problems you can face. </p>
+<p>For example, you can add to a unit the following code:</p>
+
+<pre><b>procedure</b> MessageDlg (str: string); <b>overload</b>;
+<b>begin</b>
+  Dialogs.MessageDlg (str, mtInformation, [mbOK], 0);
+<b>end;</b></pre>
+
+<p>This code doesn't really overload the original MessageDlg routine. In fact if you write:</p>
+
+<pre>MessageDlg (<i>'Hello'</i>);</pre>
+
+<p>you'll get a nice error message indicating that some of the parameters are missing. The only way to call the local version instead of the one of the VCL is to refer explicitly to the local unit, something that defeats the idea of overloading:</p>
+
+<pre>OverDefF.MessageDlg (<i>'Hello'</i>);</pre>
+
+<h2>Default Parameters</h2>
+
+<p>A related new feature of Delphi 4 is that you can give a default value for the parameter of a function, and you can call the function with or without the parameter. Let me show an example. We can define the following encapsulation of the MessageBox method of the Application global object, which uses PChar instead of strings, providing two default parameters:</p>
+
+<pre><b>procedure</b> MessBox (Msg: string;
+  Caption: string = 'Warning';
+  Flags: LongInt = mb_OK <b>or</b> mb_IconHand);
+<b>begin</b>
+  Application.MessageBox (PChar (Msg),
+    PChar (Caption), Flags);
+<b>end</b>;</pre>
+
+<p>With this definition, we can call the procedure in each of the following ways:</p>
+
+<pre>MessBox (<i>'Something wrong here!'</i>);
+MessBox (<i>'Something wrong here!'</i>, <i>'Attention'</i>);
+MessBox (<i>'Hello'</i>, <i>'Message'</i>, mb_OK);</pre>
+
+<p>In Figure 6.5 you can see that Delphi's Code Parameters properly use a different style to indicate the parameters that have a default value, so you can easily determine which parameters can be omitted.</p>
+
+<p class="slug">Figure 6.5: Delphi's Code Parameters mark out with square brackets the parameters that have default values; you can omit these in the call.
+
+<p><img src="../gif/epf0605.gif" width=650 height=376 border=0 alt="">
+
+<p>Notice that Delphi doesn't generate any special code to support default parameters; nor does it create multiple copies of the routines. The missing parameters are simply added by the compiler to the calling code.</p>
+<p>There is one important restriction affecting the use of default parameters: You cannot &quot;skip&quot; parameters. For example, you can't pass the third parameter to the function after omitting the second one:</p>
+
+<pre>MessBox (<i>'Hello'</i>, mb_OK); <i>// error</i>  </pre>
+
+<p>This is the main rule for default parameters: In a call, you can only omit parameters starting from the last one. In other words, if you omit a parameter you must omit also the following ones.</p>
+<p>There are a few other rules for default parameters as well:</p>
+<ul>
+<li>Parameters with default values must be at the end of the parameters list.
+<li>Default values must be constants. Obviously, this limits the types you can use with default parameters. For example, a dynamic array or an interface type cannot have a default parameter other than nil; records cannot be used at all.
+<li>Default parameters must be passed by value or as const. A reference (var) parameter cannot have a default value.
+</ul>
+
+<p>Using default parameters and overloading at the same time can cause quite a few problems, as the two features might conflict. For example, if I add to the previous example the following new version of the <i>ShowMsg</i> procedure:</p>
+
+<pre><b>procedure </b>ShowMsg (Str: string; I: Integer = 0); <b>overload</b>;
+<b>begin</b>
+  MessageDlg (Str + <i>': '</i> + IntToStr (I),
+    mtInformation, [mbOK], 0);
+<b>end</b>;</pre>
+
+<p>then the compiler won't complain-this is a legal definition. However, the call:</p>
+<pre>ShowMsg ('Hello');</pre>
+<p>is flagged by the compiler as <i>Ambiguous overloaded call to 'ShowMsg'</i>. Notice that this error shows up in a line of code that compiled correctly before the new overloaded definition. In practice, we have no way to call the ShowMsg procedure with one string parameter, as the compiler doesn't know whether we want to call the version with only the string parameter or the one with the string parameter and the integer parameter with a default value. When it has a similar doubt, the compiler stops and asks the programmer to state his or her intentions more clearly.</p>
+
+<h2>Conclusion</h2>
+
+<p>Writing procedure and functions is a key element of programming, although in Delphi you'll tend to write methods -- procedures and functions connected with classes and objects.
+<p>Instead of moving on to object-oriented features, however, the next few chapters give you some details on other Pascal programming elements, starting with strings.
+
+<h3><a href="ch07str.htm">Next Chapter: Handling Strings</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

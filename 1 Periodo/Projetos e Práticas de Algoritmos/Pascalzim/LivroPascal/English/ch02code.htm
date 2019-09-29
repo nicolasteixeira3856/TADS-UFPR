@@ -1,0 +1,354 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 2<br>Coding in Pascal</h1>
+</td></tr>
+</table> 
+
+<!-- text -->
+
+<p>Before we move on to the subject of writing Pascal language statements, it is important to highlight a couple of elements of Pascal coding style. The question I'm addressing here is this: Besides the syntax rules, how should you write code? There isn't a single answer to this question, since personal taste can dictate different styles. However, there are some principles you need to know regarding comments, uppercase, spaces, and the so-called pretty-printing. In general, the goal of any coding style is clarity. The style and formatting decisions you make are a form of shorthand, indicating the purpose of a given piece of code. An essential tool for clarity is consistency-whatever style you choose, be sure to follow it throughout a project.
+
+<h2>Comments</h2>
+
+<p>In Pascal, comments are enclosed in either braces or parentheses followed by a star. Delphi also accepts the C++ style comments, which can span to the end of the line:
+
+<PRE>{this is a comment}
+(* this is another comment *)
+// this is a comment up to the end of the line
+</PRE>
+
+<p>The first form is shorter and more commonly used. The second form was often preferred in Europe because many European keyboards lack the brace symbol. The third form of comments has been borrowed from C++ and is available only in the 32-bit versions of Delphi. Comments up to the end of the line are very helpful for short comments and for commenting out a line of code.
+
+<p class="note">In the listings of the book I'll try to mark comments as italic (and keywords in bold), to be
+consistent with the default Delphi syntax highlighting.
+
+<p>Having three different forms of comments can be helpful for making nested comments. If you want to comment out several lines of source code to disable them, and these lines contain some real comments, you cannot use the same comment identifier:
+
+<PRE>{  ... code
+{comment, creating problems}
+... code }
+</PRE>
+
+<p>With a second comment identifier, you can write the following code, which is correct:
+
+<PRE>{  ... code
+//this comment is OK
+... code }
+</PRE>
+
+<p>Note that if the open brace or parenthesis-star is followed by the dollar sign ($), it becomes a compiler directive, as in {$X+}.
+
+<p class="note">Actually, compiler directives are still comments. For example, {$X+ This is a comment} is legal. It's both a valid directive and a comment, although sane programmers will probably tend to separate directives and comments.
+
+<h2>Use of Uppercase</h2>
+
+<p>The Pascal compiler (unlike those in other languages) ignores the case (capitalization) of characters. Therefore, the identifiers Myname, MyName, myname, myName, and MYNAME are all exactly equivalent. On the whole, this is definitely a positive, since in case-sensitive languages, many syntax errors are caused by incorrect capitalization.
+
+<p class="note">Note: There is only one exception to the case-insensitive rule of Pascal: the <i>Register</i> procedure of a components' package must start with the uppercase <i>R</i>, because of a C++Builder compatibility issue.
+
+<p>There are a couple of subtle drawbacks, however. First, you must be aware that these identifiers really are the same, so you must avoid using them as different elements. Second, you should try to be consistent in the use of uppercase letters, to improve the readability of the code.
+<p>A consistent use of case isn't enforced by the compiler, but it is a good habit to get into. A common approach is to capitalize only the first letter of each identifier. When an identifier is made up of several consecutive words (you cannot insert a space in an identifier), every first letter of a word should be capitalized:
+
+<PRE>MyLongIdentifier
+MyVeryLongAndAlmostStupidIdentifier
+</PRE>
+
+<p>Other elements completely ignored by the compiler are the spaces, new lines, and tabs you add to the source code. All these elements are collectively known as white space. White space is used only to improve code readability; it does not affect the compilation.
+<p>Unlike BASIC, Pascal allows you to write a statement on several lines of code, splitting a long instruction on two or more lines. The drawback (at least for many BASIC programmers) of allowing statements on more than one line is that you have to remember to add a semicolon to indicate the end of a statement, or more precisely, to separate a statement from the next one. Notice that the only restriction in splitting programming statements on different lines is that a string literal may not span several lines.
+<p>Again, there are no fixed rules on the use of spaces and multiple-line statements, just some rules of thumb:
+<ul>
+<li>The Delphi editor has a vertical line you can place after 60 or 70 characters. If you use this line and try to avoid surpassing this limit, your source code will look better when you print it on paper. Otherwise long lines may get broken at any position, even in the middle of a word, when you print them.
+<li> When a function or procedure has several parameters, it is common practice to place the parameters on different lines.
+<li> You can leave a line completely white (blank) before a comment or to divide a long piece of code in smaller portions. Even this simple idea can improve the readability of the code, both on screen and when you print it.
+<li> Use spaces to separate the parameters of a function call, and maybe even a space before the initial open parenthesis. Also keep operands of an expression separated. I know that some programmers will disagree with these ideas, but I insist: Spaces are free; you don't pay for them. (OK, I know that they use up disk space and modem connection time when you upload or download a file, but this is less and less relevant, nowadays.)
+</ul>
+
+<h2>Pretty-Printing</h2>
+
+<p>The last suggestion on the use of white spaces relates to the typical Pascal language-formatting style, known as pretty-printing. This rule is simple: Each time you need to write a compound statement, indent it two spaces to the right of the rest of the current statement. A compound statement inside another compound statement is indented four spaces, and so on:
+
+<PRE><b>if</b> ... <b>then</b>
+  statement;
+
+<b>if</b> ... <b>then</b>
+<b>begin</b>
+  statement1;
+  statement2;
+<b>end</b>;
+
+<b>if</b> ... <b>then</b>
+<b>begin</b>
+  <b>if</b> ... <b>then</b>
+    statement1;
+  statement2;
+<b>end</b>;
+</PRE>
+
+<p class="note">The above formatting is based on pretty-printing, but programmers have different interpretations of this general rule. Some programmers indent the begin and end statements to the level of the inner code, some of them indent begin and end and then indent the internal code once more, other programmers put the begin in the line of the if condition. This is mostly a matter of personal taste.
+
+<p>A similar indented format is often used for lists of variables or data types, and to continue a statement from the previous line:
+
+<PRE><b>type</b>
+  Letters = <b>set of</b> Char;
+<b>var</b>
+  Name: string;
+<b>begin</b>
+   <i>{ long comment and long statement, going on in the
+     following line and indented two spaces }</i>
+   MessageDlg (<i>'This is a message'</i>,
+     mtInformation, [mbOk], 0);
+</PRE>
+
+<p>Of course, any such convention is just a suggestion to make the code more readable to other programmers, and it is completely ignored by the compiler. I've tried to use this rule consistently in all of the samples and code fragments in this book. Delphi source code, manuals, and Help examples use a similar formatting style.
+
+<h2>Syntax Highlighting</h2>
+
+<p>To make it easier to read and write Pascal code, the Delphi editor has a feature called color syntax highlighting. Depending on the meaning in Pascal of the words you type in the editor, they are displayed using different colors. By default, keywords are in bold, strings and comments are in color (and often in italic), and so on.
+<p>Reserved words, comments, and strings are probably the three elements that benefit most from this feature. You can see at a glance a misspelled keyword, a string not properly terminated, and the length of a multiple-line comment.
+<p>You can easily customize the syntax highlight settings using the Editor Colors page of the Environment Options dialog box (see Figure 2.1). If you work by yourself, choose the colors you like. If you work closely with other programmers, you should all agree on a standard color scheme. I find that working on a computer with a different syntax coloring than the one I am used to is really difficult.
+
+<p class="slug">FIGURE 2.1: The dialog box used to set the color syntax highlighting.
+
+<p><img src="../gif/epf0201.gif" width=443 height=418 alt="" border=0>
+
+<p class="note">Note: In this book I've tried to apply a sort of syntax highlighting to the source code listings. I hope this actually makes them more readable.
+
+<h2>Using Code Templates</h2>
+
+<p>Delphi 3 introduced a new feature related to source code editing. Because when writing Pascal language statements you often repeat the same sequence of keywords, Borland has provided a new feature called Code Templates. A code template is simply a piece of code related with a shorthand. You type the shorthand, then press Ctrl+J, and the full piece of code appears.
+For example, if you type arrayd, and then press Ctrl+J, the Delphi editor will expand your text into:
+
+<PRE><b>array</b> [0..] <b>of</b> ;
+</PRE>
+
+<p>Since the predefined code templates usually include several versions of the same construct, the shortcut generally terminates with a letter indicating which of the versions you are interested in. However, you can also type only the initial part of the shortcut. For example, if you type ar and then press Ctrl+J, the editor will display a local menu with a list of the available choices with a short description, as you can see in Figure 2.2.
+
+<p class="slug">Figure 2.2: Code Templates selection
+
+<p><img src="../gif/epf0202.gif" width=592 height=265 alt="" border="0">
+
+<p>You can fully customize the code templates by modifying the existing ones or adding your own common code pieces. If you do this, keep in mind that the text of a code template generally includes the '|' character to indicate where the cursor should jump to after the operation, that is, where you start typing to complete the template with custom code.
+
+<h2>Language Statements</h2>
+
+<p>Once you have defined some identifiers, you can use them in statements and in the expressions that are part of some statements. Pascal offers several statements and expressions. Let's look at keywords, expressions, and operators first.
+
+<h2>Keywords</h2>
+
+<p>Keywords are all the Object Pascal reserved identifiers, which have a role in the language. Delphi's help distinguishes between reserved words and directives: Reserved words cannot be used as identifiers, while directives should not be used as such, even if the compiler will accept them. In practice, you should not use any keywords as an identifier.
+<p>In Table 2.1 you can see a complete list of the identifiers having a specific role in the Object Pascal language (in Delphi 4), including keywords and other reserved words.
+
+<p class="slug">Table 2.1: Keywords and other reserved words in the Object Pascal language
+
+<p><table border="1" cellspacing="0" bordercolor="Black">
+	<tr><th>Keyword		</th><th>Role</th></tr>
+	<tr><td>absolute	</td><td>directive (variables)</td></tr>
+	<tr><td>abstract	</td><td>directive (method)</td></tr>
+	<tr><td>and			</td><td>operator (boolean)</td></tr>
+	<tr><td>array		</td><td>type</td></tr>
+	<tr><td>as			</td><td>operator (RTTI)</td></tr>
+	<tr><td>asm			</td><td>statement</td></tr>
+	<tr><td>assembler	</td><td>backward compatibility (asm)</td></tr>
+	<tr><td>at			</td><td>statement (exceptions)</td></tr>
+	<tr><td>automated	</td><td>access specifier (class)</td></tr>
+	<tr><td>begin		</td><td>block marker</td></tr>
+	<tr><td>case		</td><td>statement</td></tr>
+	<tr><td>cdecl		</td><td>function calling convention</td></tr>
+	<tr><td>class		</td><td>type</td></tr>
+	<tr><td>const		</td><td>declaration or directive (parameters)</td></tr>
+	<tr><td>constructor	</td><td>special method</td></tr>
+	<tr><td>contains	</td><td>operator (set)</td></tr>
+	<tr><td>default		</td><td>directive (property)</td></tr>
+	<tr><td>destructor	</td><td>special method</td></tr>
+	<tr><td>dispid		</td><td>dispinterface specifier</td></tr>
+	<tr><td>dispinterface</td><td>type</td></tr>
+	<tr><td>div			</td><td>operator</td></tr>
+	<tr><td>do			</td><td>statement</td></tr>
+	<tr><td>downto		</td><td>statement (for)</td></tr>
+	<tr><td>dynamic		</td><td>directive (method)</td></tr>
+	<tr><td>else		</td><td>statement (if or case)</td></tr>
+	<tr><td>end			</td><td>block marker</td></tr>
+	<tr><td>except		</td><td>statement (exceptions)</td></tr>
+	<tr><td>export		</td><td>backward compatibility (class)</td></tr>
+	<tr><td>exports		</td><td>declaration</td></tr>
+	<tr><td>external	</td><td>directive (functions)</td></tr>
+	<tr><td>far			</td><td>backward compatibility (class)</td></tr>
+	<tr><td>file		</td><td>type</td></tr>
+	<tr><td>finalization</td><td>unit structure</td></tr>
+	<tr><td>finally		</td><td>statement (exceptions)</td></tr>
+	<tr><td>for			</td><td>statement</td></tr>
+	<tr><td>forward		</td><td>function directive</td></tr>
+	<tr><td>function	</td><td>declaration</td></tr>
+	<tr><td>goto		</td><td>statement</td></tr>
+	<tr><td>if			</td><td>statement</td></tr>
+	<tr><td>implementation</td><td>unit structure</td></tr>
+	<tr><td>implements	</td><td>directive (property)</td></tr>
+	<tr><td>in		</td><td>operator (set) - project structure</td></tr>
+	<tr><td>index		</td><td>directive (dipinterface)</td></tr>
+	<tr><td>inherited	</td><td>statement</td></tr>
+	<tr><td>initialization</td><td>unit structure</td></tr>
+	<tr><td>inline		</td><td>backward compatibility (see asm)</td></tr>
+	<tr><td>interface	</td><td>type</td></tr>
+	<tr><td>is			</td><td>operator (RTTI)</td></tr>
+	<tr><td>label		</td><td>declaration</td></tr>
+	<tr><td>library		</td><td>program structure</td></tr>
+	<tr><td>message 	</td><td>directive (method)</td></tr>
+	<tr><td>mod			</td><td>operator (math)</td></tr>
+	<tr><td>name		</td><td>directive (function)</td></tr>
+	<tr><td>near		</td><td>backward compatibility (class)</td></tr>
+	<tr><td>nil			</td><td>value</td></tr>
+	<tr><td>nodefault	</td><td>directive (property)</td></tr>
+	<tr><td>not			</td><td>operator (boolean)</td></tr>
+	<tr><td>object		</td><td>backward compatibility (class)</td></tr>
+	<tr><td>of			</td><td>statement (case)</td></tr>
+	<tr><td>on			</td><td>statement (exceptions)</td></tr>
+	<tr><td>or			</td><td>operator (boolean)</td></tr>
+	<tr><td>out			</td><td>directive (parameters)</td></tr>
+	<tr><td>overload	</td><td>function directive</td></tr>
+	<tr><td>override	</td><td>function directive</td></tr>
+	<tr><td>package		</td><td>program structure (package)</td></tr>
+	<tr><td>packed		</td><td>directive (record)</td></tr>
+	<tr><td>pascal		</td><td>function calling convention</td></tr>
+	<tr><td>private		</td><td>access specifier (class)</td></tr>
+	<tr><td>procedure	</td><td>declaration</td></tr>
+	<tr><td>program		</td><td>program structure</td></tr>
+	<tr><td>property	</td><td>declaration</td></tr>
+	<tr><td>protected	</td><td>access specifier (class)</td></tr>
+	<tr><td>public		</td><td>access specifier (class)</td></tr>
+	<tr><td>published	</td><td>access specifier (class)</td></tr>
+	<tr><td>raise		</td><td>statement (exceptions)</td></tr>
+	<tr><td>read		</td><td>property specifier</td></tr>
+	<tr><td>readonly	</td><td>dispatch interface specifier</td></tr>
+	<tr><td>record		</td><td>type</td></tr>
+	<tr><td>register	</td><td>function calling convention</td></tr>
+	<tr><td>reintroduce	</td><td>function directive</td></tr>
+	<tr><td>repeat		</td><td>statement</td></tr>
+	<tr><td>requires	</td><td>program structure (package)</td></tr>
+	<tr><td>resident	</td><td>directive (functions)</td></tr>
+	<tr><td>resourcestring</td><td>type</td></tr>
+	<tr><td>safecall	</td><td>function calling convention</td></tr>
+	<tr><td>set			</td><td>type</td></tr>
+	<tr><td>shl			</td><td>operator (math)</td></tr>
+	<tr><td>shr			</td><td>operator (math)</td></tr>
+	<tr><td>stdcall		</td><td>function calling convention</td></tr>
+	<tr><td>stored		</td><td>directive (property)</td></tr>
+	<tr><td>string		</td><td>type</td></tr>
+	<tr><td>then		</td><td>statement (if)</td></tr>
+	<tr><td>threadvar	</td><td>declaration</td></tr>
+	<tr><td>to			</td><td>statement (for)</td></tr>
+	<tr><td>try			</td><td>statement (exceptions)</td></tr>
+	<tr><td>type		</td><td>declaration</td></tr>
+	<tr><td>unit		</td><td>unit structure</td></tr>
+	<tr><td>until		</td><td>statement</td></tr>
+	<tr><td>uses		</td><td>unit structure</td></tr>
+	<tr><td>var			</td><td>declaration</td></tr>
+	<tr><td>virtual		</td><td>directive (method)</td></tr>
+	<tr><td>while		</td><td>statement</td></tr>
+	<tr><td>with		</td><td>statement</td></tr>
+	<tr><td>write		</td><td>property specifier</td></tr>
+	<tr><td>writeonly	</td><td>dispatch interface specifier</td></tr>
+	<tr><td>xor		 	</td><td>operator (boolean)</td></tr>
+</table>
+
+<h2>Expressions and Operators</h2>
+
+<p>There isn't a general rule for building expressions, since they mainly depend on the operators being used, and Pascal has a number of operators. There are logical, arithmetic, Boolean, relational, and set operators, plus some others. Expressions can be used to determine the value to assign to a variable, to compute the parameter of a function or procedure, or to test for a condition. Expressions can include function calls, too. Every time you are performing an operation on the value of an identifier, rather than using an identifier by itself, that is an expression.
+<p>Expressions are common to most programming languages. An expression is any valid combination of constants, variables, literal values, operators, and function results. Expressions can also be passed to value parameters of procedures and functions, but not always to reference parameters (which require a value you can assign to).
+
+<h3>Operators and Precedence</h3>
+
+<p>If you have ever written a program in your life, you already know what an expression is. Here, I'll highlight specific elements of Pascal operators. You can see a list of the operators of the language, grouped by precedence, in Table 2.1. 
+
+<p class="note">Contrary to most other programming languages, the and and or operators have precedence compared to the relational one. So if you write <i>a &lt; b and c &lt; d</i>, the compiler will try to do the and operation first, resulting in a compiler error. For this reason you should enclose each of the &lt; expression in parentheses: <i>(a &lt; b) and (c &lt; d)</i>.
+
+<p>Some of the common operators have different meanings with different data types. For example, the + operator can be used to add two numbers, concatenate two strings, make the union of two sets, and even add an offset to a PChar pointer. However, you cannot add two characters, as is possible in C.
+<p>Another strange operator is div. In Pascal, you can divide any two numbers (real or integers) with the / operator, and you'll invariably get a real-number result. If you need to divide two integers and want an integer result, use the div operator instead. 
+
+<p class="slug">Table 2.2: Pascal Language Operators, Grouped by Precedence
+
+<p><table border="1" cellspacing="0" cellpadding="3" bordercolor="Black">
+<tr><th colspan="2">Unary Operators (Highest Precedence)</th></tr>
+
+<tr><td>@</td>         <td>Address of the variable or function (returns a pointer)</td></tr>
+<tr><td>not</td>       <td>Boolean or bitwise not</td></tr>
+
+<tr><th colspan="2">Multiplicative and Bitwise Operators</th></tr>
+
+<tr><td>*</td>         <td>Arithmetic multiplication or set intersection</td></tr>
+<tr><td>/</td>         <td>Floating-point division</td></tr>
+<tr><td>div</td>       <td>Integer division</td></tr>
+<tr><td>mod</td>       <td>Modulus (the remainder of integer division)</td></tr>
+<tr><td>as</td>        <td>Allows a type-checked type conversion among at runtime (part of the RTTI support)</td></tr>
+<tr><td>and</td>       <td>Boolean or bitwise and</td></tr>
+<tr><td>shl</td>       <td>Bitwise left shift</td></tr>
+<tr><td>shr</td>       <td>Bitwise right shift</td></tr>
+
+<tr><th colspan="2">Additive Operators</th></tr>
+
+<tr><td>+</td>         <td>Arithmetic addition, set union, string concatenation,
+          pointer offset addition</td></tr>
+<tr><td>-</td>         <td>Arithmetic subtraction, set difference, 
+          pointer offset subtraction</td></tr>
+<tr><td>or</td>        <td>Boolean or bitwise or</td></tr>
+<tr><td>xor</td>       <td>Boolean or bitwise exclusive or</td></tr>
+
+<tr><th colspan="2">Relational and Comparison Operators (Lowest Precedence)</th></tr>
+
+<tr><td>=</td>         <td>Test whether equal</td></tr>
+<tr><td>&lt;&gt;</td>        <td>Test whether not equal</td></tr>
+<tr><td>&lt;</td>         <td>Test whether less than</td></tr>
+<tr><td>&gt;</td>         <td>Test whether greater than</td></tr>
+<tr><td>&lt;=</td>        <td>Test whether less than or equal to,
+          or a subset of a set</td></tr>
+<tr><td>&gt;=</td>        <td>Test whether greater than or equal to,
+          or a superset of a set</td></tr>
+<tr><td>in</td>        <td>Test whether the item is a member of the set</td></tr>
+<tr><td>is</td>        <td>Test whether object is type-compatible
+          (another RTTI operator)</td></tr>
+</table>
+
+<h3>Set Operators</h3>
+
+<p>The set operators include union (+), difference (-), intersection (*),membership test (in), plus some relational operators. To add an element to a set, you can make the union of the set with another one that has only the element you need. Here's a Delphi example related to font styles:
+
+<PRE>Style := Style + [fsBold];
+Style := Style + [fsBold, fsItalic] - [fsUnderline];
+</PRE>
+
+<p>As an alternative, you can use the standard Include and Exclude procedures, which are much more efficient (but cannot be used with component properties of the set type, because they require an l-value parameter):
+
+<PRE>Include (Style, fsBold);
+</PRE>
+
+<h2>Conclusion</h2>
+
+<p>Now that we know the basic layout of a Pascal program we are ready to start understanding its meaning in detail. We'll start by exploring the definition of predefined and user defined data types, then we'll move along to the use of the keywords to form programming statements.
+
+<h3><a href="ch03data.htm">Next Chapter: Types, Variables, and Constants</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

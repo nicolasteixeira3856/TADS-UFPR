@@ -1,0 +1,239 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 7<br>Handling Strings</h1>
+</td></tr>
+</table> 
+
+<!-- text -->	
+
+<p>String handling in Delphi is quite simple, but behind the scenes the situation is quite complex. Pascal has a traditional way of handling strings, Windows has its own way, borrowed from the C language, and 32-bit versions of Delphi include a powerful long string data type, which is the default string type in Delphi.</p>
+
+<h2>Types of Strings</h2>
+
+<p>In Borland's Turbo Pascal and in 16-bit Delphi, the typical string type is a sequence of characters with a length byte at the beginning, indicating the current size of the string. Because the length is expressed by a single byte, it cannot exceed 255 characters, a very low value that creates many problems for string manipulation. Each string is defined with a fixed size (which by default is the maximum, 255), although you can declare shorter strings to save memory space.</p>
+<p>A string type is similar to an array type. In fact, a string is almost an array of characters. This is demonstrated by the fact that you can access a specific string character using the [] notation. </p>
+<p>To overcome the limits of traditional Pascal strings, the 32-bit versions of Delphi support long strings. There are actually three string types:</p>
+<ul>
+<li>The ShortString type corresponds to the typical Pascal strings, as described before. These strings have a limit of 255 characters and correspond to the strings in the 16-bit version of Delphi. Each element of a short string is of type ANSIChar (the standard character type).
+<li>The ANSIString type corresponds to the new variable-length long strings. These strings are allocated dynamically, are reference counted, and use a copy-on-write technique. The size of these strings is almost unlimited (they can store up to two billion characters!). They are also based on the ANSIChar type.
+<li>
+The WideString type is similar to the ANSIString type but is based on the WideChar type-it stores Unicode characters.
+</ul>
+
+<h2>Using Long Strings</h2>
+
+<p>If you simply use the string data type, you get either short strings or ANSI strings, depending on the value of the $H compiler directive. $H+ (the default) stands for long strings (the ANSIString type), which is what is used by the components of the Delphi library.</p>
+<p>Delphi long strings are based on a reference-counting mechanism, which keeps track of how many string variables are referring to the same string in memory. This reference-counting is used also to free the memory when a string isn't used anymore-that is, when the reference count reaches zero.</p>
+<p>If you want to increase the size of a string in memory but there is something else in the adjacent memory, then the string cannot grow in the same memory location, and a full copy of the string must therefore be made in another location. When this situation occurs, Delphi's run-time support reallocates the string for you in a completely transparent way. You simply set the maximum size of the string with the SetLength procedure, effectively allocating the required amount of memory:</p>
+
+<pre>SetLength (String1, 200);</pre>
+
+<p>The SetLength procedure performs a memory request, not an actual memory allocation. It reserves the required memory space for future use, without actually using the memory. This technique is based on a feature of the Windows operating systems and is used by Delphi for all dynamic memory allocations. For example, when you request a very large array, its memory is reserved but not allocated.</p>
+<p>Setting the length of a string is seldom necessary. The only case in which you must allocate memory for the long string using SetLength is when you have to pass the string as a parameter to an API function (after the proper typecast), as I'll show you shortly.</p>
+
+<h2>Looking at Strings in Memory</h2>
+
+<p>To help you better understand the details of memory management for strings, I've written the simple StrRef example. In this program I declare two global strings: Str1 and Str2. When the first of the two buttons is pressed, the program assigns a constant string to the first of the two variables and then assigns the second variable to the first:</p>
+
+<pre>Str1 := <i>'Hello'</i>;
+Str2 := Str1;</pre>
+
+<p>Besides working on the strings, the program shows their internal status in a list box, using the following StringStatus function:</p>
+
+<pre><b>function</b> StringStatus (<b>const</b> Str: string): string;
+<b>begin</b>
+  Result := <i>'Address: '</i> + IntToStr (Integer (Str)) +
+    <i>', Length: '</i> + IntToStr (Length (Str)) + 
+    <i>', References: '</i> + IntToStr (PInteger (Integer (Str) - 8)^) +
+    <i>', Value: '</i> + Str;
+<b>end</b>;</pre>  
+
+<p>It is vital in the <i>StringStatus</i> function to pass the string parameter as a const parameter. Passing this parameter by copying will cause the side effect of having one extra reference to the string while the function is being executed. By contrast, passing the parameter via a reference (var) or constant (const) parameter doesn't imply a further reference to the string. In this case I've used a const parameter, as the function is not supposed to modify the string.</p>
+<p>To obtain the memory address of the string (useful to determine its actual identity and to see when two different strings refer to the same memory area), I've simply made a hard-coded typecast from the string type to the Integer type. Strings are references-in practice, they're pointers: Their value holds the actual memory location of the string. </p>
+<p>To extract the reference count, I've based the code on the little-known fact that the length and reference count are actually stored in the string, before the actual text and before the position the string variable points to. The (negative) offset is -4 for the length of the string (a value you can extract more easily using the Length function) and -8 for the reference count.</p>
+<p>Keep in mind that this internal information about offsets might change in future versions of Delphi; there is also no guarantee that similar undocumented features will be maintained in the future.</p>
+<p>By running this example, you should get two strings with the same content, the same memory location, and a reference count of 2, as shown in the upper part of the list box of Figure 2.1. Now if you change the value of one of the two strings (it doesn't matter which one), the memory location of the updated string will change. This is the effect of the copy-on-write technique.</p>
+
+<p class="slug">Figure 7.1: The StrRef example shows the internal status of two strings, including the current reference count.
+
+<p><img src="../gif/epf0701.gif" width=481 height=252 border=0 alt="">
+
+<p>We can actually produce this effect, shown in the second part of the list box of Figure 7.1, by writing the following code for the OnClick event handler of the second button:</p>
+
+<pre><b>procedure</b> TFormStrRef.BtnChangeClick(Sender: TObject);
+<b>begin</b>
+  Str1 [2] := <i>'a'</i>;
+  ListBox1.Items.Add (<i>'Str1 [2] := ''a'''</i>);
+  ListBox1.Items.Add (<i>'Str1 - '</i> + StringStatus (Str1));
+  ListBox1.Items.Add (<i>'Str2 - '</i> + StringStatus (Str2));
+<b>end</b>;</pre>
+
+<p>Notice that the code of the <i>BtnChangeClick</i> method can be executed only after the <i>BtnAssignClick</i> method. To enforce this, the program starts with the second button disabled (its Enabled property is set to False); it enables the button at the end of the first method. You can freely extend this example and use the StringStatus function to explore the behavior of long strings in many other circumstances.</p>
+
+<h2>Delphi Strings and Windows PChars</h2>
+
+<p>Another important point in favor of using long strings is that they are null-terminated. This means that they are fully compatible with the C language null-terminated strings used by Windows. A null-terminated string is a sequence of characters followed by a byte that is set to zero (or null). This can be expressed in Delphi using a zero-based array of characters, the data type typically used to implement strings in the C language. This is the reason null-terminated character arrays are so common in the Windows API functions (which are based on the C language). Since Pascal's long strings are fully compatible with C null-terminated strings, you can simply use long strings and cast them to PChar when you need to pass a string to a Windows API function.</p>
+<p>For example, to copy the caption of a form into a PChar string (using the API function GetWindowText) and then copy it into the Caption of the button, you can write the following code:</p>
+
+<pre><b>procedure</b> TForm1.Button1Click (Sender: TObject);
+<b>var</b>
+  S1: String;
+<b>begin</b>
+  SetLength (S1, 100);
+  GetWindowText (Handle, PChar (S1), Length (S1));
+  Button1.Caption := S1;
+<b>end</b>;</pre>
+
+<p>You can find this code in the LongStr example. Note that if you write this code but fail to allocate the memory for the string with SetLength, the program will probably crash. If you are using a PChar to pass a value (and not to receive one as in the code above), the code is even simpler, because there is no need to define a temporary string and initialize it. The following line of code passes the Caption property of a label as a parameter to an API function, simply by typecasting it to PChar:</p>
+
+<pre>SetWindowText (Handle, PChar (Label1.Caption));</pre>
+
+<p>When you need to cast a WideString to a Windows-compatible type, you have to use PWideChar instead of PChar for the conversion. Wide strings are often used for OLE and COM programs.</p>
+<p>Having presented the nice picture, now I want to focus on the pitfalls. There are some problems that might arise when you convert a long string into a PChar. Essentially, the underlying problem is that after this conversion, you become responsible for the string and its contents, and Delphi won't help you anymore. Consider the following limited change to the first program code fragment above, Button1Click:</p>
+
+<pre><b>procedure</b> TForm1.Button2Click(Sender: TObject);
+<b>var</b>
+  S1: String;
+<b>begin</b>
+  SetLength (S1, 100);
+  GetWindowText (Handle, PChar (S1), Length (S1));
+  S1 := S1 + <i>' is the title'</i>; <i>// this won't work</i>
+  Button1.Caption := S1;
+<b>end</b>;</pre>
+
+<p>This program compiles, but when you run it, you are in for a surprise: The Caption of the button will have the original text of the window title, without the text of the constant string you have added to it. The problem is that when Windows writes to the string (within the GetWindowText API call), it doesn't set the length of the long Pascal string properly. Delphi still can use this string for output and can figure out when it ends by looking for the null terminator, but if you append further characters after the null terminator, they will be skipped altogether.</p>
+<p>How can we fix this problem? The solution is to tell the system to convert the string returned by the GetWindowText API call back to a Pascal string. However, if you write the following code:</p>
+
+<pre>S1 := String (S1);</pre>
+
+<p>the system will ignore it, because converting a data type back into itself is a useless operation. To obtain the proper long Pascal string, you need to recast the string to a PChar and let Delphi convert it back again properly to a string:</p>
+
+<pre>S1 := String (PChar (S1));</pre>
+
+<p>Actually, you can skip the string conversion, because PChar-to-string conversions are automatic in Delphi. Here is the final code:</p>
+
+<pre><b>procedure</b> TForm1.Button3Click(Sender: TObject);
+<b>var</b>
+  S1: String;
+<b>begin</b>
+  SetLength (S1, 100);
+  GetWindowText (Handle, PChar (S1), Length (S1));
+  S1 := String (PChar (S1));
+  S1 := S1 + <i>' is the title'</i>;
+  Button3.Caption := S1;
+<b>end</b>;</pre>
+
+<p>An alternative is to reset the length of the Delphi string, using the length of the PChar string, by writing:</p>
+
+<pre>SetLength (S1, StrLen (PChar (S1)));</pre>
+
+<p>You can find three versions of this code in the LongStr example, which has three buttons to execute them. However, if you just need to access the title of a form, you can simply use the Caption property of the form object itself. There is no need to write all this confusing code, which was intended only to demonstrate the string conversion problems. There are practical cases when you need to call Windows API functions, and then you have to consider this complex situation.</p>
+
+<h2>Formatting Strings</h2>
+
+<p>Using the plus (+) operator and some of the conversion functions (such as IntToStr) you can indeed build complex strings out of existing values. However, there is a different approach to formatting numbers, currency values, and other strings into a final string. You can use the powerful Format function or one of its companion functions.</p>
+<p>The Format function requires as parameters a string with the basic text and some placeholders (usually marked by the % symbol) and an array of values, one for each placeholder. For example, to format two numbers into a string you can write:</p>
+
+<pre>Format (<i>'First %d, Second %d'</i>, [n1, n2]);</pre>
+
+<p>where n1 and n2 are two Integer values. The first placeholder is replaced by the first value, the second matches the second, and so on. If the output type of the placeholder (indicated by the letter after the % symbol) doesn't match the type of the corresponding parameter, a runtime error occurs. Having no compile-time type checking is actually the biggest drawback of using the Format function.</p>
+<p>The Format function uses an open-array parameter (a parameter that can have an arbitrary number of values), something I'll discuss toward the end of this chapter. For the moment, though, notice only the array-like syntax of the list of values passed as the second parameter.</p>
+<p>Besides using %d, you can use one of many other placeholders defined by this function and briefly listed in Table 7.1. These placeholders provide a default output for the given data type. However, you can use further format specifiers to alter the default output. A width specifier, for example, determines a fixed number of characters in the output, while a precision specifier indicates the number of decimal digits. For example,</p>
+
+<pre>Format ('%8d', [n1]);</pre>
+
+<p>converts the number n1 into an eight-character string, right-aligning the text (use the minus (-) symbol to specify left-justification) filling it with white spaces.</p>
+
+<p class="slug">Table 7.1: Type Specifiers for the Format Function
+
+<p><table border="1" cellspacing="0" cellpadding="3" bordercolor="Black">
+	<tr align="left"><th>TYPE SPECIFIER</th>
+	<th>DESCRIPTION</th></tr>
+	
+	<tr><td>d (decimal)</td>
+	<td>The corresponding integer value is converted to a string of decimal digits.</td></tr>
+
+	<tr><td>x (hexadecimal)</td>
+	<td>The corresponding integer value is converted to a string of hexadecimal digits.</td></tr>
+
+	<tr><td>p (pointer)</td>
+	<td>The corresponding pointer value is converted to a string expressed with hexadecimal digits.</td></tr>
+
+	<tr><td>s (string)</td>
+	<td>The corresponding string, character, or PChar value is copied to the output string.</td></tr>
+
+	<tr><td>e (exponential)</td>
+	<td>The corresponding floating-point value is converted to a string based on exponential notation.</td></tr>
+
+	<tr><td>f (floating point)</td>
+	<td>The corresponding floating-point value is converted to a string based on floating point notation.</td></tr>
+
+	<tr><td>g (general)</td>
+	<td>The corresponding floating-point value is converted to the shortest possible decimal string using either floating-point or exponential notation.</td></tr>
+
+	<tr><td>n (number)</td>
+	<td>The corresponding floating-point value is converted to a floating-point string but also uses thousands separators.</td></tr>
+
+	<tr><td>m (money)</td>
+	<td>The corresponding floating-point value is converted to a string representing a currency amount. The conversion is based on regional settings-see the Delphi Help file under Currency and date/time formatting variables.</td></tr>
+</table>
+
+<p>The best way to see examples of these conversions is to experiment with format strings yourself. To make this easier I've written the FmtTest program, which allows a user to provide formatting strings for integer and floating-point numbers. As you can see in Figure 7.2, this program displays a form divided into two parts. The left part is for Integer numbers, the right part for floating-point numbers. </p>
+<p>Each part has a first edit box with the numeric value you want to format to a string. Below the first edit box there is a button to perform the formatting operation and show the result in a message box. Then comes another edit box, where you can type a format string. As an alternative you can simply click on one of the lines of the ListBox component, below, to select a predefined formatting string. Every time you type a new formatting string, it is added to the corresponding list box (note that by closing the program you lose these new items).</p>
+
+<p class="slug">Figure 7.2: The output of a floating-point value from the FmtTest program
+
+<p><img src="../gif/epf0702.gif" width=406 height=370 border=0 alt="">
+
+<p>The code of this example simply uses the text of the various controls to produce its output. This is one of the three methods connected with the Show buttons:</p>
+
+<pre><b>procedure</b> TFormFmtTest.BtnIntClick(Sender: TObject);
+<b>begin</b>
+  ShowMessage (Format (EditFmtInt.Text,
+    [StrToInt (EditInt.Text)]));
+  <i>// if the item is not there, add it</i>
+  <b>if</b> ListBoxInt.Items.IndexOf (EditFmtInt.Text) &lt; 0 <b>then</b>
+    ListBoxInt.Items.Add (EditFmtInt.Text);
+<b>end</b>;</pre>
+
+<p>The code basically does the formatting operation using the text of the EditFmtInt edit box and the value of the EditInt control. If the format string is not already in the list box, it is then added to it. If the user instead clicks on an item in the list box, the code moves that value to the edit box:</p>
+
+<pre><b>procedure</b> TFormFmtTest.ListBoxIntClick(Sender: TObject);
+<b>begin</b>
+  EditFmtInt.Text := ListBoxInt.Items [
+    ListBoxInt.ItemIndex];
+<b>end</b>;</pre>
+
+<h2>Conclusion</h2>
+
+<p>Strings a certainly a very common data type. Although you can safely use them in most cases without understanding how they work, this chapter should have made clear the exact behavior of strings, making it possible for you to use all the power of this data type.
+<p>Strings are handled in memory in a special dynamic way, as happens with dynamic arrays. This is the topic of the next chapter.
+
+<h3><a href="ch08mem.htm">Next Chapter: Memory</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

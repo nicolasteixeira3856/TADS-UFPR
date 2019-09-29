@@ -1,0 +1,160 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 10<br>Variants</h1>
+</td></tr>
+</table> 
+
+<!-- text -->
+
+<p>To provide full OLE support, the 32-bit version of Delphi includes the Variant data type. Here I want to discuss this data type from a general perspective. The Variant type, in fact, has a pervasive effect on the whole language, and the Delphi components library also uses them in ways not related to OLE programming.</p>
+
+<h2>Variants Have No Type</h2>
+
+<p>In general, you can use variants to store any data type and perform numerous operations and type conversions. Notice that this goes against the general approach of the Pascal language and against good programming practices. A variant is type-checked and computed at run time. The compiler won't warn you of possible errors in the code, which can be caught only with extensive testing. On the whole, you can consider the code portions that use variants to be interpreted code, because, as with interpreted code, many operations cannot be resolved until run time. This affects in particular the speed of the code.</p>
+<p>Now that I've warned you against the use of the Variant type, it is time to look at what it can do. Basically, once you've declared a variant variable such as the following:</p>
+
+<pre><b>var</b>
+  V: Variant;</pre>
+  
+<p>you can assign to it values of several different types:</p>
+
+<pre>V := 10;
+V := <i>'Hello, World'</i>;
+V := 45.55;</pre>
+
+<p>Once you have the variant value, you can copy it to any compatible-or incompatible-data type. If you assign a value to an incompatible data type, Delphi performs a conversion, if it can. Otherwise it issues a run-time error. In fact, a variant stores type information along with the data, allowing a number of run-time operations; these operations can be handy but are both slow and unsafe.</p>
+<p>Consider the following example (called VariTest), which is an extension of the code above. I placed three edit boxes on a new form, added a couple of buttons, and then wrote the following code for the OnClick event of the first button:</p>
+
+<pre><b>procedure</b> TForm1.Button1Click(Sender: TObject);
+<b>var</b>
+  V: Variant;
+<b>begin</b>
+  V := 10;
+  Edit1.Text := V;
+  V := <i>'Hello, World'</i>;
+  Edit2.Text := V;
+  V := 45.55;
+  Edit3.Text := V;
+<b>end</b>;</pre>
+
+<p>Funny, isn't it? Besides assigning a variant holding a string to the Text property of an edit component, you can assign to the Text a variant holding an integer or a floating-point number. As you can see in Figure 10.1, everything works.</p>
+
+<p class="slug">Figure 10.1: The output of the VariTest example after the Assign button has been pressed.</p>
+
+<p><img src="../gif/epf1001.gif" width=301 height=168 border=0 alt="">
+
+<p>Even worse, you can use the variants to compute values, as you can see in the code related to the second button:</p>
+
+<pre><b>procedure</b> TForm1.Button2Click(Sender: TObject);
+<b>var</b>
+  V: Variant;
+  N: Integer;
+<b>begin</b>
+  V := Edit1.Text;
+  N := Integer(V) * 2;
+  V := N;
+  Edit1.Text := V;
+<b>end</b>;</pre>
+
+<p>Writing this kind of code is risky, to say the least. If the first edit box contains a number, everything works. If not, an exception is raised. Again, you can write similar code, but without a compelling reason to do so, you shouldn't use the Variant type; stick with the traditional Pascal data types and type-checking approach. In Delphi and in the VCL (Visual Component Library), variants are basically used for OLE support and for accessing database fields.</p>
+
+<h2>Variants in Depth</h2>
+
+<p>Delphi includes a variant record type, <i>TVarData</i>, which has the same memory layout as the Variant type. You can use this to access the actual type of a variant. The <i>TVarData</i> structure includes the type of the Variant, indicated as <i>VType</i>, some reserved fields, and the actual value.</p>
+<p>The possible values of the <i>VType</i> field correspond to the data types you can use in  OLE automation, which are often called OLE types or variant types. Here is a complete alphabetical list of the available variant types: </p>
+
+<ul>
+<li>varArray
+<li>varBoolean
+<li>varByRef
+<li>varCurrency
+<li>varDate
+<li>varDispatch
+<li>varDouble
+<li>varEmpty
+<li>varError
+<li>varInteger
+<li>varNull
+<li>varOleStr
+<li>varSingle
+<li>varSmallint
+<li>varString
+<li>varTypeMask
+<li>varUnknown
+<li>varVariant
+</ul>
+
+<p>You can find descriptions of these types in the Values in variants topic in the Delphi Help system.</p>
+<p>There are also many functions for operating on variants that you can use to make specific type conversions or to ask for information about the type of a variant (see, for example, the <i>VarType</i> function). Most of these type conversion and assignment functions are actually called automatically when you write expressions using variants. Other variant support routines (look for the topic Variant support routines in the Help file) actually operate on variant arrays.</p>
+
+<h2>Variants Are Slow!</h2>
+
+<p>Code that uses the Variant type is slow, not only when you convert data types, but also when you add two variant values holding an integer each. They are almost as slow as the interpreted code of Visual Basic! To compare the speed of an algorithm based on variants with that of the same code based on integers, you can look at the VSpeed example.</p>
+<p>This program runs a loop, timing its speed and showing the status in a progress bar. Here is the first of the two very similar loops, based on integers and variants:</p>
+
+<pre><b>procedure</b> TForm1.Button1Click(Sender: TObject);
+<b>var</b>
+  time1, time2: TDateTime;
+  n1, n2: Variant;
+<b>begin</b>
+  time1 := Now;
+  n1 := 0;
+  n2 := 0;
+  ProgressBar1.Position := 0;
+  <b>while</b> n1 &lt; 5000000 <b>do</b>
+  <b>begin</b>
+    n2 := n2 + n1;
+    Inc (n1);
+    <b>if</b> (n1 <b>mod</b> 50000) = 0 <b>then</b>
+    <b>begin</b>
+      ProgressBar1.Position := n1 <b>div</b> 50000;
+      Application.ProcessMessages;
+    <b>end</b>;
+  <b>end</b>;
+  <i>// we must use the result</i>
+  Total := n2;
+  time2 := Now;
+  Label1.Caption := FormatDateTime (
+    <i>'n:ss'</i>, Time2-Time1) + <i>' seconds'</i>;
+<b>end</b>;</pre>
+
+<p>The timing code is worth looking at, because it's something you can easily adapt to any kind of performance test. As you can see, the program uses the Now function to get the current time and the FormatDateTime function to output the time difference, asking only for the minutes (&quot;n&quot;) and the seconds (&quot;ss&quot;) in the format string. As an alternative, you can use the Windows API's <i>GetTickCount</i> function, which returns a very precise indication of the milliseconds elapsed since the operating system was started.</p>
+<p>In this example the speed difference is actually so great that you'll notice it even without a precise timing. Anyway, you can see the results for my own computer in Figure 10.2. The actual values depend on the computer you use to run this program, but the proportion won't change much.</p>
+
+<p class="slug">Figure 10.2: The different speeds of the same algorithm, based on integers and variants (the actual timing varies depending on the computer), as shown by the VSpeed example.</p>
+
+<p><img src="../gif/epf1002.gif" width=319 height=167 border=0 alt="">
+
+<h2>Conclusion</h2>
+
+<p>Variants are so different from traditional Pascal data types that I've decided to cover them in this short separate chapter. Although their role is in OLE programming, they can be handy to write <i>quick and dirty</i> programs without having even to think about data types. As we have seen, this affects performance by far. 
+<p>Now that we have covered most of the language features, let me discuss the overall structure of a program and the modularization offered by units.
+
+<h3><a href="ch11unit.htm">Next Chapter: Program and Units</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

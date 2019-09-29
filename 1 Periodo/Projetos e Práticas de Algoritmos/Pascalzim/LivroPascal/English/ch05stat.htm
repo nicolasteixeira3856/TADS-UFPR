@@ -1,0 +1,370 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 5<br>Statements</h1>
+</td></tr>
+</table> 
+
+<!-- text -->
+
+
+<p>If the data types are one of the foundations of Pascal programming the other are statements. Statements of the programming language are based on keywords and other elements which allow you to indicate to a program a sequence of operations to perform. Statements are often enclosed in procedures or functions, as we'll see in the next chapter. Now we'll just focus on the basic types of commands you can use to create a program.
+
+<h2>Simple and Compound Statements</h2>
+<p>A Pascal statement is simple when it doesn't contain any other statements. Examples of simple  statements are assignment statements and procedure calls. Simple statements are separated by a semicolon:
+
+<PRE>X := Y + Z;  <i>// assignment</i>
+Randomize;   <i>// procedure call</i>
+</PRE>
+
+Usually, statements are part of a compound statement, marked by begin and end brackets. A compound statement can appear in place of a generic Pascal statement. Here is an example:
+
+<PRE><b>begin</b>
+  A := B;
+  C := A * 2;
+<b>end</b>;
+</PRE>
+
+The semicolon after the last statement before the end isn't required, as in the following:
+
+<PRE><b>begin</b>
+  A := B;
+  C := A * 2
+<b>end</b>;
+</PRE>
+
+Both versions are correct. The first version has a useless (but harmless) semicolon. This semicolon is, in fact, a null statement; that is, a statement with no code. Notice that, at times, null statements can be used inside loops or in other particular cases.
+
+<p class=note>Note: Although these final semicolons serve no purpose, I tend to use them and suggest you do the same. Sometimes after you've written a couple of lines you might want to add one more statement. If the last semicolon is missing you should remember to add it, so it might be better to add it in the first place.
+
+<h2>Assignment Statements</h2>
+
+<p>Assignments in Pascal use the colon-equal operator, an odd notation for programmers who are used to other languages. The = operator, which is used for assignments in some other languages, in Pascal is used to test for equality.
+
+<p class=note>Note: By using different symbols for an assignment and an equality test, the Pascal compiler (like the C compiler) can translate source code faster, because it doesn't need to examine the context in which the operator is used to determine its meaning. The use of different operators also makes the code easier for people to read.
+
+<h2>Conditional Statements</h2>
+
+<P>A conditional statement is used to execute either one of the statements it contains or none of them, depending on some test. There are two basic flavors of conditional statements: if statements and case statements.
+
+<H3>If Statements</H3>
+
+<P>The if statement can be used to execute a statement only if a certain condition is met (if-then), or to choose between two different alternatives (if-then-else). The condition is described with a Boolean expression. A simple Delphi example will demonstrate how to write conditional statements. First create a new application, and put two check boxes and four buttons in the form. Do not change the names of buttons or check boxes, but double-click on each button to add a handler for its <i>OnClick</i> event. Here is a simple <i>if</i> statement for the first button:
+
+<PRE><b>procedure </b>TForm1.Button1Click(Sender: TObject);
+<b>begin</b>
+<i>  // simple if statement</i>
+  <b>if</b> CheckBox1.Checked <b>then</b>
+    ShowMessage (<i>'CheckBox1 is checked'</i>)
+<b>end</b>;
+</PRE>
+
+<P>When you click on the button, if the first check box has a check mark in it, the program will show a simple message (see Figure 5.1). I've used the ShowMessage function because it is the simplest Delphi function you can use to display a short message to the user.
+
+<p class="slug">Figure 5.1: The message displayed by the IfTest example when you press the first button and the first check box is checked.
+
+<p><img src="../gif/epf0501.gif" width=405 height=308 alt="" border="0">
+
+<P>If you click the button and nothing happens, it means the check box was not checked. In a case like this, it would probably be better to make this more explicit, as with the code for the second button, which uses an if-then-else statement:
+
+<PRE><b>procedure</b> TForm1.Button2Click(Sender: TObject);
+<b>begin</b>
+  <i>// if-then-else statement</i>
+  <b>if</b> CheckBox2.Checked <b>then</b>
+    ShowMessage (<i>'CheckBox2 is checked'</i>)
+  <b>else</b>
+    ShowMessage (<i>'CheckBox2 is NOT checked'</i>);
+<b>end</b>;
+</PRE>
+
+<P>Notice that you cannot have a semicolon after the first statement and before the <i>else</i> keyword, or the compiler will issue a syntax error. The <i>if-then-else</i> statement, in fact, is a single statement, so you cannot place a semicolon in the middle of it.
+<P>An <i>if</i> statement can be quite complex. The condition can be turned into a series of conditions (using the <i>and</i>, <i>or</i> and <i>not</i> Boolean operators), or the <i>if</i> statement can nest a second <i>if</i> statement. The last two buttons of the IfTest example demonstrate these cases:
+
+<PRE><b>procedure</b> TForm1.Button3Click(Sender: TObject);
+<b>begin</b>
+  <i>// statement with a double condition</i>
+  <b>if</b> CheckBox1.Checked <b>and</b> CheckBox2.Checked <b>then</b>
+    ShowMessage (<i>'Both check boxes are checked'</i>)
+<b>end</b>;
+
+<b>procedure</b> TForm1.Button4Click(Sender: TObject);
+<b>begin</b>
+  <i>// compound if statement</i>
+  <b>if</b> CheckBox1.Checked <b>then</b>
+    <b>if</b> CheckBox2.Checked <b>then</b>
+      ShowMessage (<i>'CheckBox1 and 2 are checked'</i>)
+    <b>else</b>
+      ShowMessage (<i>'Only CheckBox1 is checked'</i>)
+  <b>else</b>
+    ShowMessage (
+      <i>'Checkbox1 is not checked, who cares for Checkbox2?'</i>)
+<b>end</b>;
+</PRE>
+
+<P>Look at the code carefully and run the program to see if you understand everything. When you have doubts about a programming construct, writing a very simple program such as this can help you learn a lot. You can add more check boxes and increase the complexity of this small example, making any test you like.
+
+<h3>Case Statements</h3>
+
+<P>If your <i>if</i> statements become very complex, at times you can replace them with <i>case</i> statements. A <i>case</i> statement consists in an expression used to select a value, a list of possible values, or a range of values. These values are constants, and they must be unique and of an ordinal type. Eventually, there can be an <i>else</i> statement that is executed if none of the labels correspond to the value of the selector. Here are two simple examples:
+
+<PRE><b>case</b> Number <b>of</b>
+  1: Text := <i>'One'</i>;
+  2: Text := <i>'Two'</i>;
+  3: Text := <i>'Three'</i>;
+<b>end</b>;
+
+<b>case</b> MyChar <b>of</b>
+  '+' : Text := 'Plus sign';
+  '-' : Text := 'Minus sign';
+  '*', '/': Text := 'Multiplication or division';
+  '0'..'9': Text := 'Number';
+  'a'..'z': Text := 'Lowercase character';
+  'A'..'Z': Text := 'Uppercase character';
+<b>else</b>
+  Text := 'Unknown character';
+<b>end</b>;
+</PRE>
+
+<h2>Loops in Pascal</h2>
+
+<P>The Pascal language has the typical repetitive statements of most programming languages, including <i>for</i>, <i>while</i>, and <i>repeat</i> statements. Most of what these loops do will be familiar if you've used other programming languages, so I'll cover them only briefly.
+
+<h3>The For Loop</h3>
+
+<P>The for loop in Pascal is strictly based on a counter, which can be either increased or decreased each time the loop is executed. Here is a simple example of a for loop used to add the first ten numbers.
+
+<PRE><b>var</b>
+  K, I: Integer;
+<b>begin</b>
+  K := 0;
+  <b>for</b> I := 1 <b>to</b> 10 <b>do</b>
+    K := K + I;
+</PRE>
+
+<P>This same for statement could have been written using a reverse counter:
+
+<PRE><b>var</b>
+  K, I: Integer;
+<b>begin</b>
+  K := 0;
+  <b>for</b> I := 10 <b>downto</b> 1 <b>do</b>
+    K := K + I;
+</PRE>
+
+<P>The for loop in Pascal is less flexible than in other languages (it is not possible to specify an increment different than one), but it is simple and easy to understand. If you want to test for a more complex condition, or to provide a customized counter, you need to use a while or repeat statement, instead of a for loop.
+
+<p class=note>Note: The counter of a for loop doesn't need to be a number. It can be a value of any ordinal type, such as a character or an enumerated type.
+
+<h3>While and Repeat Statements</h3>
+
+<P>The difference between the <i>while-do</i> loop and the <i>repeat-until</i> loop is that the code of the <i>repeat</i> statement is always executed at least once. You can easily understand why by looking at a simple example:
+
+<PRE><b>while</b> (I &lt;= 100) <b>and</b> (J &lt;= 100) <b>do</b>
+<b>begin</b>
+  <i>// use I and J to compute something...</i>
+  I := I + 1;
+  J := J + 1;
+<b>end</b>;
+
+<b>repeat</b>
+  <i>// use I and J to compute something...</i>
+  I := I + 1;
+  J := J + 1;
+<b>until</b> (I &gt; 100) <b>or</b> (J &gt; 100);
+</PRE>
+
+<P>If the initial value of <i>I</i> or <i>J</i> is greater than 100, the statements inside the repeat-until loop are executed once anyway.
+
+<p class=note>The other key difference between these two loops is that the <i>repeat-until</i> loop has a <I>reversed</I> condition. The loop is executed as long as the condition is <I>not</I> met. When the condition is met, the loop terminates. This is the opposite from a <i>while-do</i> loop, which is executed while the condition is true. For this reason I had to reverse the condition in the code above to obtain a similar statement.
+
+<h3>An Example of Loops</h3>
+
+<P>To explore the details of loops, let's look at a small Delphi example. The Loops program highlights the difference between a loop with a fixed counter and a loop with an almost random counter. Start with a new blank project, place a list box and two buttons on the main form, and give the buttons a proper name (BtnFor and BtnWhile) by setting their <i>Name</i> property in the Object Inspector. You can also remove the word <I>Btn</I> from the <i>Caption</i> property (and eventually even add the &amp; character to it to activate the following letter as a shortcut key). Here is a summary of the textual description of this form:
+
+<PRE><b>object</b> Form1: TForm1
+  Caption = 'Loops'
+  <b>object</b> ListBox1: TListBox ...
+  <b>object</b> BtnFor: TButton
+    Caption = '&amp;For'
+    OnClick = BtnForClick
+  <b>end</b>
+  <b>object</b> BtnWhile: TButton
+    Caption = '&amp;While'
+    OnClick = BtnWhileClick
+  <b>end</b>
+<b>end</b>
+</PRE>
+
+<p class="slug">Figure 5.2: Each time you press the For button of the Loops example, the list box is filled with consecutive numbers.
+
+<p><img src="../gif/epf0502.gif" width=347 height=300 alt="" border="0">
+
+<P>Now we can add some code to the <i>OnClick</i> events of the two buttons. The first button has a simple <i>for</i> loop to display a list of numbers, as you can see in Figure 5.2. Before executing this loop, which adds a number of strings to the <i>Items</i> property of the list box, you need to clear the contents of the list box itself:
+
+<PRE><b>procedure</b> TForm1.BtnForClick(Sender: TObject);
+<b>var</b>
+  I: Integer;
+<b>begin</b>
+  ListBox1.Items.Clear;
+  <b>for</b> I := 1 <b>to</b> 20 <b>do</b>
+    Listbox1.Items.Add (<i>'String '</i> + IntToStr (I));
+<b>end</b>;
+</PRE>
+
+<P>The code associated with the second button is slightly more complex. In this case, there is a while loop based on a counter, which is increased randomly. To accomplish this, I've called the <i>Randomize</i> procedure, which resets the random number generator, and the <i>Random</i> function with a range value of 100. The result of this function is a number between 0 and 99, chosen randomly. The series of random numbers control how many times the while loop is executed.
+
+<PRE><b>procedure</b> TForm1.BtnWhileClick(Sender: TObject);
+<b>var</b>
+  I: Integer;
+<b>begin</b>
+  ListBox1.Items.Clear;
+  Randomize;
+  I := 0;
+  <b>while</b> I &lt; 1000 <b>do</b>
+  <b>begin</b>
+    I := I + Random (100);
+    Listbox1.Items.Add (<i>'Random Number: '</i> + IntToStr (I));
+  <b>end</b>;
+<b>end</b>;
+</PRE>
+
+<P>Each time you click the While button, the numbers are different, because they depend on the random-number generator. Figure 5.3 shows the results from two separate button-clicks. Notice that not only are the generated numbers different each time, but so is the number of items. That is, this while loop is executed a random numbers of times. If you press the While button several times in a row, you'll see that the list box has a different number of lines.
+
+<p class="slug">Figure 5.3: The contents of the list box of the Loops example change each time you press the While button. Because the loop counter is incremented by a random value, every time you press the button the loop may execute a different number of times.
+
+<p><img src="../gif/epf0503.gif" width=519 height=442 alt="" border="0">
+
+<p class=note>Note: You can alter the standard flow of a loop's execution using the <i>Break</i> and <i>Continue</i> system procedures. The first interrupts the loop; the second is used to jump directly to the loop test or counter increment, continuing with the next iteration of the loop (unless the condition is zero or the counter has reached its highest value). Two more system procedures, <i>Exit</i> and <i>Halt</i>, let you immediately return from the current function or procedure or terminate the program.
+
+<h2>The With Statement</h2>
+
+<P>The last kind of Pascal statement I'll focus on is the <i>with</i> statement, which used to be peculiar to this programming language (although it has been recentrly introduced also in JavaScript and Visual Basic) and can be very useful in Delphi programming.
+<P>The <i>with</i> statement is nothing but shorthand. When you need to refer to a record type variable (or an object), instead of repeating its name every time, you can use a <i>with</i> statement. For example, while presenting the record type, I wrote this code:
+
+<PRE><b>type</b>
+  Date = <b>record</b>
+    Year: Integer;
+    Month: Byte;
+    Day: Byte;
+  <b>end</b>;
+
+<b>var</b>
+  BirthDay: Date;
+
+<b>begin</b>
+  BirthDay.Year := 1997;
+  BirthDay.Month := 2;
+  BirthDay.Day := 14;
+</PRE>
+
+<P>Using a with statement, I can improve the final part of this code, as follows:
+
+<PRE><b>begin</b>
+  <b>with</b> BirthDay <b>do</b>
+  <b>begin</b>
+    Year := 1995;
+    Month := 2;
+    Day := 14;
+  <b>end</b>;
+</PRE>
+
+<P>This approach can be used in Delphi programs to refer to components and other class types. For example, we can rewrite the final part of the last example, Loops, using a with statement to access the items of the list box:
+
+<PRE><b>procedure </b>TForm1.WhileButtonClick(Sender: TObject);
+<b>var</b>
+  I: Integer;
+<b>begin</b>
+  <b>with</b> ListBox1.Items <b>do</b>
+  <b>begin</b>
+    Clear; <i>// shortcut</i>
+    Randomize;
+    I := 0;
+    <b>while</b> I &lt; 1000 <b>do</b>
+    <b>begin</b>
+      I := I + Random (100);
+      <i>// shortcut:</i>
+      Add (<i>'Random Number: '</i> + IntToStr (I));
+    <b>end</b>;
+  <b>end</b>;
+<b>end</b>;
+</PRE>
+
+<P>When you work with components or classes in general, the with statement allows you to skip writing some code, particularly for nested fields. For example, suppose that you need to change the Width and the Color of the drawing pen for a form. You can write the following code:
+
+<PRE>Form1.Canvas.Pen.Width := 2;
+Form1.Canvas.Pen.Color := clRed;
+</PRE>
+
+<P>But it is certainly easier to write this code:
+
+<PRE><b>with</b> Form1.Canvas.Pen <b>do</b>
+<b>begin</b>
+  Width := 2;
+  Color := clRed;
+<b>end</b>;
+</PRE>
+
+<P>When you are writing complex code, the <i>with</i> statement can be effective and spares you the declaration of some temporary variables, but it has a drawback. It can make the code less readable, particularly when you are working with different objects that have similar or corresponding properties.
+<P>A further drawback is that using the <i>with</i> statement can allow subtle logical errors in the code that the compiler will not detect. For example:
+
+<PRE><b>with</b> Button1 <b>do</b>
+<b>begin</b>
+  Width := 200;
+  Caption := <i>'New Caption'</i>;
+  Color := clRed;
+<b>end</b>;
+</PRE>
+
+<P>This code changes the <i>Caption</i> and the <i>Width</i> of the button, but it affects the <i>Color</i> property of the form, not that of the button! The reason is that the <i>TButton</i> components don't have the <i>Color</i> property, and since the code is executed for a form object (we are writing a method of the form) this object is accessed by default. If we had instead written:
+
+<PRE>Button1.Width := 200;
+Button1.Caption := <i>'New Caption'</i>;
+Button1.Color := clRed; <i>// error!</i>
+</PRE>
+
+<P>the compiler would have issued an error. In general, we can say that since the <i>with</i> statement introduces new identifiers in the current scope, we might hide existing identifiers, or wrongfully access another identifier in the same scope (as in the first version of this code fragment). Even considering this kind of drawback, I suggest you get used to <i>with</i> statements, because they can be really very handy, and at times even make the code more readable.
+<P>You should, however, avoid using multiple <i>with</i> statements, such as:
+
+<PRE><b>with</b> ListBox1, Button1 <b>do</b>...
+</PRE>
+
+<P>The code following this would probably be highly unreadable, because for each property defined in this block you would need to think about which component it refers to, depending on the respective properties and the order of the components in the <i>with</i> statement.
+
+<p class=note>Note: Speaking of readability, Pascal has no <I>endif</I> or <I>endcase</I> statement. If an <i>if</i> statement has a <i>begin-end</i> block, then the end of the block marks the end of the statement. The <i>case</i> statement, instead, is always terminated by an <i>end</i>. All these <i>end</i> statements, often found one after the other, can make the code difficult to follow. Only by tracing the indentations can you see which statement a particular <i>end</i> refers to. A common way to solve this problem and make the code more readable is to add a comment after the <i>end</i> statement indicating its role, as in:
+
+<PRE><b>if</b> ... <b>then</b>
+ ...
+<b>end</b>; <i>// if</i>
+</PRE>
+
+<h2>Conclusion</h2>
+
+<p>This chapter has described how to code conditional statements and loops. Instead of writing long lists of such statements, programs are usually split in routines, procedures or functions. This is the topic of the next chapter, which introduces also some advanced elements of Pascal.
+
+<h3><a href="ch06proc.htm">Next Chapter: Procedures</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

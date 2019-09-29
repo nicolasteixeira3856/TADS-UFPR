@@ -1,0 +1,198 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 9:<br>Windows Programming</h1>
+</td></tr>
+</table> 
+
+<!-- text -->	
+
+<p>Delphi provides a complete encapsulation of the low-level Windows API using Object Pascal and the Visual Component Library (VCL), so it is rarely necessary to build Windows applications using plain Pascal and calling Windows API functions directly. Nonetheless, programmers who want to use some special techniques not supported by the VCL still have that option in Delphi. You would only want to take this approach for very special cases, such as the development of new Delphi components based on unusual API calls, and I don't want to cover the details. Instead, we'll look at a few elements of Delphi's interaction with the operating system and a couple of techniques that Delphi programmers can benefit from.
+
+<h2>Windows Handles</h2>
+
+Among the data types introduced by Windows in Delphi, handles represent the most important group. The name of this data type is <i>THandle</i>, and the type is defined in the Windows unit as:
+
+<pre><b>type</b>
+  THandle = LongWord;
+</pre>
+
+<p>Handle data types are implemented as numbers, but they are not used as such. In Windows, a handle is a reference to an internal data structure of the system. For example, when you work with a window (or a Delphi form), the system gives you a handle to the window. The system informs you that the window you are working with is window number 142, for example. From that point on, your application can ask the system to operate on window number 142—moving it, resizing it, reducing it to an icon, and so on. Many Windows API functions, in fact, have a handle as the first parameter. This doesn't apply only to functions operating on windows; other Windows API functions have as their first parameter a GDI handle, a menu handle, an instance handle, a bitmap handle, or one of the many other handle types.
+<p>In other words, a handle is an internal code you can use to refer to a specific element handled by the system, including a window, a bitmap, an icon, a memory block, a cursor, a font, a menu, and so on. In Delphi, you seldom need to use handles directly, since they are hidden inside forms, bitmaps, and other Delphi objects. They become useful when you want to call a Windows API function that is not supported by Delphi.
+<p>To complete this description, here is a simple example demonstrating Windows handles. The WHandle program has a simple form, containing just a button. In the code, I respond to the OnCreate event of the form and the OnClick event of the button, as indicated by the following textual definition of the main form:
+
+<pre><b>object</b> FormWHandle: TFormWHandle
+  Caption = <i>'Window Handle'</i>
+  OnCreate = FormCreate
+  <b>object </b>BtnCallAPI: TButton
+    Caption = <i>'Call API'</i>
+    OnClick = BtnCallAPIClick
+<b>  end
+end</b></pre>
+
+<p>As soon as the form is created, the program retrieves the handle of the window corresponding to the form, by accessing the Handle property of the form itself. We call IntToStr to convert the numeric value of the handle into a string, and we append that to the caption of the form, as you can see in Figure 9.1:
+
+<pre><b>procedure</b> TFormWHandle.FormCreate(Sender: TObject);
+<b>begin</b>
+  Caption := Caption + <i>' '</i> + IntToStr (Handle);
+<b>end</b>;</pre>
+
+<p>Because <i>FormCreate</i> is a method of the form's class, it can access other properties and methods of the same class directly. Therefore, in this procedure we can simply refer to the <i>Caption</i> of the form and its Handle property directly. 
+
+<p class="slug">Figure 9.1: The WHandle example shows the handle of the form window. Every time you run this program you'll get a different value.
+
+<p><img src="../gif/epf0901.gif" width=259 height=115 border=0 alt="">
+
+<p>If you run this program several times you'll generally get different values for the handle. This value, in fact, is determined by Windows and is sent back to the application. (Handles are never determined by the program, and they have no predefined values; they are determined by the system, which generates new values each time you run a program.)
+<p>When the user presses the button, the program simply calls a Windows API function, SetWindowText, which changes the text or caption of the window passed as the first parameter. To be more precise, the first parameter of this API function is the handle of the window we want to modify:
+
+<pre><b>procedure </b>TFormWHandle.BtnCallAPIClick(Sender: TObject);
+<b>begin</b>
+  SetWindowText (Handle, <i>'Hi'</i>);
+<b>end</b>;</pre>
+
+<p>This code has the same effect as the previous event handler, which changed the text of the window by giving a new value to the Caption property of the form. In this case calling an API function makes no sense, because there is a simpler Delphi technique. Some API functions, however, have no correspondence in Delphi, as we'll see in more advanced examples later in the book.
+
+<h2>External Declarations</h2>
+
+<p>Another important element for Windows programming is represented by external declarations. Originally used to link the Pascal code to external functions that were written in assembly language, the external declaration is used in Windows programming to call a function from a DLL (a dynamic link library). In Delphi, there are a number of such declarations in the Windows unit:
+
+<pre><i>// forward declaration</i>
+<b>function </b>LineTo (DC: HDC; X, Y: Integer): BOOL; <b>stdcall</b>;
+
+<i>// external declaration (instead of actual code)</i>
+<b>function</b> LineTo; <b>external</b> <i>'gdi32.dll'</i> <b>name</b> <i>'LineTo'</i>;</pre>
+
+<p>This declaration means that the code of the function LineTo is stored in the GDI32.DLL dynamic library (one of the most important Windows system libraries) with the same name we are using in our code. Inside an external declaration, in fact, we can specify that our function refer to a function of a DLL that originally had a different name.
+<p>You seldom need to write declarations like the one just illustrated, since they are already listed in the Windows unit and many other Delphi system units. The only reason you might need to write this external declaration code is to call functions from a custom DLL, or to call undocumented Windows functions. 
+
+<p class="note">Note: In the 16-bit version of Delphi, the external declaration used the name of the library without the extension, and was followed by the name directive (as in the code above) or by an alternative index directive, followed by the ordinal number of the function inside the DLL. The change reflects a system change in the way libraries are accessed: Although Win32 still allows access to DLL functions by number, Microsoft has stated this won't be supported in the future. Notice also that the Windows unit replaces the WinProcs and WinTypes units of the 16-bit version of Delphi.
+
+<h2>A Windows Callback Function</h2>
+
+<p>We've seen in Chapter 6 that Objet Pascal supports procedural types. A common use of procedural types is to provide callback functions to a Windows API function. 
+<p>First of all, what is a callback function? The idea is that some API function performs a given action over a number of internal elements of the system, such as all of the windows of a certain kind. Such a function, also called an enumerated function, requires as a parameter the action to be performed on each of the elements, which is passed as a function or procedure compatible with a given procedural type. Windows uses callback functions in other circumstances, but we'll limit our study to this simple case.
+<p>Now consider the EnumWindows API function, which has the following prototype (copied from the Win32 Help file):
+
+<pre>BOOL EnumWindows(
+  WNDENUMPROC lpEnumFunc,  <i>// address of callback function</i>
+  LPARAM lParam <i>// application-defined value</i>
+  );</pre>
+  
+<p>Of course, this is the C language definition. We can look inside the Windows unit to retrieve the corresponding Pascal language definition:
+
+<pre><b>function</b> EnumWindows (
+  lpEnumFunc: TFNWndEnumProc;
+  lParam: LPARAM): BOOL; <b>stdcall</b>;</pre>
+  
+<p>Consulting the help file, we find that the function passed as a parameter should be of the following type (again in C):
+
+<pre>BOOL CALLBACK EnumWindowsProc (
+  HWND hwnd, <i>// handle of parent window</i>
+  LPARAM lParam <i>// application-defined value</i>
+  );</pre>
+
+<p>This corresponds to the following Delphi procedural type definition:
+
+<pre><b>type</b>
+  EnumWindowsProc = <b>function</b> (Hwnd: THandle;
+    Param: Pointer): Boolean; <b>stdcall</b>;</pre>
+
+<p>The first parameter is the handle of each main window in turn, while the second is the value we've passed when calling the <i>EnumWindows</i> function. Actually in Pascal the <i>TFNWndEnumProc</i> type is not properly defined; it is simply a pointer. This means we need to provide a function with the proper parameters and then use it as a pointer, taking the address of the function instead of calling it. Unfortunately, this also means that the compiler will provide no help in case of an error in the type of one of the parameters.
+
+<p class=note>Windows requires programmers to follow the stdcall calling convention every time we call a Windows API function or pass a callback function to the system. Delphi, by default, uses a different and more efficient calling convention, indicated by the register keyword.
+
+<p>Here is the definition of a proper compatible function, which reads the title of the window into a string, then adds it to a ListBox of a given form:
+
+<pre><b>function</b> GetTitle (Hwnd: THandle; Param: Pointer): Boolean; <b>stdcall</b>;
+<b>var</b>
+  Text: string;
+<b>begin</b>
+  SetLength (Text, 100);
+  GetWindowText (Hwnd, PChar (Text), 100);
+  FormCallBack.ListBox1.Items.Add (
+    IntToStr (Hwnd) + <i>': '</i> + Text);
+  Result := True;
+<b>end</b>;</pre>
+
+<p>The form has a ListBox covering almost its whole area, along with a small panel on the top hosting a button. When the button is pressed, the <i>EnumWindows</i> API function is called, and the <i>GetTitle</i> function is passed as its parameter:
+
+<pre><b>procedure</b> TFormCallback.BtnTitlesClick(Sender: TObject);
+<b>var</b>
+  EWProc: EnumWindowsProc;
+<b>begin</b>
+  ListBox1.Items.Clear;
+  EWProc := GetTitle;
+  EnumWindows (@EWProc, 0);
+<b>end</b>;</pre>
+
+<p>I could have called the function without storing the value in a temporary procedural type variable first, but I wanted to make clear what is going on in this example. The effect of this program is actually quite interesting, as you can see in Figure 9.2. The Callback example shows a list of all the existing main windows running in the system. Most of them are hidden windows you usually never see (and many actually have no caption).
+
+<p class="slug">Figure 9.2: The output of the Callback example, listing the current main windows (visible and hidden).
+
+<p><img src="../gif/epf0902.gif" width=304 height=352 border=0 alt="">
+
+<h2>A Minimal Windows Program</h2>
+
+<p>To complete the coverage of Windows programming and the Pascal language, I want to show you a very simple but complete application built without using the VCL. The program simply takes the command-line parameter (stored by the system in the cmdLine global variable) and then extracts information from it with the ParamCount and ParamStr Pascal functions. The first of these functions returns the number of parameters; the second returns the parameter in a given position. 
+<p>Although users seldom specify command-line parameters in a graphical user interface environment, the Windows command-line parameters are important to the system. For example, once you have defined an association between a file extension and an application, you can simply run a program by selecting an associated file. In practice, when you double-click on a file, Windows starts the associated program and passes the selected file as a command-line parameter. 
+<p>Here is the complete source code of the project (a DPR file, not a PAS file):
+
+<pre><b>program</b> Strparam;
+
+<b>uses</b>
+  Windows;
+
+<b>begin</b>
+  <i>// show the full string</i>
+  MessageBox (0, cmdLine, 
+    <i>'StrParam Command Line'</i>, MB_OK);
+
+  <i>// show the first parameter</i>
+  <b>if</b> ParamCount &gt; 0 <b>then</b>
+    MessageBox (0, PChar (ParamStr (1)), 
+      <i>'1st StrParam Parameter'</i>, MB_OK)
+  <b>else</b>
+    MessageBox (0, PChar (<i>'No parameters'</i>), 
+      <i>'1st StrParam Parameter'</i>, MB_OK);
+<b>end</b>.</pre>
+
+<p>The output code uses the <i>MessageBox</i> API function, simply to avoid getting the entire VCL into the project. A pure Windows program as the one above, in fact, has the advantage of a very small memory footprint: The executable file of the program is about 16 Kbytes.
+<p>To provide a command-line parameter to this program, you can use Delphi's Run > Parameters menu command. Another technique is to open the Windows Explorer, locate the directory that contains the executable file of the program, and drag the file you want to run onto the executable file. The Windows Explorer will start the program using the name of the dropped file as a command-line parameter. Figure 9.3 shows both the Explorer and the corresponding output.
+
+<p class="slug">Figure 9.3: You can provide a  command-line parameter to the StrParam example  by dropping a file over the executable file in the Windows Explorer. 
+
+<p><img src="../gif/epf0903.gif" width=495 height=100 border=0 alt="">
+
+<h2>Conclusion</h2>
+
+<p>In this chapter we've seen a low-level introduction to Windows programming, discussing handles and a very simple Windows program. For normal Windows programming tasks, you'll generally use the visual development support provided by Delphi and based on the VCL. But this is beyond the scope of this book, which is the Pascal language.
+<p>Next chapter covers variants, a very strange addition to Pascal type system, introduced to provide full OLE support.
+
+<h3>Next Chapter: <a href="ch10var.htm">Variants</a></a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>

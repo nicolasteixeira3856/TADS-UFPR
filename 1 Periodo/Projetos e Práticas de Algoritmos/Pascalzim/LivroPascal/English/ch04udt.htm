@@ -1,0 +1,394 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="pascal.css">
+<title>Essential Pascal</title>
+</head>
+
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#551A8B" VLINK="#663366" ALINK="#FF0000">
+
+<!-- top -->
+<table border="0" width="100%" cellpadding="10">
+<tr><td align="center"> 
+<img src="../gif/books.gif" alt="Logo" width=249 height=100 border=0></td>   
+<td>
+<ul><li><a href="http://www.marcocantu.com">
+ 	www.marcocantu.com</a>
+<li><a href="http://www.marcocantu.com/books">
+	Marco's Delphi Books</a>
+<li><a 	href="http://www.marcocantu.com/epascal">
+	Essential Pascal - Web Site</a>
+<li><a href="default.htm">
+	Essential Pascal - Local Index</a>
+</ul></td></tr>
+<tr bgcolor="#FFC891"><td valign="bottom">
+    <h1>Marco Cant&ugrave;'s<br>Essential Pascal</h1></td>
+<td valign="bottom">
+    <h1>Chapter 4<br>User-Defined Data Types</h1>
+</td></tr>
+</table> 
+
+<!-- text -->
+
+<P>Along with the notion of type, one of the great ideas introduced by the Pascal language is the ability to define new data types in a program. Programmers can define their own data types by means of <I>type constructors</I>, such as subrange types, array types, record types, enumerated types, pointer types, and set types. The most important user-defined data type is the class, which is part of the object-oriented extensions of Object Pascal, not covered in this book.
+<P>If you think that type constructors are common in many programming languages, you are right, but Pascal was the first language to introduce the idea in a formal and very precise way. There are still few languages with so many mechanisms to define new types.
+
+<h2>Named and Unnamed Types</h2>
+
+<P>These types can be given a name for later use or applied to a variable directly. When you give a name to a type, you must provide a specific section in the code, such as the following:
+
+<pre>
+<b>type</b>
+  <i>// subrange definition</i>
+  Uppercase = 'A'..'Z';
+
+  <i>// array definition</i>
+  Temperatures = <b>array</b> [1..24] <b>of</b> Integer;
+
+  <i>// record definition</i>
+  Date = <b>record</b>
+    Month: Byte;
+    Day: Byte;
+    Year: Integer;
+  <b>end</b>;
+
+  <i>// enumerated type definition</i>
+  Colors = (Red, Yellow, Green, Cyan, Blue, Violet);
+
+  <i>// set definition</i>
+  Letters = <b>set of</b> Char;
+</pre>
+
+<P>Similar type-definition constructs can be used directly to define a variable without an explicit type name, as in the following code:
+
+<pre>
+<b>var</b>
+  DecemberTemperature: <b>array</b> [1..31] <b>of</b> Byte;
+  ColorCode: <b>array</b> [Red..Violet] <b>of</b> Word;
+  Palette: <b>set of</b> Colors;
+</pre>
+
+<p class=note>Note: In general, you should avoid using <I>unnamed</I> types as in the code above, because you cannot pass them as parameters to routines or declare other variables of the same type. The type compatibility rules of Pascal, in fact, are based on type names, not on the actual definition of the types. Two variables of two identical types are still not compatible, unless their types have exactly the same name, and unnamed types are given internal names by the compiler. Get used to defining a data type each time you need a variable with a complicated structure, and you won’t regret the time you’ve spent in it.
+
+<P>But what do these type definitions mean? I’ll provide some descriptions for those who are not familiar with Pascal type constructs. I’ll also try to underline the differences from the same constructs in other programming languages, so you might be interested in reading the following sections even if you are familiar with kind of type definitions exemplified above. Finally, I’ll show some Delphi examples and introduce some tools that will allow you to access type information dynamically.
+
+<h2>Subrange Types</h2>
+
+<P>A subrange type defines a range of values within the range of another type (hence the name <I>subrange)</I>. You can define a subrange of the Integer type, from 1 to 10 or from 100 to 1000, or you can define a subrange of the Char type, as in:
+
+<pre>
+<b>type</b>
+  Ten = 1..10;
+  OverHundred = 100..1000;
+  Uppercase = <i>'A'</i>..<i>'Z'</i>;
+</pre>
+
+<P>In the definition of a subrange, you don’t need to specify the name of the base type. You just need to supply two constants of that type. The original type must be an ordinal type, and the resulting type will be another ordinal type.
+<P>When you have defined a subrange, you can legally assign it a value within that range. This code is valid:
+
+<pre>
+<b>var</b>
+  UppLetter: UpperCase;
+<b>begin</b>
+  UppLetter := <i>'F'</i>;
+</pre>
+
+<P>But this one is not:
+
+<pre>
+<b>var</b>
+  UppLetter: UpperCase;
+<b>begin</b>
+  UppLetter := <i>'e'</i>; <i>// compile-time error</i>
+</pre>
+
+<P>Writing the code above results in a compile-time error, <I>&quot;Constant expression violates subrange bounds.&quot;</I> If you write the following code instead:
+
+<pre>
+<b>var</b>
+  UppLetter: Uppercase;
+  Letter: Char;
+<b>begin</b>
+  Letter :=<i>'e'</i>;
+  UppLetter := Letter;
+</pre>
+
+<P>Delphi will compile it. At run-time, if you have enabled the Range Checking compiler option (in the Compiler page of the Project Options dialog box), you’ll get a <I>Range check error</I> message.
+
+<p class=note>
+<b>Note:</b> I suggest that you turn on this compiler option while you are developing a program, so it'll be more robust and easier to debug, as in case of errors you'll get an explicit message and not an undetermined behavior. You can eventually disable the option for the final build of the program, to make it a little faster. However, the difference is really small, and for this reason I suggest you to leave all these run-time checks turned on, even in a shipping program. The same holds true for other run-time checking options, such as overflow and stack checking.
+
+<h2>Enumerated Types</h2>
+
+<P>Enumerated types constitute another user-defined ordinal type. Instead of indicating a range of an existing type, in an enumeration you list all of the possible values for the type. In other words, an enumeration is a list of values. Here are some examples:
+
+<pre>
+<b>type</b>
+  Colors = (Red, Yellow, Green, Cyan, Blue, Violet);
+  Suit = (Club, Diamond, Heart, Spade);
+</pre>
+
+<P>Each value in the list has an associated <I>ordinality</I>, starting with zero. When you apply the <i>Ord</i> function to a value of an enumerated type, you get this zero-based value. For example, <i>Ord (Diamond)</i> returns 1.
+
+<p class=note>Note: Enumerated types can have different internal representations. By default, Delphi uses an 8-bit representation, unless there are more than 256 different values, in which case it uses the 16-bit representation. There is also a 32-bit representation, which might be useful for compatibility with C or C++ libraries. You can actually change the default behavior, asking for a larger representation, by using the <i>$Z</i> compiler directive.
+
+<P>The Delphi VCL (Visual Component Library) uses enumerated types in many places. For example, the style of the border of a form is defined as follows:
+
+<pre>
+<b>type</b>
+  TFormBorderStyle = (bsNone, bsSingle, bsSizeable,
+    bsDialog, bsSizeToolWin, bsToolWindow);
+</pre>
+
+<P>When the value of a property is an enumeration, you usually can choose from the list of values displayed in the Object Inspector, as shown in Figure 4.1.
+
+<p class="slug">Figure 4.1: An enumerated type property in the Object Inspector
+
+<p><img src="../gif/epf0401.gif" width=201 height=193 alt="" border="0">
+
+<P>The Delphi Help file generally lists the possible values of an enumeration. As an alternative you can use the <i>OrdType</i> program, available on www.marcocantu.com, to see the list of the values of each Delphi enumeration, set, subrange, and any other ordinal type. You can see an example of the output of this program in Figure 4.2. 
+
+<p class="slug">Figure 4.2: Detailed information about an enumerated type, as displayed by the OrdType program (available on my web site).</b></i>
+
+<p><img src="../gif/epf0402.gif" width=451 height=227 alt="" border=0>
+
+<h2>Set Types</h2>
+
+<P>Set types indicate a group of values, where the list of available values is indicated by the ordinal type the set is based onto. These ordinal types are usually limited, and quite often represented by an enumeration or a subrange. If we take the subrange 1..3, the possible values of the set based on it include only 1, only 2, only 3, both 1 and 2, both 1 and 3, both 2 and 3, all the three values, or none of them.
+<p>A variable usually holds one of the possible values of the range of its type. A set-type variable, instead, can contain none, one, two, three, or more values of the range. It can even include all of the values. Here is an example of a set:
+
+<pre>
+<b>type</b>
+  Letters = <b>set of</b> Uppercase;
+</pre>
+
+<P>Now I can define a variable of this type and assign to it some values of the original type. To indicate some values in a set, you write a comma-separated list, enclosed within square brackets. The following code shows the assignment to a variable of several values, a single value, and an empty value:
+
+<pre>
+<b>var</b>
+  Letters1, Letters2, Letters3: Letters;
+<b>begin</b>
+  Letters1 := ['A', 'B', 'C'];
+  Letters2 := ['K'];
+  Letters3 := [];
+</pre>
+
+<P>In Delphi, a set is generally used to indicate nonexclusive flags. For example, the following two lines of code (which are part of the Delphi library) declare an enumeration of possible icons for the border of a window and the corresponding set type:
+
+<pre>
+<b>type</b>
+  TBorderIcon = (biSystemMenu, biMinimize, biMaximize, biHelp);
+  TBorderIcons = <b>set of</b> TBorderIcon;
+</pre>
+
+<P>In fact, a given window might have none of these icons, one of them, or more than one. When working with the Object Inspector (see Figure 4.3), you can provide the values of a set by expanding the selection (double-click on the property name or click on the plus sign on its left) and toggling on and off the presence of each value.
+
+<p class="slug">Figure 4.3: A set-type property in the Object Inspector
+
+<p><img src="../gif/epf0403.gif" width=309 height=178 alt="" border="0">
+
+<P>Another property based on a set type is the style of a font. Possible values indicate a bold, italic, underline, and strikethrough font. Of course the same font can be both italic and bold, have no attributes, or have them all. For this reason it is declared as a set. You can assign values to this set in the code of a program as follows:
+
+<pre>
+Font.Style := []; <i>// no style</i>
+Font.Style := [fsBold]; <i>// bold style only</i>
+Font.Style := [fsBold, fsItalic]; <i>// two styles</i>
+</pre>
+
+<P>You can also operate on a set in many different ways, including adding two variables of the same set type (or, to be more precise, computing the union of the two set variables):
+
+<pre>
+Font.Style := OldStyle + [fsUnderline]; <i>// two sets</i>
+</pre>
+
+<P>Again, you can use the OrdType examples included in the TOOLS directory of the book source code to see the list of possible values of many sets defined by the Delphi component library.
+
+<h2>Array Types</h2>
+
+<P>Array types define lists of a fixed number of elements of a specific type. You generally use an <i>index</i> within square brackets to access to one of the elements of the array. The square brackets are used also to specify the possible values of the index when the array is defined. For example, you can define a group of 24 integers with this code:
+
+</B><pre>
+<b>type</b>
+  DayTemperatures = <b>array</b> [1..24] <b>of</b> Integer;
+</pre>
+
+<P>In the array definition, you need to pass a subrange type within square brackets, or define a new specific subrange type using two constants of an ordinal type. This subrange specifies the valid indexes of the array. Since you specify both the upper and the lower index of the array, the indexes don’t need to be zero-based, as is necessary in C, C++, Java, and other programming languages.
+<P>Since the array indexes are based on subranges, Delphi can check for their range as we’ve already seen. An invalid constant subrange results in a compile-time error; and an out-of-range index used at run-time results in a run-time error if the corresponding compiler option is enabled.
+<P>Using the array definition above, you can set the value of a <i>DayTemp1</i> variable of the <i>DayTemperatures</i> type as follows:
+
+<pre>
+<b>type</b>
+  DayTemperatures = <b>array</b> [1..24] <b>of</b> Integer;
+
+<b>var</b>  
+  DayTemp1: DayTemperatures;
+  
+<b>procedure</b> AssignTemp;  
+<b>begin</b>  
+  DayTemp1 [1] := 54;
+  DayTemp1 [2] := 52;
+  ...
+  DayTemp1 [24] := 66;
+  DayTemp1 [25] := 67; <i>// compile-time error</i>
+</pre>
+
+<P>An array can have more than one dimension, as in the following examples:
+
+<pre>
+<b>type</b>
+  MonthTemps = <b>array</b> [1..24, 1..31] <b>of</b> Integer;
+  YearTemps = <b>array</b> [1..24, 1..31, Jan..Dec] <b>of</b> Integer;
+</pre>
+
+<P>These two array types are built on the same core types. So you can declare them using the preceding data types, as in the following code:
+
+<pre>
+<b>type</b>
+  MonthTemps = <b>array</b> [1..31] <b>of</b> DayTemperatures;
+  YearTemps = <b>array</b> [Jan..Dec] <b>of</b> MonthTemps;
+</pre>
+
+<P>This declaration inverts the order of the indexes as presented above, but it also allows assignment of whole blocks between variables. For example, the following statement copies January’s temperatures to February:
+
+<pre>
+<b>var</b>
+  ThisYear: YearTemps;
+<b>begin</b>
+  ...
+  ThisYear[Feb] := ThisYear[Jan];
+</pre>
+
+<P>You can also define a <I>zero-based </I>array, an array type with the lower bound set to zero. Generally, the use of more logical bounds is an advantage, since you don’t need to use the index 2 to access the third item, and so on. Windows, however, uses invariably zero-based arrays (because it is based on the C language), and the Delphi component library tends to do the same.
+<P>If you need to work on an array, you can always test its bounds by using the standard <i>Low</i> and <i>High</i> functions, which return the lower and upper bounds. Using <i>Low</i> and <i>High</i> when operating on an array is highly recommended, especially in loops, since it makes the code independent of the range of the array. Later, you can change the declared range of the array indices, and the code that uses <i>Low</i> and <i>High</i> will still work. If you write a loop hard-coding the range of an array you’ll have to update the code of the loop when the array size changes. <i>Low</i> and <i>High</i> make your code easier to maintain and more reliable.
+
+<p class=note>Note: Incidentally, there is no run-time overhead for using <i>Low</i> and <i>High</i> with arrays. They are resolved at compile-time into constant expressions, not actual function calls. This compile-time resolution of expressions and function calls happens also for many other simple system functions.
+
+<P>Delphi uses arrays mainly in the form of array properties. We have already seen an example of such a property in the TimeNow example, to access the <i>Items</i> property of a ListBox component. I’ll show you some more examples of array properties in the next chapter, when discussing Delphi loops.
+
+<p class=note>Note: Delphi 4 introduced dynamic arrays into Object Pascal , that is arrays that can be resized at runtime allocating the proper amount of memory. Using dynamic arrays is easy, but in this discussion of Pascal I felt they were not an proper topic to cover. You can find a description of Delphi's dynamic arrays in Chapter 8.
+
+<h2>Record Types</h2>
+
+<P>Record types define fixed collections of items of different types. Each element, or <I>field</I>, has its own type. The definition of a record type lists all these fields, giving each a name you’ll use later to access it.
+
+<P>Here is a small listing with the definition of a record type, the declaration of a variable of that type, and few statements using this variable:
+
+<pre>
+<b>type</b>
+  Date = <b>record</b>
+    Year: Integer;
+    Month: Byte;
+    Day: Byte;
+  <b>end</b>;
+  
+<b>var</b>
+  BirthDay: Date;
+  
+<b>begin</b>
+  BirthDay.Year := 1997;
+  BirthDay.Month := 2;
+  BirthDay.Day := 14;
+</pre>
+
+<P>Classes and objects can be considered an extension of the record type. Delphi libraries tend to use class types instead of record types, but there are many record types defined by the Windows API.
+<P>Record types can also have a variant part; that is, multiple fields can be mapped to the same memory area, even if they have a different data type. (This corresponds to a union in the C language.) Alternatively, you can use these variant fields or groups of fields to access the same memory location within a record, but considering those values from different perspectives. The main uses of this type were to store similar but different data and to obtain an effect similar to that of typecasting (something less useful now that typecasting has been introduced also in Pascal). The use
+of variant record types has been largely replaced by object-oriented and other modern techniques, although Delphi uses them in some peculiar cases.
+<P>The use of a variant record type is not type-safe and is not a recommended programming practice, particularly for beginners. Expert programmers can indeed use variant record types, and the core of the Delphi libraries makes use of them. You won’t need to tackle them until you are really a Delphi expert, anyway.
+
+<h2>Pointers</h2>
+
+<P>A pointer type defines a variable that holds the memory address of another variable of a given data type (or an undefined type). So a pointer variable indirectly refers to a value. The definition of a pointer type is not based on a specific keyword, but uses a special character instead. This special symbol is the caret (^):
+
+<pre>
+<b>type</b>
+  PointerToInt = ^Integer;
+</pre>
+
+<P>Once you have defined a pointer variable, you can assign to it the address of another variable of the same type, using the <i>@</i> operator:
+
+<pre>
+<b>var</b>
+  P: ^Integer;
+  X: Integer;
+<b>begin</b>
+  P := @X;
+  <i>// change the value in two different ways</i>
+  X := 10;
+  P^ := 20;  
+</pre>
+
+<p>When you have a pointer <i>P</i>, with the expression <i>P</i> you refer to the address of the memory location the pointer is referring to, and with the expression <i>P^</i> you refer to the actual content of that memory location. For this reason in the code fragment above <i>^P</i> corresponds to <i>X</i>.
+<p>Instead of referring to an existing memory location, a pointer can refer to a new memory block dynamically allocated (on the heap memory area) with the <i>New</i> procedure. In this case, when you don't need the pointer any more, you’ll also have to to get rid of the memory you’ve dynamically allocated, by calling the <i>Dispose</i> procedure.
+
+<pre>
+<b>var</b>
+  P: ^Integer;
+<b>begin</b>
+  <i>// initialization</i>
+  New (P);
+  <i>// operations</i>
+  P^ := 20;
+  ShowMessage (IntToStr (P^));
+  <i>// termination</i>
+  Dispose (P);
+<b>end</b>;
+</pre>
+
+<P>If a pointer has no value, you can assign the <i>nil</i> value to it. Then you can test whether a pointer is <i>nil</i> to see if it currently refers to a value. This is often used, because dereferencing an invalid pointer causes an access violation (also known as a general protection fault, GPF):
+
+<pre>
+procedure TFormGPF.BtnGpfClick(Sender: TObject);
+var
+  P: ^Integer;
+begin
+  P := nil;
+  ShowMessage (IntToStr (P^));
+end;
+</pre>
+
+You can see an example of the effect of this code by running the GPF example (or looking at the corresponding Figure 4.4). The example contains also the code fragments shown above.
+
+<p class="slug">Figure 4.4: The system error resulting from the access to a nil pointer, from the GPF example.</b></i>
+<p><img src="../gif/epf0404.gif" width=528 height=246 alt="" border="0">
+
+<P>In the same program you can find an example of safe data access. In this second case the pointer is assigned to an existing local variable, and can be safely used, but I’ve added a safe-check anyway:
+
+<pre>
+<b>procedure</b> TFormGPF.BtnSafeClick(Sender: TObject);
+<b>var</b>
+  P: ^Integer;
+  X: Integer;
+<b>begin</b>
+  P := @X;
+  X := 100;
+  <b>if</b> P <> <b>nil then</b>
+    ShowMessage (IntToStr (P^));
+<b>end</b>;
+</pre>
+
+<P>Delphi also defines a <i>Pointer</i> data type, which indicates untyped pointers (such as <i>void*</i> in the C language). If you use an untyped pointer you should use <i>GetMem</i> instead of <i>New</i>. The <i>GetMem</i> procedure is required each time the size of the memory variable to allocate is not defined.
+<P>The fact that pointers are seldom necessary in Delphi is an interesting advantage of this environment. Nonetheless, understanding pointers is important for advanced programming and for a full understanding of the Delphi object model, which uses pointers &quot;behind the scenes.&quot;
+
+<p class=note>Note: Although you don’t use pointers often in Delphi, you do frequently use a very similar construct—namely, references. Every object instance is really an implicit pointer or reference to its actual data. However, this is completely transparent to the programmer, who uses object variables just like any other data type.
+
+<h2>File Types</h2>
+
+<P>Another Pascal-specific type constructor is the <i>file</i> type. File types represent physical disk files, certainly a peculiarity of the Pascal language. You can define a new file data type as follows:
+
+<pre>
+<b>type</b>
+  IntFile = <b>file of</b> Integer;
+</pre>
+
+<P>Then you can open a physical file associated with this structure and write integer values to it or read the current values from the file. 
+<p class="note"><b>Author's Note</b>: Files-based examples were part of older editions of Mastering Delphi and I plan adding them here as well)
+<P>The use of files in Pascal is quite straightforward, but in Delphi there are also some components that are capable of storing or loading their contents to or from a file. There is some serialization support, in the form of streams, and there is also database support. 
+
+<h2>Conclusion</h2>
+
+<p>This chapter discussing user-defined data types complete our coverage of Pascal type system. Now we are ready to look into the statements the language provides to operate on the variables we've defined.
+
+<h3><a href="ch05stat.htm">Next Chapter: Statements</a></h3>
+
+<p class="copyr">&copy; Copyright Marco Cant&ugrave;, Wintech Italia Srl 1995-2000</p>
+</body></html>
