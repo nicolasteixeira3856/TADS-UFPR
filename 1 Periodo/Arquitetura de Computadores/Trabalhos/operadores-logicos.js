@@ -22,7 +22,7 @@ function calcularBit(){
     } else if (operacao == "XOU"){
         xou(bitUm, bitDois, bitResultado)
     } else if (operacao == "NAO"){
-        nao(bitUm, bitDois, bitResultado)
+        nao(bitUm, bitResultado)
     } else if (operacao == "NAOE"){
         naoe(bitUm, bitDois, bitResultado)
     } else if (operacao == "NAOOU"){
@@ -56,7 +56,7 @@ function xou(bitUm, bitDois, bitResultado) {
     }
 }
 
-function nao(bitUm, bitDois, bitResultado) {
+function nao(bitUm, bitResultado) {
     if(bitUm == 1){
         bitResultado.value = 0
     } else {
