@@ -1,4 +1,4 @@
-function calcularSomaBin() {
+/*function calcularSomaBin() {
     let binUm = document.getElementById('binUm').value
     let binDois = document.getElementById('binDois').value
     let resultadoBinUmDec = document.getElementById('resultadoBinUmDec')
@@ -91,4 +91,50 @@ function calcularSomaBin() {
 
     return true
 
-  }
+  }*/
+
+
+let bitUm = 1011
+let bitDois = 1111
+let resultado = []
+
+bitUm = Array.from(bitUm.toString()).map(Number)
+bitDois = Array.from(bitDois.toString()).map(Number)
+bitUm = bitUm.reverse()   
+bitDois = bitDois.reverse()   
+
+let contador = 0
+  
+let carry = 0
+
+for (let index = 0; index < bitUm.length; index++) {
+    contador++
+
+    
+    if (contador >= 2) {
+        let zero = xou(bitUm[index], bitDois[index])
+        let um = e(bitUm[index], bitDois[index])
+        resultado.push(xou(zero, carry))
+        let tres = e(zero, 0)
+        if (contador === 4) {
+            resultado.push(ou(um, tres))
+        }else {
+            
+            carry = (ou(um, tres))
+            console.log(carry)
+        }
+    } else {
+        let zero = xou(bitUm[index], bitDois[index])
+        let um = e(bitUm[index], bitDois[index])
+        resultado.push(xou(zero, 0))
+        let tres = e(zero, 0)
+        carry = (ou(um, tres))
+        console.log(carry)
+    }
+}
+
+
+
+
+
+console.log(resultado.reverse().join(""))
