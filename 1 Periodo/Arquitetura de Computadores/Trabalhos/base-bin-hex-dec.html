@@ -6,39 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trabalhos Arquitetura de Computadores</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />   
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
-<body>
-    <div class="container">
-        
-        <div class="row">
-            <div class="col-md-3">
-              
-            </div>
-            <div class="col-md-6">
-                <h1 class="p-2">Conversor de Bases</h1>
-                <p class="p-2"><b>binToDec e hexToDec</b></p>
-                <form class="form-group" action="#">
-                    <input class="form-control" id="binhex" name="binhex" placeholder="*Bin ou Hexa..." type="text" autofocus/>
-                    <br/>
-                    <select class="form-control" id="basePai" name="basePai" placeholder="*Selecione...">
-                        <option value="0">*Base...</option>
-                        <option value="2">2</option>
-                        <option value="16">16</option>
-                    </select>
-                    <br/>
-                    <input type="button" class="btn btn-primary w-100" value="Converter" onclick="converterBaseBinDecHexDec()">
-                    <br/>
-                    <br/>
-                    <input class="form-control" name="resultadoBinhex" id="resultadoBinhex" placeholder="Resultado..." type="text" readonly/>
-                </form>
-            </div>
-            <div class="col-md-3">
-                
+<body class="bg-dark">
+    <div class="container p-5">
+        <div class="bg-white opacity row">
+            <div class="col-md-12 text-center">
+                <div class="p-5">
+                    <span class="margin"><a href="index.html" class="text-dark"><i class="fas fa-undo fa-2x"> Voltar</i></a></span>
+                    <h1>Conversor de Bases</h1>
+                    <p>Binário/hexadecimal para decimal</p>
+                    <div class="offset-sm-3"> <!-- Pulando colunas do sistema de grid -->
+                        <form class="form-group w-75" action="#">
+                            <input class="form-control" id="binhex" name="binhex" placeholder="*Bin ou Hexa..." type="text" autofocus/></br>
+                            <select class="form-control" id="basePai" name="basePai" placeholder="*Selecione...">
+                                <option value="0">*Base...</option>
+                                <option value="2">2</option>
+                                <option value="16">16</option>
+                            </select></br>
+                            <input type="button" class="btn btn-dark w-100" value="Converter" onclick="converterBaseBinDecHexDec()"></br></br>
+                            <input class="form-control" name="resultadoBinhex" id="resultadoBinhex" placeholder="Resultado..." type="text" readonly/>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-    <script src="conversor-base.js"></script>
+    <script src="js/conversor-base.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

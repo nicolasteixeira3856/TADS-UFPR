@@ -1,4 +1,25 @@
-/* function checaNao() {
+function calcularBit(){
+    bitUm = document.getElementById('bitUm').value
+    bitDois = document.getElementById('bitDois').value
+    operacao = document.getElementById('operacao').value
+    bitResultado = document.getElementById('bitResultado')
+
+    if(operacao == "E"){
+        bitResultado.value = e(bitUm, bitDois)
+    } else if (operacao == "OU"){
+        bitResultado.value = ou(bitUm, bitDois)
+    } else if (operacao == "XOU"){
+        bitResultado.value = xou(bitUm, bitDois)
+    } else if (operacao == "NAO"){
+        bitResultado.value = nao(bitUm)
+    } else if (operacao == "NAOE"){
+        bitResultado.value = naoe(bitUm, bitDois)
+    } else if (operacao == "NAOOU"){
+        bitResultado.value = naoou(bitUm, bitDois)
+    }
+}
+
+function checaNao() {
     bitDois = document.getElementById('bitDois')
     operacao = document.getElementById('operacao').value
 
@@ -8,27 +29,6 @@
         bitDois.disabled = true
     }
 }
-
-function calcularBit(){
-    bitUm = document.getElementById('bitUm').value
-    bitDois = document.getElementById('bitDois').value
-    operacao = document.getElementById('operacao').value
-    bitResultado = document.getElementById('bitResultado')
-
-    if(operacao == "E"){
-        e(bitUm, bitDois, bitResultado)
-    } else if (operacao == "OU"){
-        ou(bitUm, bitDois, bitResultado)
-    } else if (operacao == "XOU"){
-        xou(bitUm, bitDois, bitResultado)
-    } else if (operacao == "NAO"){
-        nao(bitUm, bitResultado)
-    } else if (operacao == "NAOE"){
-        naoe(bitUm, bitDois, bitResultado)
-    } else if (operacao == "NAOOU"){
-        naoou(bitUm, bitDois, bitResultado)
-    }
-} */
 
 function e(bitUm, bitDois){
     if( (bitUm == 1) && (bitDois == 1) ){

@@ -6,38 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trabalhos Arquitetura de Computadores</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-    <div class="container">
-        
-        <div class="row">
-            <div class="col-md-3">
-              
-            </div>
-            <div class="col-md-6">
-                <h1 class="p-2">Calculadora soma binária</h1>
-                <br/>
-                <form class="form-group" action="#">
-                    <input class="form-control" id="binUm" name="binUm" placeholder="Binário 1" type="text" autofocus/>
-                    <input class="form-control" id="binDois" name="binDois" placeholder="Binário 2" type="text" autofocus/>
-                    <br/>
-                    <input type="button" class="btn btn-primary w-100" value="Converter" onclick="calcularSomaBin()">
-                    <br/>
-                    <br/>
-                    <input class="form-control" name="resultadoBinUmDec" id="resultadoBinUmDec" placeholder="Binário 1 em decimal..." type="text" readonly/>
-                    <input class="form-control" name="resultadoBinDoisDec" id="resultadoBinDoisDec" placeholder="Binário 2 em decimal..." type="text" readonly/>
-                    <input class="form-control" name="resultadoSomaDec" id="resultadoSomaDec" placeholder="Resultado da soma em decimal..." type="text" readonly/>
-                    <input class="form-control" name="resultadoSomaBin" id="resultadoSomaBin" placeholder="Resultado da soma em binário..." type="text" readonly/>
-                </form>
-            </div>
-            <div class="col-md-3">
-                
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />   
+    <link rel="stylesheet" href="css/estilo.css">
+</head> 
+<body class="bg-dark">
+    <div class="container p-5">
+        <div class="bg-white opacity row">
+            <div class="col-md-12 text-center">
+                <div class="p-5">
+                    <span class="margin"><a href="index.html" class="text-dark"><i class="fas fa-undo fa-2x"> Voltar</i></a></span>
+                    <h1>Calculadora de soma binária</h1>
+                    <p>Levando em consideração 4 bits</p>
+                    <div class="offset-sm-3"> <!-- Pulando colunas do sistema de grid -->
+                        <form class="form-group w-75" action="#">
+                            <input class="form-control" id="binUm" name="binUm" placeholder="Binário 1" type="text" autofocus/></br>
+                            <input class="form-control" id="binDois" name="binDois" placeholder="Binário 2" type="text" autofocus/></br>
+                            <input type="button" class="btn btn-dark w-100" value="Converter" onclick="calcularSomaBin()"></br></br>
+                            <input class="form-control" name="resultadoBinUmDec" id="resultadoBinUmDec" placeholder="Binário 1 em decimal..." type="text" readonly/></br>
+                            <input class="form-control" name="resultadoBinDoisDec" id="resultadoBinDoisDec" placeholder="Binário 2 em decimal..." type="text" readonly/></br>
+                            <input class="form-control" name="resultadoSomaDec" id="resultadoSomaDec" placeholder="Resultado da soma em decimal..." type="text" readonly/></br>
+                            <input class="form-control" name="resultadoSomaBin" id="resultadoSomaBin" placeholder="Resultado da soma em binário..." type="text" readonly/></br>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-    <script src="operadores-logicos.js"></script>
-    <script src="soma-bits.js"></script>
+    <script src="js/conversor-base.js"></script>
+    <script src="js/operadores-logicos.js"></script>
+    <script src="js/soma-bits.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
