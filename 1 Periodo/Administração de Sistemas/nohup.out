@@ -1,0 +1,17 @@
+sending incremental file list
+logsync.txt
+
+sent 1.84K bytes  received 35 bytes  3.75K bytes/sec
+total size is 122.55M  speedup is 65,431.02
+sending incremental file list
+logsync.txt
+
+sent 1.88K bytes  received 35 bytes  3.83K bytes/sec
+total size is 122.55M  speedup is 64,063.02
+sending incremental file list
+./
+Captura de tela de 2019-10-21 11-43-36.png
+logsync.txt
+
+sent 418.68K bytes  received 57 bytes  837.46K bytes/sec
+total size is 122.97M  speedup is 293.67
