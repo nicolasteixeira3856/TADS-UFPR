@@ -1,29 +1,23 @@
-origemUm=~/Documentos	
-origemDois=~/Imagens	
+origemUm=~/Documents	
+origemDois=~/Pictures	
 destinoUm=./BackupDocumentos	
 destinoDois=./BackupImagens
-logfile=$destino/logsync.txt	
+logfileUm=$destinoUm/logsync.txt
+logfileDois=$destinoDois/logsync.txt	
 
 echo "***********************************************************************"
 echo "Bem-vindo ao script de backup automático"
-echo "As pastas automaticamente sincronizadas serão: Imagens e Documentos"
+echo "Esse script só precisa ser executado uma vez, após isso as pastas Imagens e Documentos efetuarão backup automaticamente a cada uma hora"
 echo "***********************************************************************"
 
-for DEV in /sys/block/sd*
-do
-	if readlink $DEV/device | grep -q usb
-	then
-		DEV=`basename $DEV`
-		echo "$DEV is a USB device, info:"
-		udevinfo --query=all --name $DEV
-		if [ -d /sys/block/${DEV}/${DEV}1 ]
-		then
-			echo "Has partitions " /sys/block/$DEV/$DEV[0-9]*
-		else
-			echo "Has no partitions"
-		fi
-		echo
-	fi
-done
+sleep 5s
 
-# rsync -avzh -progress --delete --exclude='.DS_Store' --delete-excluded --log-file=$logfile $origemUm/ $destinoUm/
+rsync -avzh -progress --delete --exclude='.DS_Store' --delete-excluded --log-file=$logfileUm $origemUm/ $destinoUm/
+rsync -avzh -progress --delete --exclude='.DS_Store' --delete-excluded --log-file=$logfileDois $origemDois/ $destinoDois/
+
+crontab -l > cronbackup
+echo "0 * * * * /home/nicolas/Documents/TADS-UFPR/1 Periodo/Administração de Sistemas/backup.sh" >> cronbackup
+crontab cronbackup
+rm cronbackup
+
+echo "Script executado com sucesso, os seus arquivos serão salvos em um local seguro a cada uma hora"
