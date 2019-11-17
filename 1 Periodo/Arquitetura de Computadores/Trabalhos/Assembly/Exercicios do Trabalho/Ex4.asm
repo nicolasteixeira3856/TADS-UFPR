@@ -12,24 +12,23 @@ ORG 100h
     INC BL
 LOOPNUM:
     MOV AH, 2
-
-    PUTC 10   
-    PUTC 13
   
+    MOV DL, ' '
+    INT 21h
     MOV DL, BH
     INT 21h
     MOV DL, BL
     INT 21h
     
     INC BL
-    CMP BL,'9'+1
+    CMP BL, 58
     JNE LOOPNUM
     
 FIXLOOP:
 
-    MOV BL,'0'
+    MOV BL, 48
     INC BH
-    CMP BH,'9'+1
+    CMP BH, 58
     
     JNE LOOPNUM         
 
