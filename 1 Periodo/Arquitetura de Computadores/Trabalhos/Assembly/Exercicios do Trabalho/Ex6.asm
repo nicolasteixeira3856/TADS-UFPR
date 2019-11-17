@@ -4,7 +4,6 @@ ORG 100h
 
 .data
     varApoioNum db ?
-   
 .code
      
     PRINT 'Digite um numero de 1 a 99: '
@@ -13,9 +12,11 @@ ORG 100h
     
     ;Entrando com os valores
 	MOV AH, 01h
-	INT 21h 
+	INT 21h
+	 
 	MOV BH, AL ;Coloca a entrada do primeiro digito no BH
 	INT 21h
+	 
 	MOV BL, AL ;Coloca a entrada do segundo digito no BL
 	
 	MOV AL, BH ;BH - primeiro digito, vai para o AL
@@ -36,7 +37,9 @@ ORG 100h
 	MOV AH, 0h
 	MOV AL, varApoioNum
 	MOV CH, 3
+	
 	DIV CH
+	
 	CMP AH, 0
 	JE EMULTDETRES
 	
@@ -50,6 +53,9 @@ NAOEMULTDETRES:
     RET
 	
 EMULTDETRES:
+
+    CMP varApoioNum, 0
+    JE NAOEMULTDETRES
 
     PRINT 'O numero e multiplo de tres'
     

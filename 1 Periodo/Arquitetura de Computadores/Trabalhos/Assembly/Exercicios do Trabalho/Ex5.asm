@@ -37,7 +37,11 @@ ORG 100h
     
         
         MOV AH, 1
-    	INT 21h 
+    	INT 21h
+    	
+    	CMP AL, 48
+	    JE rotaNumeroNulo
+    	 
     	SUB AL, 48
     	MOV BL, AL
     	MOV AL, 1
@@ -57,8 +61,15 @@ ORG 100h
         MOV AL, 1
     	INT 21h
     	
+    	MOV varApoio, AL
+    	
     	CMP AL, 48
-    	JE printNeutro 
+    	JE printNeutro
+    	
+    	SUB varApoio, 48
+    	
+    	CMP varApoio, 1
+    	JGE printNegativo  
     	
     	PUTC 10
     	PUTC 13
@@ -74,7 +85,17 @@ ORG 100h
     
         PRINT 'O numero digitado e neutro'
         
-        RET    
+        RET
+        
+    printNegativo:
+    
+        PUTC 10
+    	PUTC 13
+    
+        PRINT 'O numero digitado e negativo'
+        
+        RET 
+        
                                                                            
 
 
