@@ -14,6 +14,7 @@ if [ $? = 0 ] ; then
     (
     echo "25"
     echo "# Detectando outros scripts de backup já gerados" ; sleep 1
+    rm ./agendarBackup.sh
 
     echo "50"
     echo "# Gerando script de backup..." ; sleep 5
@@ -33,40 +34,21 @@ if [ $? = 0 ] ; then
 
     echo "70"
     echo "# Preparando o agendamento..."; sleep 3
-    echo "crontab -l > cronbackup" >> ./backupScript.sh
-    echo 'echo "${PWD}/backupScript.sh" >> cronbackup' >> ./backupScript.sh
-    echo "crontab cronbackup" >> ./backupScript.sh
-    echo "rm cronbackup" >> ./backupScript.sh
+    touch ./agendarBackup.sh
+    chmod +777 ./agendarBackup.sh
+    echo "crontab -l > cronbackup" >> ./agendarBackup.sh
+    echo 'echo "0 * * * * ${HOME}/Backup/backupScript.sh" >> cronbackup' >> ./agendarBackup.sh
+    echo "crontab cronbackup" >> ./agendarBackup.sh
+    echo "rm cronbackup" >> ./agendarBackup.sh
 
-    echo "99"
+    echo "95"
     echo "# Finalizando o script..." ; sleep 1
+    mkdir -p ${HOME}/Backup
+    rm -f ${HOME}/Backup/backupScript.sh
+    mv ./backupScript.sh ${HOME}/Backup
 
     echo "# O script foi gerado com sucesso." ; sleep 0
     echo "100"
     ) |
     zenity --progress --no-cancel --title="Gerador de backup" --text="Iniciando..." --ok-label="Ok" --percentage=0 --width=290 --height=100
 fi
-
-# origemUm=~/Documents	
-# origemDois=~/Pictures	
-# destinoUm=./BackupDocumentos	
-# destinoDois=./BackupImagens
-# logfileUm=$destinoUm/logsync.txt
-# logfileDois=$destinoDois/logsync.txt	
-
-# echo "***********************************************************************"
-# echo "Bem-vindo ao script de backup automático"
-# echo "Esse script só precisa ser executado uma vez, após isso as pastas Imagens e Documentos efetuarão backup automaticamente a cada uma hora"
-# echo "***********************************************************************"
-
-# sleep 5s
-
-# rsync -avzh -progress --delete --exclude='.DS_Store' --delete-excluded --log-file=$logfileUm $origemUm/ $destinoUm/
-# rsync -avzh -progress --delete --exclude='.DS_Store' --delete-excluded --log-file=$logfileDois $origemDois/ $destinoDois/
-
-# crontab -l > cronbackup
-# echo "0 * * * * /home/nicolas/Documents/TADS-UFPR/1 Periodo/Administração de Sistemas/backup.sh" >> cronbackup
-# crontab cronbackup
-# rm cronbackup
-
-# echo "Script executado com sucesso, os seus arquivos serão salvos em um local seguro a cada uma hora"
