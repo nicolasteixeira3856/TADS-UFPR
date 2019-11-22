@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #Abrindo um novo question com sim/não com o Zenity
 zenity --question --title="Gerador de backup" --text="Você gostaria de executar o script agora?" --ok-label="Sim" --cancel-label="Não" --width=240 --height=140
@@ -39,7 +39,9 @@ if [ $? = 0 ] ; then
     #Verificando se no local que o script está sendo executado já existe um .sh com o nome de agendarBackup, caso sim eu o deleto (para evitar escrever algo dentro de outro).
     echo "10"
     echo "# Detectando outros scripts de backup já gerados" ; sleep 1
-    rm ./"${agendarBackup}"
+    if [ -f $agendarBackup ] ; then
+        rm "${agendarBackup}"
+    fi
 
     #Iniciando de fato a geração do script
     echo "35"
@@ -47,7 +49,7 @@ if [ $? = 0 ] ; then
 
     #Criando o arquivo backupScript.sh e logo após lhe dou permissão geral sobre o sistema
     touch ./"${backupScript}"
-    chmod +777 ./"${backupScript}"
+    chmod +x ./"${backupScript}"
 
     #Separando o array de pastas por |, tornando assim cada pasta (se houver mais de uma), um indice do array
     IFS='|' read -r -a arrayPastas <<< "$pastas"
@@ -62,7 +64,7 @@ if [ $? = 0 ] ; then
         destinoApoio+="/"${arrayNomePastas[-1]}""
 
         #Colocando o RSYNC dentro do backupScript.sh
-        echo "rsync --protect-args -avzh -progress --delete --exclude='.DS_Store' --delete-excluded '$element/' '$destinoApoio'" >> ./"${backupScript}"
+        echo "rsync --protect-args -avzh -progress --delete --exclude='.DS_Store' --delete-excluded --log-file=backup_$random.log '$element/' '$destinoApoio'_Backup" >> ./"${backupScript}"
     done
     #Fim do for
 
@@ -70,7 +72,7 @@ if [ $? = 0 ] ; then
     echo "# Preparando o agendamento..."; sleep 3
     #Criando o arquivo agendarBackup.sh (esse que será executado pelo usuário de fato) e logo após concedendo permissão geral sobre o sistema
     touch ./"${agendarBackup}"
-    chmod +777 ./"${agendarBackup}"
+    chmod +x ./"${agendarBackup}"
     #Listando tudo que tiver dentro do crontab, passando para um arquivo temporário cronbackup
     echo "crontab -l > cronbackup" >> ./"${agendarBackup}"
     #Colocando a execucação do backupScript dentro do cronbackup
