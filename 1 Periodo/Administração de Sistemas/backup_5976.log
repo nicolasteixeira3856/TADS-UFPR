@@ -1,0 +1,353 @@
+2019/11/22 23:46:34 [6057] building file list
+2019/11/22 23:46:34 [6057] created directory /home/nicolas/Desktop/Documents_Backup
+2019/11/22 23:46:34 [6057] cd+++++++++ ./
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/README.md
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/HEAD
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/config
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/description
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/index
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/packed-refs
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/branches/
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/hooks/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/applypatch-msg.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/commit-msg.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/fsmonitor-watchman.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/post-update.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/pre-applypatch.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/pre-commit.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/pre-push.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/pre-rebase.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/pre-receive.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/prepare-commit-msg.sample
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/hooks/update.sample
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/info/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/info/exclude
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/logs/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/logs/HEAD
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/logs/refs/
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/logs/refs/heads/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/logs/refs/heads/master
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/logs/refs/remotes/
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/logs/refs/remotes/origin/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/logs/refs/remotes/origin/HEAD
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/objects/
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/objects/info/
+2019/11/22 23:46:34 [6057] cd+++++++++ TADS-UFPR/.git/objects/pack/
+2019/11/22 23:46:34 [6057] >f+++++++++ TADS-UFPR/.git/objects/pack/pack-94dcfd64ace05f51b24176a2188d2a3ce6d0790d.idx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/.git/objects/pack/pack-94dcfd64ace05f51b24176a2188d2a3ce6d0790d.pack
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/.git/refs/
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/.git/refs/heads/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/.git/refs/heads/master
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/.git/refs/remotes/
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/.git/refs/remotes/origin/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/.git/refs/remotes/origin/HEAD
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/.git/refs/tags/
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/1PeriodoTADS.txt
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/agendarBackup_5976.sh
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/backup.sh
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/backup_5976.log
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/Old/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/Old/cronbackup.sh
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/Old/nohup.out
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Administração de Sistemas/Old/teste.sh
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/.~lock.Tabela Somador.xlsx#
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 01- Prof Jouglas.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 02- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 03- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 04- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 05- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 06- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 07- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 08- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 09- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 10- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 11- Prof Jouglas.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/AULA 12 - Somador.pptx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/CROCCLIPx64.exe
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos de somas utilizando um somador de 2 bits.docx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exercicios Conversao.rtf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exercícios.docx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Nícolas Teixeira - Trabalhos.zip
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/PONTO FLUTUANTE.xlsx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Tabela Somador.xlsx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalho - Conversor de Base.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalho - Operações Lógicas.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalho - Somador 4 bits.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/ex1.asm
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex10JE.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex11.1JL.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex11.2CALL.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex12JMP.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex13LOOP.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex13LOOP_2.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex13LOOP_3.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex13LOOP_4.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex14IO.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/@Ex9JA.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/var.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Exemplos/var2.asm
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/ImpressaoNumeroDoisDigitos.asm
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/Ex3.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/Ex4.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/Ex5.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/Ex6.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/Ex8.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/ex1.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/ex2.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios do Trabalho/ex7.asm
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Assembly/Exercicios/Exercicios ASM.asm
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/base-bin-hex-dec.html
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/base-dec-bin-hex.html
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/index.html
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/operadores-logicos.html
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/soma-bits.html
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/0.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/1.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/10.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/11.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/12.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/13.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/14.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/15.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/2.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/3.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/4.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/5.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/6.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/7.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/8.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/9.png
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/Design.ckt
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/crocodile/tabela.jpg
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/css/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/css/estilo.css
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/js/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/js/conversor-base.js
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/js/operadores-logicos.js
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/Trabalhos/Conversores/js/soma-bits.js
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Emu8086 Serial Number.txt
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/emu8086v408r.exe
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex10JE.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex11.1JL.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex11.2CALL.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex12JMP.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex13LOOP.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex13LOOP_2.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex13LOOP_3.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex13LOOP_4.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex14IO.asm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Arquitetura de Computadores/emu 8086/Ex Assembly/@Ex9JA.asm
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/Nícoals Teixeira - Tarefa02EaD.docx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/Nícoals Teixeira - Tarefa02EaD.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/Nícoals Teixeira - Tarefa04EaD.odt
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/Nícoals Teixeira - Tarefa04EaD.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/Nícolas Teixeira - Tarefa03EaD.docx
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/Nícolas Teixeira - Tarefa03EaD.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/Nícolas Teixeira - Tarefa05EaD.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Engenharia de Requisitos/SlideEngenhariaDeRequisitos.pptx
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/1_Construçãodealgoritmos.pdf
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Listas/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Listas/LISTA DE EXERCÍCIOS NÚMERO 1.pdf
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Listas/LISTA DE EXERCÍCIOS NÚMERO 2.pdf
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Listas/Resolução Lista 01/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Listas/Resolução Lista 01/Lista01Ex2.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Listas/Resolução Lista 01/Lista01Ex6.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Listas/Resolução Lista 01/Lista01Ex9.pas
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/IntroLingPascal-ZIM.pdf
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/default.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/pascal.css
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch01hist.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch02code.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch03data.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch04udt.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch05stat.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch06proc.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch07str.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch08mem.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch09win.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch10var.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/ch11unit.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/default.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/examples.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/glossary.htm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/English/pascal.css
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0602.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0603.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0604.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0605.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0701.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0702.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0801.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0901.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0902.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF0903.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF1001.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/EPF1002.GIF
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/Epf0404.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/apollo1.jpg
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/books.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epF0601.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0201.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0202.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0301.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0302.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0303.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0401.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0402.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0403.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0501.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0502.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/epf0503.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/newani.gif
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/LivroPascal/gif/pascal.css
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/Pzim.exe
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/leiame.txt
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/pzim.chm
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/pzim.pdf
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/AlocacaoDinamica.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Aritmetica.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/AtribuicaoPonteiro.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/BandeiraFrancesa.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/BandeiraHolandesa.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/BandeiraItaliana.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/ComplexoTeste.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Cronometro.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/DiaSemana.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Enumeracoes.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/EquacaoSegundoGrau.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/ExemploMatrizes.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Fatorial.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/FatorialRecursivo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Fibonacci.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/ForCaseEnumeracao.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/IndiceMassaCorporal.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/ListasLineares.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/MMC.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/NumeroPi.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/NumeroPrimo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/OlaMundo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/OutroAbsurdo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Predinho.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/QueAbsurdo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/RaizQuadrada.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/RolagemDados.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/SenoCosseno.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/SomaMatrizes.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/SomaPares.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/TabelaAsc.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Tabuada.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Triangulo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/Trocavalores.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/keypressed.pas
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/desenho/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/desenho/EditorHugo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/desenho/PaintZim20.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/desenho/pikachu.paintzim
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/Arvore.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/Bolhas.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/Cubo3DPixel.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/DesenhoPacman.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/JuliaGraph.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/MandelbrotGraph.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/graph/Poligonos3DLinha.pas
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/gui/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/gui/ComponentesExemplo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/gui/ComponentesInterfaceTexto.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/gui/InstalacaoEletrica.pas
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/CampoMinadoGraph.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Damas.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/FlappyBird 1.0-2.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Invasores.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/JogoVida.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Labirinto.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/OperacaoTaiga.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Pong.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Pong2.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/QuebraCabeca.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Snake.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Tetris.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Wordkill.pas
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/RayCast/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/RayCast/Raycast.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/RayCast/mapa.ray
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/UnitElementosVisuais.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/UnitPaintZim.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Uno.pas
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/caixa.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/carta_nula.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/cor_amarela.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/cor_azul.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/cor_coringa.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/cor_verde.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/cor_vermelha.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/coringa.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/coringa_+4.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/face_monte.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/inverte.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/logo.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/manual
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/nomes
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_+2.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_0.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_1.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_2.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_3.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_4.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_5.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_6.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_7.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_8.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/numero_9.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/passaro.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/pula.paintzim
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/exemplos/jogos/Uno/Dados/vazio.paintzim
+2019/11/22 23:46:35 [6057] cd+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/units/
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/units/Complexo.pas
+2019/11/22 23:46:35 [6057] >f+++++++++ TADS-UFPR/1 Periodo/Projetos e Práticas de Algoritmos/Pascalzim/pascalzim/units/Math.pas
+2019/11/22 23:46:35 [6057] sent 28.23M bytes  received 5.65K bytes  18.82M bytes/sec
+2019/11/22 23:46:35 [6057] total size is 36.17M  speedup is 1.28
+2019/11/22 23:46:35 [6073] building file list
+2019/11/22 23:46:35 [6073] cd+++++++++ ./
+2019/11/22 23:46:35 [6073] sent 65 bytes  received 19 bytes  168.00 bytes/sec
+2019/11/22 23:46:35 [6073] total size is 0  speedup is 0.00
+2019/11/22 23:46:35 [6077] building file list
+2019/11/22 23:46:35 [6077] cd+++++++++ ./
+2019/11/22 23:46:35 [6077] sent 65 bytes  received 19 bytes  168.00 bytes/sec
+2019/11/22 23:46:35 [6077] total size is 0  speedup is 0.00
+2019/11/22 23:46:35 [6080] building file list
+2019/11/22 23:46:35 [6080] created directory /home/nicolas/Desktop/Pictures_Backup
+2019/11/22 23:46:35 [6080] cd+++++++++ ./
+2019/11/22 23:46:35 [6080] >f+++++++++ Screenshot from 2019-11-09 20-40-50.png
+2019/11/22 23:46:35 [6080] >f+++++++++ Screenshot from 2019-11-19 19-48-09.png
+2019/11/22 23:46:35 [6080] >f+++++++++ Screenshot from 2019-11-19 19-48-15.png
+2019/11/22 23:46:35 [6080] >f+++++++++ Screenshot from 2019-11-19 19-48-24.png
+2019/11/22 23:46:35 [6080] >f+++++++++ Screenshot from 2019-11-19 19-48-31.png
+2019/11/22 23:46:35 [6080] >f+++++++++ Screenshot from 2019-11-19 20-26-07.png
+2019/11/22 23:46:35 [6080] sent 1.67M bytes  received 193 bytes  3.34M bytes/sec
+2019/11/22 23:46:35 [6080] total size is 1.68M  speedup is 1.01

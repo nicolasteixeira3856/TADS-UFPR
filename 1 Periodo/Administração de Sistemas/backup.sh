@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #Abrindo um novo question com sim/não com o Zenity
 zenity --question --title="Gerador de backup" --text="Você gostaria de executar o script agora?" --ok-label="Sim" --cancel-label="Não" --width=240 --height=140
@@ -84,16 +84,18 @@ if [ $? = 0 ] ; then
     echo 'echo "Agendamento efetuado com sucesso, as pastas selecionadas serão sincronizadas no local de destino a cada uma hora."' >> ./"${agendarBackup}"
 
     echo "75"
-    echo "# Executando o script pela primeira vez"
-    #Executando o script por uma primeira vez antes de move-lo, efetuando na hora que é gerado a primeira sincronização e backup das pastas selecionadas pelo usuário
-    ./"${backupScript}"
+    echo "# Movendo o script para um local seguro..."
+    #Criando um diretório (caso não houver) chamado Backup em ~/, removendo (caso existir), outro backupScript.sh e finalmente movendo backupScript.sh para o diretórioo
+    mkdir -p ${HOME}/Backup
+    if [ -f ${HOME}/Backup/"${backupScript}" ] ; then
+        rm "${backupScript}"
+    fi
+    mv ./"${backupScript}" ${HOME}/Backup
 
     echo "95"
-    echo "# Movendo o script para um local seguro..." ; sleep 1
-    #Criando um diretório (caso não houver) chamado Backup em ~/, removendo (caso existir), outro backupScript.sh e finalmente movendo backupScript.sh para o diretório
-    mkdir -p ${HOME}/Backup
-    rm -f ${HOME}/Backup/"${backupScript}"
-    mv ./"${backupScript}" ${HOME}/Backup
+    echo "# Executando o script pela primeira vez..." ; sleep 1
+    #Executando o script por uma primeira vez antes de move-lo, efetuando na hora que é gerado a primeira sincronização e backup das pastas selecionadas pelo usuário
+    ${HOME}/Backup/"${backupScript}"
 
     echo "# O script foi gerado com sucesso." ; sleep 0
     echo "100"
