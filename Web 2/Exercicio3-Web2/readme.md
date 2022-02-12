@@ -1,0 +1,1 @@
+JAR utilizado para o MYSQL: mysql-connector-java-8.0.20
